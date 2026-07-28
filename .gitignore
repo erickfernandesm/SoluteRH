@@ -1,0 +1,24 @@
+# Sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node
+node_modules/
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Arquivos temporarios de teste e build
+_*.html
+media/_*
+*.tmp
+*.log
