@@ -146,7 +146,7 @@ const problema = `
       <li class="pain" data-reveal="up">${icon('x')}<span>Cada gestor conduz o time do seu jeito. <strong>Não existe um padrão</strong> de liderança na casa.</span></li>
       <li class="pain" data-reveal="up">${icon('x')}<span>Aumento salarial é decidido caso a caso, <strong>sem critério nenhum</strong>. E todo mundo sabe.</span></li>
       <li class="pain" data-reveal="up">${icon('x')}<span>Você descobre que o clima está ruim <strong>na entrevista de desligamento</strong>.</span></li>
-      <li class="pain" data-reveal="up">${icon('x')}<span>A NR-01 virou exigência e ninguém sabe <strong>o que a fiscalização vai pedir</strong>.</span></li>
+      <li class="pain" data-reveal="up">${icon('x')}<span>Na hora de promover falta critério. <strong>Quem cresce é quem aparece</strong>, não quem entrega.</span></li>
       <li class="pain" data-reveal="up">${icon('x')}<span>O RH está ocupado demais apagando incêndio <strong>para pensar em estratégia</strong>.</span></li>
     </ul>
 
