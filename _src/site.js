@@ -555,7 +555,7 @@ const NAV = [
    O formato esperado esta documentado em _docs/BLOG.md
    -------------------------------------------------------------------------- */
 const BLOG = {
-  source: 'data/posts.json',
+  source: 'https://sistema.soluterh.com.br/api/publico/blog',
   perPage: 6,
   fallbackCover: 'media/rhestrategico.webp',
   // autor padrao quando o post nao trouxer um
