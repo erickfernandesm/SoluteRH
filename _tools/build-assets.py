@@ -308,6 +308,58 @@ CLIENTS = [
     "oficina_grafica", "newmed", "gazzoni", "fisk", "fisiodonto", "libano",
     "equipar", "datafor", "constance", "match_digital", "corinto", "mundial_aluminio",
 ]
+
+# logos que vieram como JPEG (algumas com fundo colorido, nao recortado)
+CLIENTS_JPEG = [
+    "ativa", "alpha", "nbcbank", "acoem", "melfex",
+    "saojose", "masabor", "procare", "dominic",
+    "smcontabilidade", "ultra", "amazonia", "patativa", "faput", "pedro",
+]
+
+
+def _cor_de_fundo(im):
+    """Cor predominante nas bordas: serve para completar a imagem ate o quadrado."""
+    w, h = im.size
+    faixa = max(1, min(w, h) // 20)
+    amostras = []
+    for x in range(0, w, max(1, w // 40)):
+        amostras.append(im.getpixel((x, 0)))
+        amostras.append(im.getpixel((x, h - 1)))
+    for y in range(0, h, max(1, h // 40)):
+        amostras.append(im.getpixel((0, y)))
+        amostras.append(im.getpixel((w - 1, y)))
+    contagem = {}
+    for c in amostras:
+        contagem[c] = contagem.get(c, 0) + 1
+    return max(contagem.items(), key=lambda kv: kv[1])[0]
+
+
+def build_client_jpegs():
+    """Deixa toda logo quadrada e em WebP, preservando o fundo original.
+
+    Quadrada  -> so redimensiona.
+    Retangular-> completa ate o quadrado com a cor das bordas, para nao cortar
+                 pedaco da marca.
+    """
+    print("\n[5c] Logos de clientes em JPEG")
+    from PIL import Image
+    n = 0
+    for name in CLIENTS_JPEG:
+        p = os.path.join(SRC, name + ".jpeg")
+        if not os.path.exists(p):
+            log("FALTANDO: " + name)
+            continue
+        im = Image.open(p).convert("RGB")
+        w, h = im.size
+        if w != h:
+            lado = max(w, h)
+            fundo = Image.new("RGB", (lado, lado), _cor_de_fundo(im))
+            fundo.paste(im, ((lado - w) // 2, (lado - h) // 2))
+            im = fundo
+        im = im.resize((320, 320), Image.LANCZOS)
+        im.save(os.path.join(OUT, name + ".webp"), "WEBP", quality=88, method=6)
+        n += 1
+    log("%d logos convertidas" % n)
 PEOPLE = ["riane", "marcia"]
 
 # fotos redondas do time (quem-somos)
@@ -426,6 +478,7 @@ def main():
     build_subbrands()
     build_photos()
     build_team()
+    build_client_jpegs()
     build_videos()
     print("\nConcluido.")
 

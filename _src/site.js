@@ -410,6 +410,21 @@ const CLIENTS = [
   { file: 'constance', name: 'Constance' },
   { file: 'match-digital', name: 'Match Digital' },
   { file: 'corinto', name: 'Corinto' },
+  { file: 'ativa', name: 'Ativa Hospitalar' },
+  { file: 'procare', name: 'Procare Produtos Hospitalares' },
+  { file: 'nbcbank', name: 'NBC Bank' },
+  { file: 'acoem', name: 'Acoem' },
+  { file: 'melfex', name: 'Melfex' },
+  { file: 'saojose', name: 'Supermercado São José' },
+  { file: 'masabor', name: 'Massabor' },
+  { file: 'alpha', name: 'Alpha Co' },
+  { file: 'dominic', name: 'Dominic Esquadrias' },
+  { file: 'ultra', name: 'Ultra Medka' },
+  { file: 'smcontabilidade', name: 'SM Contabilidade' },
+  { file: 'patativa', name: 'Grupo Patativa' },
+  { file: 'amazonia', name: 'Hotel Portal da Amazônia' },
+  { file: 'faput', name: 'Fapur' },
+  { file: 'pedro', name: 'Instituto Pedro Ruiz' },
 ];
 
 /* --------------------------------------------------------------------------

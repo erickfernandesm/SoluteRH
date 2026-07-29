@@ -1268,21 +1268,22 @@ p { text-wrap: pretty; }
 }
 
 /* logotipos de clientes */
+/* Quadrado preenchido: parte das logos vem recortada em fundo branco e parte
+   vem como tile de marca ja colorido. Deixando a imagem ocupar a moldura
+   inteira, os dois tipos ficam com a mesma aparencia. */
 .client-logo {
   flex: none;
-  width: clamp(96px, 11vw, 132px);
-  aspect-ratio: 16 / 10;
-  display: grid;
-  place-items: center;
+  width: clamp(88px, 9.5vw, 116px);
+  aspect-ratio: 1;
   border-radius: var(--r-md);
-  padding: .5rem;
+  overflow: hidden;
   background: var(--fog-50);
   filter: grayscale(1);
-  opacity: .55;
+  opacity: .5;
   transition: filter var(--t-mid) var(--e-out), opacity var(--t-mid), transform var(--t-mid) var(--e-out);
 }
-.client-logo img { max-height: 100%; width: auto; object-fit: contain; }
-.client-logo:hover { filter: none; opacity: 1; transform: translateY(-4px) scale(1.04); }
+.client-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.client-logo:hover { filter: none; opacity: 1; transform: translateY(-4px) scale(1.05); }
 
 /* marquee tipografica */
 .marquee-text {
@@ -2760,32 +2761,34 @@ body.has-announce { --header-offset: 40px; }
 /* grade de logos de clientes (pagina clientes) */
 .logo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(130px, 100%), 1fr));
   gap: 1px;
-  background: var(--line);
+  /* mesma cor das celulas: se a ultima fila ficar incompleta, o espaco vazio
+     nao aparece como um bloco mais claro */
+  background: var(--ink-900);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   overflow: hidden;
 }
 .logo-grid__cell {
-  aspect-ratio: 16 / 10;
-  display: grid;
-  place-items: center;
-  padding: 1.35rem;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
   background: var(--ink-900);
+  /* as linhas da grade vem do contorno de cada celula, nao do vao */
+  box-shadow: 0 0 0 1px var(--line);
   transition: background-color var(--t-mid);
 }
 .logo-grid__cell img {
-  max-height: 100%;
-  max-width: 100%;
-  width: auto;
-  object-fit: contain;
-  filter: grayscale(1) brightness(1.5);
-  opacity: .6;
-  transition: all var(--t-mid) var(--e-out);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1);
+  opacity: .48;
+  transition: filter var(--t-mid) var(--e-out), opacity var(--t-mid), transform var(--t-mid) var(--e-out);
 }
-.logo-grid__cell:hover { background: var(--ink-850); }
-.logo-grid__cell:hover img { filter: none; opacity: 1; transform: scale(1.06); }
+.logo-grid__cell:hover img { filter: none; opacity: 1; transform: scale(1.05); }
 
 /* card de episodio / live */
 .ep {

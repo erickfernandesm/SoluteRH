@@ -212,6 +212,7 @@
         featured: !!p.featured,
       }))
       .sort((a, b) => {
+        if (a.featured !== b.featured) return a.featured ? -1 : 1;
         const da = parseDate(a.date), db = parseDate(b.date);
         return (db ? db.getTime() : 0) - (da ? da.getTime() : 0);
       });
@@ -356,6 +357,7 @@
           media(p, url, ext) +
 
           '<div class="post-item__body">' +
+            (p.featured ? '<span style="display:inline-block;margin-bottom:.6rem;background:#f47a1f;color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.08em;padding:.24rem .62rem;border-radius:999px;text-transform:uppercase">Destaque</span>' : '') +
             '<h2 class="post-item__title"><a href="' + url + '"' + openAttrs + '>' + esc(p.title) + '</a></h2>' +
             (p.excerpt ? '<p class="post-item__text">' + esc(p.excerpt) + '</p>' : '') +
             tags +
