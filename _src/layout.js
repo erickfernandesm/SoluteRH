@@ -101,7 +101,9 @@ function mega(tipo) {
   const itens = tipo === 'trainings'
     ? TRAININGS.map((x) => ({
         titulo: x.title,
-        texto: x.short,
+        // quando o treinamento e o mesmo servico da consultoria, a descricao
+        // vem de la para os dois menus dizerem a mesma coisa
+        texto: x.short || (SERVICES.find((s) => s.slug === x.sameAs) || {}).short || '',
         href: 'treinamentos.html#' + x.slug,
         icone: x.icon,
         externo: false,

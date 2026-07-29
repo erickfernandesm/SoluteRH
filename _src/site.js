@@ -416,21 +416,13 @@ const COURSES = [
    -------------------------------------------------------------------------- */
 const TRAININGS = [
   {
+    // E o mesmo servico da consultoria. Em vez de repetir o texto aqui, o
+    // conteudo e puxado de SERVICES por `sameAs`, para nunca desencontrar
+    // quando um dos dois for editado.
     slug: 'academia-de-lideres',
     title: 'Academia de Líderes',
     icon: 'users',
-    // TEXTO PROVISORIO: trocar por conteudo real antes de publicar
-    short: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    lead: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    format: 'Lorem ipsum dolor sit amet',
-    duration: 'Consectetur adipiscing elit',
-    forWho: 'Sed do eiusmod tempor incididunt ut labore',
-    topics: [
-      ['Lorem ipsum 1', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'],
-      ['Lorem ipsum 2', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'],
-      ['Lorem ipsum 3', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'],
-      ['Lorem ipsum 4', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'],
-    ],
+    sameAs: 'desenvolvimento-de-lideranca',
   },
   {
     slug: 'palestras',

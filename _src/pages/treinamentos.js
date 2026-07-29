@@ -9,7 +9,7 @@
    Para publicar: trocar os textos e apagar `noindex` e o bloco .draft-note.
    ========================================================================== */
 
-const { SITE, TRAININGS } = require('../site');
+const { SITE, SERVICES, TRAININGS } = require('../site');
 const { icon } = require('../icons');
 const { wa } = require('../layout');
 const B = require('../blocks');
@@ -41,8 +41,25 @@ const atalhos = TRAININGS.map(
   (x) => `<a class="chip" href="#${x.slug}">${x.title}</a>`
 ).join('\n        ');
 
+/* Resolve o conteudo de um treinamento.
+   Quando ele aponta para um servico da consultoria (sameAs), o texto vem
+   de la: e a mesma oferta, so muda o lugar onde aparece. */
+function conteudo(x) {
+  if (!x.sameAs) return x;
+  const s = SERVICES.find((v) => v.slug === x.sameAs);
+  if (!s) return x;
+  return Object.assign({}, x, {
+    short: s.short,
+    lead: s.lead,
+    topics: s.delivers,
+    forWho: s.forWho,
+    verMais: 'consultoria-' + s.slug + '.html',
+  });
+}
+
 /* ---------------------------------------------------------- uma secao ---- */
-function secao(x, i) {
+function secao(bruto, i) {
+  const x = conteudo(bruto);
   const par = i % 2 === 1;
   const waMsg = 'Olá! Gostaria de saber mais sobre o treinamento de ' + x.title + '.';
 
@@ -60,7 +77,7 @@ function secao(x, i) {
 
       <div>
         <span class="emblem" style="margin-inline:0" data-reveal="zoom">${icon(x.icon)}</span>
-        <p class="eyebrow" data-reveal="up">Treinamento</p>
+        <p class="eyebrow" data-reveal="up">${x.verMais ? 'Treinamento e consultoria' : 'Treinamento'}</p>
         <h2 id="${x.slug}-titulo" data-split="words" data-reveal="fade">${x.title}</h2>
         <p class="lead" style="margin-top:1.1rem" data-reveal="up" data-reveal-delay="100">${x.lead}</p>
 
@@ -69,26 +86,29 @@ function secao(x, i) {
 
         <div class="row" style="margin-top:2.2rem" data-reveal="up" data-reveal-delay="180">
           <a class="btn btn--primary" href="${wa(waMsg)}" target="_blank" data-magnetic="0.2">
-            Lorem ipsum dolor ${icon('arrow')}
+            ${x.verMais ? 'Falar sobre este treinamento' : 'Lorem ipsum dolor'} ${icon('arrow')}
           </a>
+          ${x.verMais ? `<a class="btn btn--ghost" href="${x.verMais}">Ver a página completa</a>` : ''}
         </div>
       </div>
 
       <div class="stack" style="gap:.8rem" data-reveal="${par ? 'right' : 'left'}">
+        ${x.format ? `
         <div class="ep">
           <span class="ep__ico" style="color:var(--brand)">${icon('layers')}</span>
           <div>
             <h3 class="ep__title">Formato</h3>
             <p class="ep__meta"><span>${x.format}</span></p>
           </div>
-        </div>
+        </div>` : ''}
+        ${x.duration ? `
         <div class="ep">
           <span class="ep__ico" style="color:var(--brand)">${icon('clock')}</span>
           <div>
             <h3 class="ep__title">Duração</h3>
             <p class="ep__meta"><span>${x.duration}</span></p>
           </div>
-        </div>
+        </div>` : ''}
         <div class="ep">
           <span class="ep__ico" style="color:var(--brand)">${icon('users')}</span>
           <div>
