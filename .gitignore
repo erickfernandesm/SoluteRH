@@ -22,3 +22,6 @@ _*.html
 media/_*
 *.tmp
 *.log
+
+# o .htaccess faz parte do deploy
+!.htaccess

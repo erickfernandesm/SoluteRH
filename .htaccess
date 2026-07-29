@@ -1,0 +1,124 @@
+# =============================================================================
+# SOLUTE RH - configuracao do servidor (Apache / LiteSpeed)
+# -----------------------------------------------------------------------------
+# Este arquivo faz tres coisas:
+#   1. redireciona as URLs do site antigo (WordPress) para as novas
+#   2. define pagina de erro, compressao e cache
+#   3. bloqueia acesso as pastas de manutencao
+#
+# Sobe junto com o resto do site, na raiz do dominio.
+# =============================================================================
+
+RewriteEngine On
+
+# -----------------------------------------------------------------------------
+# 1. HTTPS e www
+# -----------------------------------------------------------------------------
+# forca https
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# tira o www (deixe comentado se preferir manter www)
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# -----------------------------------------------------------------------------
+# 2. Redirecionamentos do site antigo
+# -----------------------------------------------------------------------------
+# Cada linha preserva o ranqueamento que a URL antiga ja tem no Google.
+# 301 = mudanca definitiva. NAO trocar por 302.
+
+# home alternativa do WordPress
+Redirect 301 /pagina-inicial/ https://soluterh.com.br/
+
+# institucional
+Redirect 301 /quem-somos/            https://soluterh.com.br/quem-somos.html
+Redirect 301 /contato/               https://soluterh.com.br/contato.html
+Redirect 301 /politica-de-privacidade https://soluterh.com.br/politica-de-privacidade.html
+
+# blog e noticias
+Redirect 301 /noticias/ https://soluterh.com.br/blog.html
+Redirect 301 /blog/     https://soluterh.com.br/blog.html
+
+# servicos de consultoria
+Redirect 301 /rh-estrategico/       https://soluterh.com.br/consultoria-rh-estrategico.html
+Redirect 301 /pcs/                  https://soluterh.com.br/consultoria-plano-de-cargos-e-salarios.html
+Redirect 301 /nr-01/                https://soluterh.com.br/consultoria-nr-01-riscos-psicossociais.html
+Redirect 301 /academia-de-lideres/  https://soluterh.com.br/consultoria-desenvolvimento-de-lideranca.html
+Redirect 301 /avd/                  https://soluterh.com.br/consultoria-avaliacao-de-desempenho.html
+Redirect 301 /pesquisa-de-clima/    https://soluterh.com.br/consultoria-pesquisa-de-clima.html
+Redirect 301 /fit-cultural/         https://soluterh.com.br/consultoria-fit-cultural-e-perfil-comportamental.html
+Redirect 301 /rs/                   https://soluterh.com.br/consultoria-recrutamento-e-selecao.html
+
+# artigos antigos do blog
+Redirect 301 /2025/09/09/o-que-esta-acontecendo-com-os-profissionais-de-rh-que-ignoram-a-ia-2/ https://soluterh.com.br/post.html?post=rh-que-ignora-a-ia
+Redirect 301 /2026/05/04/por-onde-comecar-um-plano-de-cargos-e-salarios-o-guia-pratico-e-completo-2026/ https://soluterh.com.br/post.html?post=por-onde-comecar-plano-de-cargos-e-salarios
+
+# qualquer outro post antigo cai na listagem do blog
+RewriteRule ^[0-9]{4}/[0-9]{2}/[0-9]{2}/.*$ /blog.html [R=301,L]
+
+# restos do WordPress que nao existem mais
+RewriteRule ^(wp-admin|wp-login\.php|wp-json|xmlrpc\.php|feed|comments/feed) - [R=410,L]
+
+# -----------------------------------------------------------------------------
+# 3. URL sem .html tambem funciona (redireciona para a versao oficial)
+# -----------------------------------------------------------------------------
+# Mantem uma URL canonica so, evitando conteudo duplicado.
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+?)/?$ /$1.html [R=301,L]
+
+# -----------------------------------------------------------------------------
+# 4. Pagina de erro
+# -----------------------------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# -----------------------------------------------------------------------------
+# 5. Protege as pastas de manutencao
+# -----------------------------------------------------------------------------
+RedirectMatch 404 ^/(_src|_tools|_docs)/
+
+# -----------------------------------------------------------------------------
+# 6. Compressao
+# -----------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# 7. Cache do navegador
+# -----------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # midia e fontes nao mudam: cache longo
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType image/x-icon            "access plus 1 year"
+  ExpiresByType video/mp4               "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+
+  # css e js: uma semana (ao publicar mudanca, limpe o cache do LiteSpeed)
+  ExpiresByType text/css                "access plus 1 week"
+  ExpiresByType application/javascript  "access plus 1 week"
+
+  # html e o json do blog: sempre fresco
+  ExpiresByType text/html               "access plus 0 seconds"
+  ExpiresByType application/json        "access plus 5 minutes"
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# 8. Seguranca basica
+# -----------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# nao listar o conteudo das pastas
+Options -Indexes
