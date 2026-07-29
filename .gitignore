@@ -25,3 +25,6 @@ media/_*
 
 # o .htaccess faz parte do deploy
 !.htaccess
+
+# pacote de publicacao (gerado por _tools/empacotar.js)
+publicar/
