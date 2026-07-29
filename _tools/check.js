@@ -89,6 +89,45 @@ pages.forEach((file) => {
   });
 });
 
+/* ---- conteudo do blog (vem de JSON, nao passa pelo HTML) ---- */
+const arqPosts = path.join(ROOT, 'data', 'posts.json');
+if (fs.existsSync(arqPosts)) {
+  let dados = null;
+  try {
+    dados = JSON.parse(fs.readFileSync(arqPosts, 'utf8'));
+  } catch (e) {
+    err('data/posts.json', 'JSON invalido: ' + e.message);
+  }
+  const posts = dados && (dados.posts || dados.data || dados.items || dados);
+  if (Array.isArray(posts)) {
+    posts.forEach((p) => {
+      const onde = 'posts.json/' + (p.slug || 'sem-slug');
+      if (!p.slug) err(onde, 'post sem slug');
+      if (!p.title) err(onde, 'post sem titulo');
+      if (!p.date) warn(onde, 'post sem data');
+      if (!p.body && !p.link) warn(onde, 'post sem corpo e sem link externo');
+
+      // o mesmo criterio do texto das paginas: nada de travessao
+      const campos = [p.title, p.excerpt, p.body, (p.tags || []).join(' ')].join(' ');
+      if (campos.indexOf('—') > -1) {
+        err(onde, 'travessao no conteudo do post');
+      }
+
+      // imagens locais precisam existir
+      [].concat(p.cover || [], p.images || []).forEach((src) => {
+        if (src && !isExternal(src) && !exists(src)) {
+          err(onde, 'imagem inexistente: ' + src);
+        }
+      });
+    });
+    const slugs = posts.map((p) => p.slug).filter(Boolean);
+    slugs.forEach((s, i) => {
+      if (slugs.indexOf(s) !== i) err('data/posts.json', 'slug repetido: ' + s);
+    });
+    console.log('  ' + posts.length + ' post(s) verificado(s) em data/posts.json');
+  }
+}
+
 /* ---- assets orfaos referenciados pelo CSS ---- */
 const css = fs.readFileSync(path.join(ROOT, 'css', 'style.css'), 'utf8');
 (css.match(/url\((?!["']?data:)["']?([^"')]+)["']?\)/g) || []).forEach((u) => {

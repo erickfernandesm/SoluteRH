@@ -1,4 +1,4 @@
-# Blog da Solute RH — integração com o sistema
+# Blog da Solute RH: integração com o sistema
 
 O blog do site não tem banco de dados nem painel próprio. Ele lê uma **fonte JSON**
 e monta as páginas sozinho. Isso permite que **o sistema da Solute seja o painel**:
