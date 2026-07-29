@@ -2722,8 +2722,19 @@ body.has-announce { --header-offset: 40px; }
 .prose blockquote {
   padding-left: 1.35rem;
   border-left: 2px solid var(--brand);
-  color: var(--fog-200, var(--fog-100));
+  color: var(--fog-100);
   font-size: 1.08rem;
+  line-height: 1.6;
+}
+/* atribuicao da citacao */
+.prose blockquote small {
+  display: block;
+  margin-top: .7rem;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--brand);
 }
 
 /* card de curso */
