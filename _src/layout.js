@@ -2,7 +2,7 @@
    SOLUTE RH - layout compartilhado (head, header, drawer, footer)
    ========================================================================== */
 
-const { SITE, SERVICES, COURSES, NAV, EVENT } = require('./site');
+const { SITE, SERVICES, COURSES, TRAININGS, NAV, EVENT } = require('./site');
 const { icon } = require('./icons');
 
 const wa = (text) =>
@@ -98,7 +98,15 @@ function announceBar() {
  *  'services' leva a paginas internas; 'courses' abre o site de cada curso
  *  em outra aba. */
 function mega(tipo) {
-  const itens = tipo === 'courses'
+  const itens = tipo === 'trainings'
+    ? TRAININGS.map((x) => ({
+        titulo: x.title,
+        texto: x.short,
+        href: 'treinamentos.html#' + x.slug,
+        icone: x.icon,
+        externo: false,
+      }))
+    : tipo === 'courses'
     ? COURSES.map((c) => ({
         titulo: c.title,
         texto: c.short || '',
@@ -125,7 +133,10 @@ function mega(tipo) {
         </a>`
   ).join('');
 
-  const rodape = tipo === 'courses'
+  const rodape = tipo === 'trainings'
+    ? { nota: 'Todos os formatos são fechados e montados sob a realidade da sua empresa.',
+        label: 'Ver todos os treinamentos', href: 'treinamentos.html' }
+    : tipo === 'courses'
     ? { nota: 'Não sabe qual curso combina com o seu momento? A gente ajuda a escolher.',
         label: 'Ver todos os cursos', href: 'cursos.html' }
     : { nota: 'Não sabe por onde começar? O diagnóstico gratuito aponta a prioridade.',
@@ -160,14 +171,20 @@ function header(meta) {
 
   const drawerItems = NAV.map((n) => {
     if (n.mega) {
-      const subs = n.mega === 'courses'
+      const subs = n.mega === 'trainings'
+        ? TRAININGS.map((x) =>
+            `<a href="treinamentos.html#${x.slug}">${x.title}</a>`
+          ).join('\n')
+        : n.mega === 'courses'
         ? COURSES.map((c) =>
             `<a href="${c.url || 'cursos.html'}"${c.url ? ' target="_blank"' : ''}>${c.title}</a>`
           ).join('\n            ')
         : SERVICES.map((s) =>
             `<a href="consultoria-${s.slug}.html">${s.nav}</a>`
           ).join('\n            ');
-      const verTudo = n.mega === 'courses'
+      const verTudo = n.mega === 'trainings'
+        ? '<a href="treinamentos.html"><strong>Ver todos os treinamentos</strong></a>'
+        : n.mega === 'courses'
         ? '<a href="cursos.html"><strong>Ver todos os cursos</strong></a>'
         : '<a href="consultoria.html"><strong>Ver tudo em Consultoria</strong></a>';
       return `
@@ -271,6 +288,7 @@ function footer() {
           <a href="quem-somos.html">Quem somos</a>
           <a href="consultoria.html">Consultoria</a>
           <a href="cursos.html">Solute Cursos</a>
+          <a href="treinamentos.html">Treinamentos</a>
           <a href="clientes.html">Clientes</a>
           <a href="solute-cast.html">Solute Cast</a>
           <a href="contato.html">Contato</a>${EVENT.enabled ? `\n          <a href="${EVENT.page}">${EVENT.name}</a>` : ''}

@@ -405,6 +405,82 @@ const COURSES = [
 ];
 
 /* --------------------------------------------------------------------------
+   TREINAMENTOS
+   Formatos fechados, conduzidos dentro da empresa. Vivem todos na mesma
+   pagina (treinamentos.html), cada um na sua ancora.
+   -------------------------------------------------------------------------- */
+const TRAININGS = [
+  {
+    slug: 'academia-de-lideres',
+    title: 'Academia de Líderes',
+    icon: 'users',
+    short: 'Trilha de formação para quem lidera equipe na sua empresa.',
+    lead:
+      'Quase todo problema de clima é, no fundo, um problema de liderança. Promover o melhor técnico sem prepará-lo para liderar custa caro: cria conflito, trava a entrega e faz gente boa pedir demissão do chefe, não da empresa.',
+    format: 'Turma fechada, presencial ou on-line',
+    duration: 'Encontros periódicos ao longo do ciclo',
+    forWho: 'Coordenadores, gerentes e sócios que lideram time',
+    topics: [
+      ['Feedback que muda comportamento', 'Como preparar, conduzir e acompanhar a conversa difícil sem virar bronca nem elogio vazio.'],
+      ['Delegação sem perder o controle', 'O que delegar, para quem, com qual autonomia e como acompanhar sem microgerenciar.'],
+      ['Gestão de conflito', 'Identificar o conflito cedo, separar posição de interesse e conduzir para acordo em vez de trégua.'],
+      ['Ritual de gestão', 'Implantar as rotinas de acompanhamento que não dependem de lembrete: 1:1, reunião de time e prioridades da semana.'],
+    ],
+  },
+  {
+    slug: 'palestras',
+    title: 'Palestras',
+    icon: 'megaphone',
+    short: 'Conteúdo de gestão de pessoas para o seu evento interno.',
+    lead:
+      'Evento interno é uma das poucas horas do ano em que a empresa inteira para para ouvir a mesma coisa. Vale usar essa hora com conteúdo que fica, não com palestra motivacional que evapora na segunda-feira.',
+    format: 'Presencial ou on-line, de 45 a 90 minutos',
+    duration: 'Encontro único, com material de apoio',
+    forWho: 'SIPAT, convenções, semanas internas e kick-off de ano',
+    topics: [
+      ['Tema sob medida', 'A pauta é construída com você a partir do momento da empresa, não escolhida de um catálogo pronto.'],
+      ['Linguagem que alcança todo mundo', 'A mesma mensagem adaptada para chão de fábrica, área administrativa e liderança.'],
+      ['Casos reais', 'Situações de empresas brasileiras, com o nome preservado, no lugar de teoria de livro.'],
+      ['Material para depois', 'A palestra deixa um roteiro prático, para o assunto não morrer quando as luzes apagarem.'],
+    ],
+  },
+  {
+    slug: 'saude-mental',
+    title: 'Saúde Mental',
+    icon: 'heart',
+    short: 'Preparar a liderança para reconhecer e encaminhar o que importa.',
+    lead:
+      'Com a NR-01, saúde mental deixou de ser assunto de campanha de setembro e virou obrigação de gestão. Só que quem convive com o time todo dia é a liderança, e quase nenhuma foi preparada para isso.',
+    format: 'Workshop presencial ou on-line',
+    duration: 'Encontro único ou trilha curta',
+    forWho: 'Lideranças, RH e comitês de saúde e segurança',
+    topics: [
+      ['Riscos psicossociais na prática', 'O que a organização do trabalho tem a ver com adoecimento, sem transformar gestor em terapeuta.'],
+      ['Sinais de alerta', 'O que observar no comportamento e na entrega, e a partir de quando aquilo pede uma conversa.'],
+      ['Como conduzir a conversa', 'O que dizer, o que não dizer e até onde vai o papel de quem lidera.'],
+      ['Encaminhamento e limites', 'Para onde direcionar, o que registrar e como respeitar a privacidade de quem procurou ajuda.'],
+    ],
+  },
+  {
+    slug: 'team-building',
+    title: 'Team Building',
+    icon: 'handshake',
+    short: 'Integração com propósito, não dinâmica solta de fim de ano.',
+    lead:
+      'Team building costuma ter má fama, e com razão: dinâmica solta, sem leitura do time e sem desdobramento, vira só uma tarde divertida. Feito com diagnóstico antes e plano depois, é uma das formas mais rápidas de destravar uma equipe.',
+    format: 'Encontro presencial, meio período ou dia inteiro',
+    duration: 'Com diagnóstico antes e devolutiva depois',
+    forWho: 'Times em formação, em conflito ou após mudança relevante',
+    topics: [
+      ['Leitura do time antes', 'Mapeamento comportamental para entender complementaridades e pontos de atrito reais.'],
+      ['Atividades com objetivo', 'Cada dinâmica existe para trabalhar algo específico que apareceu no diagnóstico.'],
+      ['Acordos de convivência', 'O time sai com combinados escritos sobre como vai trabalhar junto daqui para frente.'],
+      ['Devolutiva para a liderança', 'O que foi observado durante o encontro e o que a liderança precisa sustentar depois.'],
+    ],
+  },
+];
+
+/* --------------------------------------------------------------------------
    CLIENTES
    -------------------------------------------------------------------------- */
 const CLIENTS = [
@@ -620,6 +696,7 @@ const NAV = [
     mega: 'services',
   },
   { label: 'Cursos', href: 'cursos.html', page: 'cursos', mega: 'courses' },
+  { label: 'Treinamentos', href: 'treinamentos.html', page: 'treinamentos', mega: 'trainings' },
   { label: 'Clientes', href: 'clientes.html', page: 'clientes' },
   { label: 'Blog', href: 'blog.html', page: 'blog' },
   { label: 'Solute Cast', href: 'solute-cast.html', page: 'solute-cast' },
@@ -661,4 +738,4 @@ const EVENT = {
   announceText: 'Inscrições abertas para o Encontro Solute RH 2026',
 };
 
-module.exports = { SITE, SERVICES, COURSES, CLIENTS, TESTIMONIALS, VALUES, TEAM, TEAM_CTA, NAV, EVENT, BLOG };
+module.exports = { SITE, SERVICES, COURSES, TRAININGS, CLIENTS, TESTIMONIALS, VALUES, TEAM, TEAM_CTA, NAV, EVENT, BLOG };
