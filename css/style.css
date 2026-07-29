@@ -2109,6 +2109,9 @@ p { text-wrap: pretty; }
   border: 1px solid var(--line-brand);
   flex: none;
 }
+/* logo de empresa como avatar: preenche o circulo inteiro */
+.tstm__ava--logo { object-fit: cover; background: var(--fog-50); }
+
 .tstm__ava--ph {
   display: grid;
   place-items: center;

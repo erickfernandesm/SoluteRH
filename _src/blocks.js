@@ -36,9 +36,12 @@ function testimonials(opts) {
   const stars = Array(5).fill(icon('starFill')).join('');
 
   const cards = TESTIMONIALS.map((t) => {
+    // foto da pessoa, logo da empresa ou, na falta dos dois, as iniciais
     const avatar = t.photo
       ? `<img class="tstm__ava" src="media/${t.photo}.webp" alt="${t.name}" width="46" height="46" loading="lazy">`
-      : `<span class="tstm__ava tstm__ava--ph" aria-hidden="true">${t.initials}</span>`;
+      : t.logo
+        ? `<img class="tstm__ava tstm__ava--logo" src="media/${t.logo}.webp" alt="${t.name}" width="46" height="46" loading="lazy">`
+        : `<span class="tstm__ava tstm__ava--ph" aria-hidden="true">${t.initials}</span>`;
     return `
           <figure class="tstm">
             <div class="tstm__stars" aria-label="5 de 5 estrelas">${stars}</div>

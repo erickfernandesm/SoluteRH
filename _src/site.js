@@ -449,6 +449,68 @@ const CLIENTS = [
 const TESTIMONIALS = [
   {
     quote:
+      'Em vez de tentar encaixar a empresa em um modelo pronto, a Solute buscou entender nossa realidade e adaptou o trabalho às nossas necessidades, respeitando a cultura e o momento da organização.',
+    name: 'Ativa Hospitalar',
+    role: 'Plano de Cargos e Salários',
+    logo: 'ativa',
+  },
+  {
+    quote:
+      'Um dos maiores diferenciais dessa consultoria é a forma como compartilham conhecimento. Hoje posso dizer que desenvolvi uma visão muito mais ampla sobre Gestão de Pessoas graças ao suporte, às orientações e à metodologia aplicada por eles.',
+    name: 'Citro',
+    role: 'RH Estratégico',
+    initials: 'CI',
+  },
+  {
+    quote:
+      'O diferencial foi perceber que não entregavam apenas modelos prontos: entendiam a legislação, as boas práticas de gestão de pessoas e adaptavam tudo à nossa realidade. Isso nos trouxe muito mais confiança para implementar os processos.',
+    name: 'H2A',
+    role: 'Cargos e Salários + Gestão de Desempenho',
+    initials: 'H2',
+  },
+  {
+    quote: 'A Solute nos deu um norte muito grande na operação! Somos muito gratos!',
+    name: 'Faculdade Líbano',
+    role: 'RH Estratégico',
+    logo: 'libano',
+  },
+  {
+    quote:
+      'Procuramos a Solute RH para o desenvolvimento e a estruturação dos nossos cargos e salários, visando a clareza do crescimento de carreira interno da nossa empresa. Ficamos 100% satisfeitos com o profissionalismo e a qualidade do serviço entregue.',
+    name: 'Planejar',
+    role: 'Plano de Cargos e Salários',
+    initials: 'PL',
+  },
+  {
+    quote:
+      'Mais do que implementar mudanças, estamos construindo uma base sólida para formar um time cada vez mais preparado, engajado e comprometido com a excelência e os resultados.',
+    name: 'Procare',
+    role: 'RH Estratégico',
+    logo: 'procare',
+  },
+  {
+    quote:
+      'Aprendi muito durante a consultoria da Solute. Cada encontro e cada reunião foram oportunidades de adquirir novos conhecimentos e ampliar minha visão sobre a área de Recursos Humanos.',
+    name: 'Constance',
+    role: 'RH Estratégico',
+    logo: 'constance',
+  },
+  {
+    quote:
+      'Realizei alguns trabalhos com a Solute e todos satisfatórios com alto nível de profissionalismo, qualidade e organização. A equipe é comprometida e entregou resultados que superaram as expectativas.',
+    name: 'Sianfer',
+    role: 'RH Estratégico',
+    initials: 'SI',
+  },
+  {
+    quote:
+      'Sempre me receberam prontamente, esclareceram as minhas dúvidas e sugeriram soluções para as minhas dificuldades. A Emillia, que nos acompanhou durante o processo, é uma profissional gabaritada.',
+    name: 'Zara',
+    role: 'RH Estratégico',
+    initials: 'ZA',
+  },
+  {
+    quote:
       'A consultoria da Solute RH transformou completamente nossa gestão de pessoas. A metodologia da Rose é prática, validada e gerou resultados visíveis em poucos meses.',
     name: 'Riane Lopes',
     role: 'Sócia Diretora · Faculdade Líbano',
@@ -460,20 +522,6 @@ const TESTIMONIALS = [
     name: 'Marcia Gargiulo',
     role: 'Diretora · Datafor',
     photo: 'marcia',
-  },
-  {
-    quote:
-      'O plano de cargos e salários trouxe uma clareza que a gente não tinha. Hoje cada pessoa sabe onde está e o que precisa fazer para crescer aqui dentro.',
-    name: 'Empresa parceira',
-    role: 'Indústria · Zona da Mata, MG',
-    initials: 'ZM',
-  },
-  {
-    quote:
-      'A implantação da NR-01 foi conduzida com muita segurança técnica. Ficamos em conformidade e, de quebra, com um plano real de cuidado com o time.',
-    name: 'Empresa parceira',
-    role: 'Serviços · Juiz de Fora, MG',
-    initials: 'JF',
   },
 ];
 
