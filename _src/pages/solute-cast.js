@@ -106,7 +106,9 @@ const body = `
           <a class="btn btn--primary" href="${SITE.social.youtube}" target="_blank" data-magnetic="0.2">
             ${icon('play')} Ouvir os episódios
           </a>
-          <a class="btn btn--ghost" href="#temas">Ver os temas</a>
+          <span class="btn btn--soon" aria-disabled="true">
+            ${icon('spotify')} Em breve no Spotify
+          </span>
         </div>
       </div>
 
@@ -159,19 +161,19 @@ const body = `
           <a class="btn btn--primary" href="${SITE.social.youtube}" target="_blank" data-magnetic="0.2">
             ${icon('youtube')} Entrar na próxima live
           </a>
-          <a class="btn btn--ghost" href="${wa('Olá! Tenho uma pergunta para a live de terça do Solute Cast: ')}" target="_blank">
-            ${icon('megaphone')} Mandar pergunta
-          </a>
         </div>
       </div>
 
       <div class="stack" style="gap:.8rem" data-reveal="right">
-        <div class="ep" data-live>
-          <span class="ep__ico"><img src="media/icone-cast-laranja.png" alt=""></span>
-          <div>
-            <h3 class="ep__title"><span data-live-label>Próxima live</span></h3>
-            <p class="ep__meta"><span>${icon('calendar')} ${SITE.live.day}</span><span>${icon('clock')} ${SITE.live.time}</span></p>
-          </div>
+        <div class="next-live" data-live>
+          <span class="next-live__cal" aria-hidden="true">
+            <b>TER</b>
+            <i>09</i>
+          </span>
+          <span class="next-live__body">
+            <span class="next-live__label" data-live-label>Próxima live</span>
+            <span class="next-live__when">${SITE.live.day}, às ${SITE.live.time}</span>
+          </span>
         </div>
         <a class="ep" href="${SITE.social.youtube}" target="_blank">
           <span class="ep__ico" style="color:var(--brand)">${icon('youtube')}</span>

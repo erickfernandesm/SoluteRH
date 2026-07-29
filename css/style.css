@@ -912,6 +912,15 @@ p { text-wrap: pretty; }
 .btn--light:hover { background: #fff; box-shadow: 0 14px 40px -14px rgba(255,255,255,.4); }
 .btn--light:hover svg { transform: translateX(3px); }
 
+/* em breve: informa sem prometer clique */
+.btn--soon {
+  border: 1px dashed var(--line-strong);
+  color: var(--fog-500);
+  background: transparent;
+  cursor: default;
+}
+.btn--soon svg { opacity: .8; }
+
 /* discreto */
 .btn--quiet { color: var(--fog-300); padding-inline: .9rem; }
 .btn--quiet:hover { color: var(--brand); }
@@ -2812,7 +2821,72 @@ body.has-announce { --header-offset: 40px; }
 }
 .ep__ico img { width: 26px; height: 26px; object-fit: contain; }
 .ep__title { font-size: 1.02rem; margin-bottom: .3rem; }
-.ep__meta { font-size: .82rem; color: var(--fog-500); display: flex; gap: .8rem; flex-wrap: wrap; }
+.ep__meta { font-size: .82rem; color: var(--fog-500); display: flex; gap: .35rem .8rem; flex-wrap: wrap; }
+/* icone e texto andam juntos: sem isso o horario desgruda do relogio */
+.ep__meta > span { display: inline-flex; align-items: center; gap: .32rem; white-space: nowrap; }
+.ep__meta svg { width: 13px; height: 13px; flex: none; }
+
+/* --- cartao da proxima live (folhinha de calendario) -------------------- */
+.next-live {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-brand);
+  background:
+    radial-gradient(360px circle at 0% 0%, rgba(243, 140, 35, .12), transparent 62%),
+    var(--ink-900);
+  transition: border-color var(--t-mid), transform var(--t-mid) var(--e-out);
+}
+.next-live:hover { transform: translateX(4px); }
+
+.next-live__cal {
+  flex: none;
+  width: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  background: var(--ink-850);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+.next-live__cal b {
+  display: block;
+  padding: .2rem 0;
+  background: var(--brand);
+  color: #16120C;
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+.next-live__cal i {
+  display: block;
+  padding: .3rem 0 .38rem;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: 1.32rem;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  color: var(--fog-50);
+  line-height: 1;
+}
+
+.next-live__body { display: grid; gap: .18rem; min-width: 0; }
+.next-live__label {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--fog-50);
+  line-height: 1.25;
+}
+.next-live__when { font-size: .84rem; color: var(--fog-500); line-height: 1.4; }
+
+/* durante a transmissao */
+.next-live.is-live { border-color: rgba(52, 211, 153, .45); }
+.next-live.is-live .next-live__cal b { background: #34d399; color: #04241a; }
+.next-live.is-live .next-live__label { color: #7defb9; }
 
 /* mapa */
 .map-frame {
