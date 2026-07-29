@@ -12,10 +12,28 @@
 RewriteEngine On
 
 # -----------------------------------------------------------------------------
+# 0. O QUE ESTE ARQUIVO NAO PODE TOCAR
+# -----------------------------------------------------------------------------
+# Dentro de public_html convivem outras coisas alem do site:
+#   certificacao-remuneracao/  instalacao propria do WordPress, no ar
+#   curso/  megacomborh/       instalacoes proprias do WordPress
+#   ponto.soluterh.com.br/     atalho para a pasta do sistema de ponto
+#   sistema.soluterh.com.br/   atalho para a pasta do sistema de gestao
+#   .well-known/               validacao automatica do certificado SSL
+#
+# As linhas abaixo interrompem o processamento para esses caminhos, para que
+# nenhuma regra do site novo interfira neles. Nao remover.
+
+RewriteRule ^\.well-known/ - [L]
+RewriteRule ^(certificacao-remuneracao|curso|megacomborh)(/|$) - [L]
+RewriteRule ^(ponto|sistema)\.soluterh\.com\.br(/|$) - [L]
+
+# -----------------------------------------------------------------------------
 # 1. HTTPS e www
 # -----------------------------------------------------------------------------
-# forca https
+# forca https (exceto na validacao do certificado, que roda em http)
 RewriteCond %{HTTPS} !=on
+RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # tira o www (deixe comentado se preferir manter www)
@@ -58,7 +76,8 @@ Redirect 301 /2026/05/04/por-onde-comecar-um-plano-de-cargos-e-salarios-o-guia-p
 RewriteRule ^[0-9]{4}/[0-9]{2}/[0-9]{2}/.*$ /blog.html [R=301,L]
 
 # restos do WordPress que nao existem mais
-RewriteRule ^(wp-admin|wp-login\.php|wp-json|xmlrpc\.php|feed|comments/feed) - [R=410,L]
+# so na raiz: as instalacoes em subpasta ja foram liberadas no bloco 0
+RewriteRule ^(wp-admin|wp-login\.php|wp-json|xmlrpc\.php|feed|comments/feed)(/|$) - [R=410,L]
 
 # -----------------------------------------------------------------------------
 # 3. URL sem .html tambem funciona (redireciona para a versao oficial)
