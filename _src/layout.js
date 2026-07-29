@@ -2,7 +2,7 @@
    SOLUTE RH - layout compartilhado (head, header, drawer, footer)
    ========================================================================== */
 
-const { SITE, SERVICES, NAV, EVENT } = require('./site');
+const { SITE, SERVICES, COURSES, NAV, EVENT } = require('./site');
 const { icon } = require('./icons');
 
 const wa = (text) =>
@@ -94,25 +94,50 @@ function announceBar() {
 }
 
 /* ---------------------------------------------------------------- HEADER */
-function megaServices() {
-  const cells = SERVICES.map(
-    (s) => `
-        <a class="mega__link" href="consultoria-${s.slug}.html">
-          <span class="mega__ico">${icon(s.icon)}</span>
+/** Painel suspenso de um item do menu.
+ *  'services' leva a paginas internas; 'courses' abre o site de cada curso
+ *  em outra aba. */
+function mega(tipo) {
+  const itens = tipo === 'courses'
+    ? COURSES.map((c) => ({
+        titulo: c.title,
+        texto: c.short || '',
+        href: c.url || 'cursos.html',
+        icone: c.icon || 'book',
+        externo: !!c.url,
+      }))
+    : SERVICES.map((s) => ({
+        titulo: s.nav,
+        texto: s.short,
+        href: 'consultoria-' + s.slug + '.html',
+        icone: s.icon,
+        externo: false,
+      }));
+
+  const cells = itens.map(
+    (i) => `
+        <a class="mega__link" href="${i.href}"${i.externo ? ' target="_blank"' : ''}>
+          <span class="mega__ico">${icon(i.icone)}</span>
           <span class="mega__txt">
-            <strong>${s.nav}</strong>
-            <span>${s.short}</span>
+            <strong>${i.titulo}</strong>
+            <span>${i.texto}</span>
           </span>
         </a>`
   ).join('');
+
+  const rodape = tipo === 'courses'
+    ? { nota: 'Não sabe qual curso combina com o seu momento? A gente ajuda a escolher.',
+        label: 'Ver todos os cursos', href: 'cursos.html' }
+    : { nota: 'Não sabe por onde começar? O diagnóstico gratuito aponta a prioridade.',
+        label: 'Ver toda a consultoria', href: 'consultoria.html' };
 
   return `
       <div class="mega" role="menu">
         <div class="mega__grid">${cells}
         </div>
         <div class="mega__foot">
-          <span>Não sabe por onde começar? O diagnóstico gratuito aponta a prioridade.</span>
-          <a class="link-arrow" href="consultoria.html">Ver toda a consultoria ${icon('arrow')}</a>
+          <span>${rodape.nota}</span>
+          <a class="link-arrow" href="${rodape.href}">${rodape.label} ${icon('arrow')}</a>
         </div>
       </div>`;
 }
@@ -120,13 +145,13 @@ function megaServices() {
 function header(meta) {
   const navItems = NAV.map((n) => {
     const current = meta.page === n.page ? ' aria-current="page"' : '';
-    if (n.mega === 'services') {
+    if (n.mega) {
       return `
     <li class="nav__item nav__item--has-mega">
       <a class="nav__link" href="${n.href}" data-page="${n.page}"${current} aria-expanded="false" aria-haspopup="true">
         ${n.label}
         <svg class="nav__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-      </a>${megaServices()}
+      </a>${mega(n.mega)}
     </li>`;
     }
     return `
@@ -134,10 +159,17 @@ function header(meta) {
   }).join('');
 
   const drawerItems = NAV.map((n) => {
-    if (n.mega === 'services') {
-      const subs = SERVICES.map(
-        (s) => `<a href="consultoria-${s.slug}.html">${s.nav}</a>`
-      ).join('\n            ');
+    if (n.mega) {
+      const subs = n.mega === 'courses'
+        ? COURSES.map((c) =>
+            `<a href="${c.url || 'cursos.html'}"${c.url ? ' target="_blank"' : ''}>${c.title}</a>`
+          ).join('\n            ')
+        : SERVICES.map((s) =>
+            `<a href="consultoria-${s.slug}.html">${s.nav}</a>`
+          ).join('\n            ');
+      const verTudo = n.mega === 'courses'
+        ? '<a href="cursos.html"><strong>Ver todos os cursos</strong></a>'
+        : '<a href="consultoria.html"><strong>Ver tudo em Consultoria</strong></a>';
       return `
       <li class="drawer__item drawer__item--has-sub">
         <button class="drawer__link" type="button" aria-expanded="false">
@@ -146,7 +178,7 @@ function header(meta) {
         </button>
         <div class="drawer__sub">
           <div>
-            <a href="consultoria.html"><strong>Ver tudo em Consultoria</strong></a>
+            ${verTudo}
             ${subs}
           </div>
         </div>

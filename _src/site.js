@@ -333,6 +333,8 @@ const SERVICES = [
 const COURSES = [
   {
     title: 'Método RH Estratégico',
+    icon: 'target',
+    short: 'A formação completa para estruturar um RH que decide.',
     url: 'https://metodorhestrategico.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
     badge: 'Certificação MEC',
     text: 'A formação completa para estruturar um RH que senta à mesa de decisão. Método validado em centenas de empresas, com ferramentas prontas e mentorias ao vivo.',
@@ -341,6 +343,8 @@ const COURSES = [
   },
   {
     title: 'Plano de Cargos e Salários',
+    icon: 'scale',
+    short: 'Do zero à tabela salarial pronta, com planilhas.',
     url: 'https://curso.soluterh.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
     badge: 'Mais procurado',
     text: 'Do zero à tabela salarial pronta. Passo a passo com planilhas de descrição, pontuação e faixas, mais suporte direto para tirar dúvidas do seu caso real.',
@@ -349,6 +353,8 @@ const COURSES = [
   },
   {
     title: 'Domine a NR-01',
+    icon: 'shield',
+    short: 'Riscos psicossociais na ordem certa, com templates.',
     url: 'https://dominenr1.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
     badge: 'Conformidade',
     text: 'Tudo o que a norma exige sobre riscos psicossociais, na ordem certa de execução, com os documentos que a fiscalização pede já modelados.',
@@ -357,6 +363,8 @@ const COURSES = [
   },
   {
     title: 'I.A. com RH',
+    icon: 'sparkles',
+    short: 'Automatize triagem, cargos e clima com prompts prontos.',
     url: 'https://iacomrh.com.br/ia-com-rh-2/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
     badge: 'Novo',
     text: 'Como automatizar triagem, descrição de cargos, análise de clima e relatórios usando inteligência artificial, com prompts prontos para o dia a dia do RH.',
@@ -364,24 +372,32 @@ const COURSES = [
   },
   {
     title: 'Liderar com Alta Performance',
+    icon: 'users',
+    short: 'Feedback, delegação e conversas difíceis na prática.',
     url: 'https://liderarcomaltaperformance.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
     text: 'Formação para gestores que precisam entregar resultado através do time: feedback, delegação, conversas difíceis e gestão de conflito.',
     meta: ['Para gestores', 'Casos reais'],
   },
   {
     title: 'Avaliação de Desempenho',
+    icon: 'chart',
+    short: 'Um ciclo de avaliação que gera decisão, não formulário.',
     url: 'https://avaliacaodedesempenhonapraticasoluterh.pages.dev/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR',
     text: 'Metodologia prática para empresários e gestores montarem um ciclo de avaliação que gera decisão, e não só formulário preenchido.',
     meta: ['Modelos prontos', 'Passo a passo'],
   },
   {
     title: 'Meu Time Forte',
+    icon: 'handshake',
+    short: 'Formar, integrar e manter equipes de alta entrega.',
     url: 'https://meutimeforte.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
     text: 'Como formar, integrar e manter equipes de alta entrega, desde a seleção até o ritual de acompanhamento semanal.',
     meta: ['Times', 'Engajamento'],
   },
   {
     title: 'Programa de Remuneração',
+    icon: 'layers',
+    short: 'Remuneração variável e bônus ligados a metas.',
     url: 'https://www.mentoria.soluterh.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR',
     text: 'Estrutura de remuneração variável, bonificação e incentivos ligada a metas, sem criar passivo nem distorção interna.',
     meta: ['Remuneração variável', 'Metas'],
@@ -555,7 +571,7 @@ const NAV = [
     page: 'consultoria',
     mega: 'services',
   },
-  { label: 'Cursos', href: 'cursos.html', page: 'cursos' },
+  { label: 'Cursos', href: 'cursos.html', page: 'cursos', mega: 'courses' },
   { label: 'Clientes', href: 'clientes.html', page: 'clientes' },
   { label: 'Blog', href: 'blog.html', page: 'blog' },
   { label: 'Solute Cast', href: 'solute-cast.html', page: 'solute-cast' },
