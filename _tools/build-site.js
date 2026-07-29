@@ -43,6 +43,7 @@ if (!fs.existsSync(PAGES_DIR)) {
 
 const files = fs.readdirSync(PAGES_DIR).filter((f) => f.endsWith('.js')).sort();
 let total = 0;
+const semIndice = ['404.html'];   // paginas que nao entram no sitemap
 
 files.forEach((f) => {
   delete require.cache[require.resolve(path.join(PAGES_DIR, f))];
@@ -51,15 +52,16 @@ files.forEach((f) => {
     if (page.meta.skip) return;
     const html = head(page.meta) + header(page.meta) + page.body + footer();
     write(page.meta.file, html);
+    // quem pede noindex nao deve aparecer no sitemap
+    if (page.meta.noindex) semIndice.push(page.meta.file);
     total++;
   });
 });
 
 /* ------------------------------------------------------------- sitemap */
-const NOINDEX = ['404.html', 'post.html'];   // fora do sitemap
 const urls = [];
 fs.readdirSync(ROOT)
-  .filter((f) => f.endsWith('.html') && NOINDEX.indexOf(f) === -1)
+  .filter((f) => f.endsWith('.html') && semIndice.indexOf(f) === -1)
   .sort()
   .forEach((f) => {
     if (!EVENT.enabled && f === 'evento.html') return;

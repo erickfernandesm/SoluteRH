@@ -2,6 +2,11 @@
    TREINAMENTOS
    Uma pagina, uma secao por formato, cada uma com a sua ancora (usada pelo
    menu suspenso e pelo indice lateral).
+
+   ATENCAO: o conteudo dos treinamentos esta em LOREM IPSUM ate a Solute
+   validar os textos (ver TRAININGS em _src/site.js). Enquanto isso a pagina
+   fica fora do indice das buscas e exibe um aviso no topo.
+   Para publicar: trocar os textos e apagar `noindex` e o bloco .draft-note.
    ========================================================================== */
 
 const { SITE, TRAININGS } = require('../site');
@@ -16,6 +21,7 @@ const meta = {
   description:
     'Treinamentos fechados conduzidos dentro da sua empresa: Academia de Líderes, palestras para eventos internos, saúde mental para lideranças e team building com propósito.',
   ogImage: 'og-default.jpg',
+  noindex: true, // conteudo provisorio: nao indexar ate validar
   schema: {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -63,7 +69,7 @@ function secao(x, i) {
 
         <div class="row" style="margin-top:2.2rem" data-reveal="up" data-reveal-delay="180">
           <a class="btn btn--primary" href="${wa(waMsg)}" target="_blank" data-magnetic="0.2">
-            Falar sobre este treinamento ${icon('arrow')}
+            Lorem ipsum dolor ${icon('arrow')}
           </a>
         </div>
       </div>
@@ -110,11 +116,14 @@ const body = `
       ${icon('chevronR')}
       <span aria-current="page">Treinamentos</span>
     </nav>
-    <p class="eyebrow eyebrow--center" data-reveal="up">Formatos fechados</p>
-    <h1 class="hero-sub__title" id="titulo" data-split="words" data-reveal="fade">Treinamento que cabe na realidade da sua empresa</h1>
+    <p class="draft-note" data-reveal="up">
+      ${icon('file')} Conteúdo provisório, aguardando validação da Solute
+    </p>
+    <p class="eyebrow eyebrow--center" data-reveal="up">Lorem ipsum</p>
+    <h1 class="hero-sub__title" id="titulo" data-split="words" data-reveal="fade">Lorem ipsum dolor sit amet consectetur</h1>
     <p class="lead" data-reveal="up" data-reveal-delay="140">
-      Turmas fechadas, conduzidas dentro da sua empresa, com a pauta montada a partir do que
-      está acontecendo aí. Nada de conteúdo de prateleira.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua, quis nostrud exercitation ullamco.
     </p>
 
     <div class="chips" style="justify-content:center;margin-top:2.2rem" data-reveal="up" data-reveal-delay="200">
@@ -129,10 +138,11 @@ ${TRAININGS.map(secao).join('\n')}
 <section class="section" aria-labelledby="como-titulo">
   <div class="wrap wrap--wide">
     <div class="section-head section-head--center">
-      <p class="eyebrow eyebrow--center" data-reveal="up">Como funciona</p>
-      <h2 id="como-titulo" class="measure" data-split="words" data-reveal="fade">Do primeiro contato ao encontro</h2>
+      <p class="eyebrow eyebrow--center" data-reveal="up">Lorem ipsum</p>
+      <h2 id="como-titulo" class="measure" data-split="words" data-reveal="fade">Consectetur adipiscing elit</h2>
       <p class="lead measure" data-reveal="up" data-reveal-delay="120">
-        Todo treinamento é montado sob medida. O caminho é sempre o mesmo, independente do formato.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua.
       </p>
     </div>
 
@@ -140,30 +150,30 @@ ${TRAININGS.map(secao).join('\n')}
       <li class="process__step" data-reveal="up">
         <span class="process__num" aria-hidden="true">01</span>
         <span class="process__ico">${icon('search')}</span>
-        <h3 class="process__title">Conversa inicial</h3>
-        <p class="process__text">Entendemos o contexto, o público e o que a empresa quer que mude depois do encontro.</p>
-        <span class="process__meta">${icon('clock')} Sem custo</span>
+        <h3 class="process__title">Lorem ipsum</h3>
+        <p class="process__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.</p>
+        <span class="process__meta">${icon('clock')} Lorem ipsum</span>
       </li>
       <li class="process__step" data-reveal="up">
         <span class="process__num" aria-hidden="true">02</span>
         <span class="process__ico">${icon('file')}</span>
-        <h3 class="process__title">Desenho da pauta</h3>
-        <p class="process__text">A partir daí montamos o conteúdo, a carga horária e o formato, com proposta por escrito.</p>
-        <span class="process__meta">${icon('check')} Sob medida</span>
+        <h3 class="process__title">Dolor sit amet</h3>
+        <p class="process__text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+        <span class="process__meta">${icon('check')} Dolor sit</span>
       </li>
       <li class="process__step" data-reveal="up">
         <span class="process__num" aria-hidden="true">03</span>
         <span class="process__ico">${icon('users')}</span>
-        <h3 class="process__title">Condução</h3>
-        <p class="process__text">O encontro acontece na sua empresa ou on-line, com material de apoio para cada participante.</p>
-        <span class="process__meta">${icon('megaphone')} Presencial ou remoto</span>
+        <h3 class="process__title">Consectetur</h3>
+        <p class="process__text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu.</p>
+        <span class="process__meta">${icon('megaphone')} Consectetur</span>
       </li>
       <li class="process__step" data-reveal="up">
         <span class="process__num" aria-hidden="true">04</span>
         <span class="process__ico">${icon('chart')}</span>
-        <h3 class="process__title">Devolutiva</h3>
-        <p class="process__text">A liderança recebe o que foi observado durante o treinamento e o que precisa sustentar depois.</p>
-        <span class="process__meta">${icon('target')} Com plano de continuidade</span>
+        <h3 class="process__title">Adipiscing elit</h3>
+        <p class="process__text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>
+        <span class="process__meta">${icon('target')} Adipiscing elit</span>
       </li>
     </ol>
   </div>
@@ -172,11 +182,11 @@ ${TRAININGS.map(secao).join('\n')}
 ${B.testimonials({ surface: 'surface-900', title: 'O que dizem sobre o trabalho' })}
 
 ${B.ctaBand({
-  eyebrow: 'Treinamentos',
-  title: 'Conte o que precisa acontecer com o seu time',
-  text: 'A partir de uma conversa a gente monta o formato, a carga horária e a pauta. Se o melhor caminho for outro serviço, dizemos isso também.',
+  eyebrow: 'Lorem ipsum',
+  title: 'Dolor sit amet consectetur adipiscing',
+  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   waText: 'Olá! Gostaria de falar sobre os treinamentos da Solute RH.',
-  cta: 'Falar sobre treinamentos',
+  cta: 'Lorem ipsum',
 })}
 
 </main>

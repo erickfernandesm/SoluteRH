@@ -1233,6 +1233,23 @@ p { text-wrap: pretty; }
     linear-gradient(180deg, rgba(5,5,6,.62) 0%, rgba(5,5,6,.4) 30%, rgba(5,5,6,.76) 68%, var(--ink-950) 92%);
 }
 
+/* aviso de conteudo provisorio: some quando o texto real entrar */
+.draft-note {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 1.4rem;
+  padding: .5rem 1rem;
+  border-radius: var(--r-pill);
+  border: 1px dashed rgba(240, 103, 74, .5);
+  background: rgba(240, 103, 74, .08);
+  color: #F0674A;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+.draft-note svg { width: 14px; height: 14px; flex: none; }
+
 /* migalhas */
 .crumbs {
   display: flex;
