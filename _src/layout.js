@@ -156,7 +156,7 @@ function mega(tipo) {
 }
 
 function header(meta) {
-  const navItems = NAV.map((n) => {
+  const navItems = NAV.filter((n) => !n.hidden).map((n) => {
     const current = meta.page === n.page ? ' aria-current="page"' : '';
     if (n.mega) {
       return `
@@ -171,7 +171,7 @@ function header(meta) {
     <li class="nav__item"><a class="nav__link" href="${n.href}" data-page="${n.page}"${current}>${n.label}</a></li>`;
   }).join('');
 
-  const drawerItems = NAV.map((n) => {
+  const drawerItems = NAV.filter((n) => !n.hidden).map((n) => {
     if (n.mega) {
       const subs = n.mega === 'trainings'
         ? TRAININGS.map((x) =>
@@ -290,7 +290,6 @@ function footer() {
           <a href="quem-somos.html">Quem somos</a>
           <a href="consultoria.html">Consultoria</a>
           <a href="cursos.html">Solute Cursos</a>
-          <a href="treinamentos.html">Treinamentos</a>
           <a href="clientes.html">Clientes</a>
           <a href="solute-cast.html">Solute Cast</a>
           <a href="contato.html">Contato</a>${EVENT.enabled ? `\n          <a href="${EVENT.page}">${EVENT.name}</a>` : ''}

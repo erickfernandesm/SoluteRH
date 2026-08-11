@@ -693,7 +693,9 @@ const NAV = [
     mega: 'services',
   },
   { label: 'Cursos', href: 'cursos.html', page: 'cursos', mega: 'courses' },
-  { label: 'Treinamentos', href: 'treinamentos.html', page: 'treinamentos', mega: 'trainings' },
+  // Fora do menu enquanto os textos estao em lorem ipsum. Para publicar,
+  // apague a linha `hidden` abaixo e rode `node _tools/build-site.js`.
+  { label: 'Treinamentos', href: 'treinamentos.html', page: 'treinamentos', mega: 'trainings', hidden: true },
   { label: 'Clientes', href: 'clientes.html', page: 'clientes' },
   { label: 'Blog', href: 'blog.html', page: 'blog' },
   { label: 'Solute Cast', href: 'solute-cast.html', page: 'solute-cast' },
