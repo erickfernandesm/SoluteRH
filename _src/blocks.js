@@ -121,7 +121,7 @@ function values(opts) {
     <div class="section-head section-head--center">
       <p class="eyebrow eyebrow--center" data-reveal="up">Nossos valores</p>
       <h2 id="valores-titulo" class="measure" data-split="words" data-reveal="fade">Estão na parede do escritório e nas entregas</h2>
-      <p class="lead measure" data-reveal="up" data-reveal-delay="100">Quem entra na Solute RH vê estes oito valores logo na primeira sala. Não é decoração: é o critério que usamos para aceitar um projeto, conduzir um diagnóstico e dizer o que precisa ser dito ao cliente.</p>
+      <p class="lead measure" data-reveal="up" data-reveal-delay="100">São seis, e vêm do nosso Manual de Cultura e Conduta. Não é decoração de parede: é o critério que usamos para aceitar um projeto, conduzir um diagnóstico e dizer ao cliente o que precisa ser dito.</p>
     </div>
 
     <div class="values" data-reveal="up">

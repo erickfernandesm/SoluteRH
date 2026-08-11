@@ -600,16 +600,16 @@ const TESTIMONIALS = [
 
 /* --------------------------------------------------------------------------
    VALORES (parede do escritório)
+   Os seis valores oficiais, na ordem e com as definicoes do Manual de Cultura
+   e Conduta da Solute. Ao alterar aqui, alterar tambem no manual.
    -------------------------------------------------------------------------- */
 const VALUES = [
-  { name: 'Humildade',     icon: 'heart',   text: 'Escutar antes de opinar. Cada empresa tem um contexto que só ela conhece de verdade.' },
-  { name: 'Integridade',   icon: 'shield',  text: 'Fazer o certo mesmo quando ninguém está olhando, inclusive quando dá mais trabalho.' },
-  { name: 'Excelência',    icon: 'star',    text: 'Entregar acima do combinado é o padrão, não a exceção celebrada.' },
-  { name: 'Metas',         icon: 'target',  text: 'Trabalho de gestão de pessoas que não move indicador é conversa bonita, não resultado.' },
-  { name: 'Seriedade',     icon: 'check',   text: 'Prazo é compromisso. Método é método. Diagnóstico não se inventa.' },
-  { name: 'Ética',         icon: 'scale',   text: 'Sigilo absoluto sobre o que vemos dentro de cada empresa. Sem exceção.' },
-  { name: 'Humanização',   icon: 'users',   text: 'Por trás de cada indicador existe uma pessoa com uma história. Nunca esquecemos disso.' },
-  { name: 'Resolutividade',icon: 'bolt',    text: 'Apontar o problema é fácil. Nós ficamos até a solução estar rodando.' },
+  { name: 'Ética',          icon: 'scale',  text: 'Agimos com responsabilidade, respeito às normas e coerência entre discurso e prática em todas as decisões.' },
+  { name: 'Integridade',    icon: 'shield', text: 'Mantemos transparência, verdade, honestidade e consistência, mesmo quando isso exige escolhas difíceis.' },
+  { name: 'Humildade',      icon: 'heart',  text: 'Reconhecemos que sempre há o que aprender, ouvindo pessoas e evoluindo continuamente.' },
+  { name: 'Resolutividade', icon: 'bolt',   text: 'Focamos em soluções práticas e eficientes, com impacto real no negócio do cliente e no nosso.' },
+  { name: 'Humanização',    icon: 'users',  text: 'Colocamos as pessoas no centro das decisões, considerando contextos, emoções e relações.' },
+  { name: 'Seriedade',      icon: 'check',  text: 'Atuamos com compromisso, profissionalismo e responsabilidade em tudo o que entregamos.' },
 ];
 
 /* --------------------------------------------------------------------------

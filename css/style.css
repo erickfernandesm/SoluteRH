@@ -2185,7 +2185,8 @@ p { text-wrap: pretty; }
 /* ==========================================================================
    14. VALORES
    ========================================================================== */
-.values { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+/* seis valores: duas fileiras de tres */
+.values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
 .value {
   position: relative;
   padding: clamp(1.3rem, 1rem + 1.1vw, 2rem);
