@@ -489,6 +489,7 @@ const TRAININGS = [
    CLIENTES
    -------------------------------------------------------------------------- */
 const CLIENTS = [
+  { file: 'h2a', name: 'H2A' },
   { file: 'acao-seguros', name: 'Ação Seguros' },
   { file: 'ativos', name: 'Ativos Contabilidade' },
   { file: 'beija-flor', name: 'Auto Peças Beija Flor' },
@@ -564,7 +565,7 @@ const TESTIMONIALS = [
       'O diferencial foi perceber que não entregavam apenas modelos prontos: entendiam a legislação, as boas práticas de gestão de pessoas e adaptavam tudo à nossa realidade. Isso nos trouxe muito mais confiança para implementar os processos.',
     name: 'H2A',
     role: 'Cargos e Salários + Gestão de Desempenho',
-    initials: 'H2',
+    logo: 'h2a',
   },
   {
     quote: 'A Solute nos deu um norte muito grande na operação! Somos muito gratos!',

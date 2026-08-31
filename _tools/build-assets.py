@@ -314,7 +314,7 @@ CLIENTS_JPEG = [
     "ativa", "alpha", "nbcbank", "acoem", "melfex",
     "saojose", "masabor", "procare", "dominic",
     "smcontabilidade", "ultra", "amazonia", "patativa", "faput", "pedro",
-    "hope", "adidas",
+    "hope", "adidas", "h2a",
     # lote de agosto: o nome do arquivo em assets nem sempre bate com o
     # nome usado no site, entao estes vieram convertidos a mao
 ]
