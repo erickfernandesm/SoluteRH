@@ -506,7 +506,7 @@ const CLIENTS = [
   { file: 'equipar', name: 'Equipar' },
   { file: 'constance', name: 'Constance' },
   { file: 'hope', name: 'Hope' },
-  { file: 'corinto', name: 'Corinto' },
+  { file: 'adidas', name: 'Adidas' },
   { file: 'ativa', name: 'Ativa Hospitalar' },
   { file: 'procare', name: 'Procare Produtos Hospitalares' },
   { file: 'nbcbank', name: 'NBC Bank' },

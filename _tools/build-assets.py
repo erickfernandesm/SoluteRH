@@ -314,7 +314,7 @@ CLIENTS_JPEG = [
     "ativa", "alpha", "nbcbank", "acoem", "melfex",
     "saojose", "masabor", "procare", "dominic",
     "smcontabilidade", "ultra", "amazonia", "patativa", "faput", "pedro",
-    "hope",
+    "hope", "adidas",
 ]
 
 
