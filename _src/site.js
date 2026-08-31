@@ -555,6 +555,13 @@ const TESTIMONIALS = [
   },
   {
     quote:
+      'Transformam temas complexos em processos claros e aplicáveis, o que nos dá segurança para decidir. Já percebemos mudanças no ambiente de trabalho, na organização dos processos e na forma como conduzimos a gestão de pessoas.',
+    name: 'SM Contabilidade',
+    role: 'Consultoria de RH',
+    logo: 'smcontabilidade',
+  },
+  {
+    quote:
       'O trabalho da Academia de Líderes ficou excelente. Além de representar exatamente a nossa realidade, trouxe um plano completo e muito interessante para corrigirmos os problemas e aproveitarmos as oportunidades.',
     name: 'DAS Brasil',
     role: 'Academia de Líderes',
