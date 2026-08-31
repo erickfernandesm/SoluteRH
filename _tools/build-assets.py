@@ -314,6 +314,7 @@ CLIENTS_JPEG = [
     "ativa", "alpha", "nbcbank", "acoem", "melfex",
     "saojose", "masabor", "procare", "dominic",
     "smcontabilidade", "ultra", "amazonia", "patativa", "faput", "pedro",
+    "hope",
 ]
 
 
@@ -345,11 +346,20 @@ def build_client_jpegs():
     from PIL import Image
     n = 0
     for name in CLIENTS_JPEG:
-        p = os.path.join(SRC, name + ".jpeg")
-        if not os.path.exists(p):
+        # a logo pode chegar em qualquer um desses formatos
+        p = next((os.path.join(SRC, name + ext)
+                  for ext in (".jpeg", ".jpg", ".png", ".webp")
+                  if os.path.exists(os.path.join(SRC, name + ext))), None)
+        if not p:
             log("FALTANDO: " + name)
             continue
-        im = Image.open(p).convert("RGB")
+        im = Image.open(p)
+        if im.mode in ("RGBA", "LA", "P"):
+            # PNG com transparencia: assenta sobre branco antes de achatar
+            im = im.convert("RGBA")
+            fundo = Image.new("RGBA", im.size, (255, 255, 255, 255))
+            im = Image.alpha_composite(fundo, im)
+        im = im.convert("RGB")
         w, h = im.size
         if w != h:
             lado = max(w, h)

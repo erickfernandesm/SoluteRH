@@ -505,7 +505,7 @@ const CLIENTS = [
   { file: 'oficina-grafica', name: 'Oficina Gráfica' },
   { file: 'equipar', name: 'Equipar' },
   { file: 'constance', name: 'Constance' },
-  { file: 'match-digital', name: 'Match Digital' },
+  { file: 'hope', name: 'Hope' },
   { file: 'corinto', name: 'Corinto' },
   { file: 'ativa', name: 'Ativa Hospitalar' },
   { file: 'procare', name: 'Procare Produtos Hospitalares' },
