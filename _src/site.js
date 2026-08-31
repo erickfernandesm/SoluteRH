@@ -489,6 +489,23 @@ const TRAININGS = [
    CLIENTES
    -------------------------------------------------------------------------- */
 const CLIENTS = [
+  { file: 'acao-seguros', name: 'Ação Seguros' },
+  { file: 'ativos', name: 'Ativos Contabilidade' },
+  { file: 'beija-flor', name: 'Auto Peças Beija Flor' },
+  { file: 'biener', name: 'Biener Biomassa' },
+  { file: 'citro-aroma', name: 'Citro Aroma' },
+  { file: 'confrapag', name: 'Confrapag' },
+  { file: 'das-brasil', name: 'DAS Brasil' },
+  { file: 'escola-zara', name: 'Escola Zara' },
+  { file: 'expander', name: 'Expander' },
+  { file: 'grupo-buso', name: 'Grupo Buso' },
+  { file: 'dextel', name: 'Dextel Fibra' },
+  { file: 'innovasel', name: 'Innovasell' },
+  { file: 'inmetro', name: 'Intermetro' },
+  { file: 'maximum', name: 'Maximum Assessoria Contábil' },
+  { file: 'molin', name: 'Molin Advocacia' },
+  { file: 'planejar', name: 'Planejar Consultores' },
+  { file: 'sianfer', name: 'Sianfer' },
   { file: 'tim', name: 'TIM' },
   { file: 'trade', name: 'Trade' },
   { file: 'sindicomercio', name: 'Sindicomércio' },
@@ -540,7 +557,7 @@ const TESTIMONIALS = [
       'Um dos maiores diferenciais dessa consultoria é a forma como compartilham conhecimento. Hoje posso dizer que desenvolvi uma visão muito mais ampla sobre Gestão de Pessoas graças ao suporte, às orientações e à metodologia aplicada por eles.',
     name: 'Citro',
     role: 'RH Estratégico',
-    initials: 'CI',
+    logo: 'citro-aroma',
   },
   {
     quote:
@@ -560,7 +577,7 @@ const TESTIMONIALS = [
       'Procuramos a Solute RH para o desenvolvimento e a estruturação dos nossos cargos e salários, visando a clareza do crescimento de carreira interno da nossa empresa. Ficamos 100% satisfeitos com o profissionalismo e a qualidade do serviço entregue.',
     name: 'Planejar',
     role: 'Plano de Cargos e Salários',
-    initials: 'PL',
+    logo: 'planejar',
   },
   {
     quote:
@@ -581,21 +598,21 @@ const TESTIMONIALS = [
       'Realizei alguns trabalhos com a Solute e todos satisfatórios com alto nível de profissionalismo, qualidade e organização. A equipe é comprometida e entregou resultados que superaram as expectativas.',
     name: 'Sianfer',
     role: 'RH Estratégico',
-    initials: 'SI',
+    logo: 'sianfer',
   },
   {
     quote:
       'Sempre me receberam prontamente, esclareceram as minhas dúvidas e sugeriram soluções para as minhas dificuldades. A Emillia, que nos acompanhou durante o processo, é uma profissional gabaritada.',
-    name: 'Zara',
+    name: 'Escola Zara',
     role: 'RH Estratégico',
-    initials: 'ZA',
+    logo: 'escola-zara',
   },
   {
     quote:
       'A consultoria da Solute RH transformou completamente nossa gestão de pessoas. A metodologia da Rose é prática, validada e gerou resultados visíveis em poucos meses.',
     name: 'Riane Lopes',
-    role: 'Sócia Diretora · Faculdade Líbano',
-    photo: 'riane',
+    role: 'Faculdade Líbano · RH Estratégico',
+    logo: 'libano',
   },
   {
     quote:
