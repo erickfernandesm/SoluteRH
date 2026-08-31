@@ -2849,7 +2849,11 @@ body.has-announce { --header-offset: 40px; }
    nao fecha a ultima fila, o que sobra fica centralizado em vez de deixar um
    buraco escuro no canto direito. O numero de colunas vem de --cols. */
 .logo-grid {
-  --cols: 10;
+  /* --cols-base e a quantidade ideal por faixa de largura. O JavaScript pode
+     ajustar --cols em ate duas para nao sobrar uma logo solta na ultima fila;
+     sem JavaScript, vale a base. */
+  --cols-base: 10;
+  --cols: var(--cols-base);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -2860,10 +2864,10 @@ body.has-announce { --header-offset: 40px; }
   overflow: hidden;
 }
 
-@media (max-width: 1180px) { .logo-grid { --cols: 8; } }
-@media (max-width: 900px)  { .logo-grid { --cols: 6; } }
-@media (max-width: 640px)  { .logo-grid { --cols: 4; } }
-@media (max-width: 420px)  { .logo-grid { --cols: 3; } }
+@media (max-width: 1180px) { .logo-grid { --cols-base: 8; } }
+@media (max-width: 900px)  { .logo-grid { --cols-base: 6; } }
+@media (max-width: 640px)  { .logo-grid { --cols-base: 4; } }
+@media (max-width: 420px)  { .logo-grid { --cols-base: 3; } }
 
 .logo-grid__cell {
   position: relative;

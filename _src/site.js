@@ -555,6 +555,13 @@ const TESTIMONIALS = [
   },
   {
     quote:
+      'O trabalho da Academia de Líderes ficou excelente. Além de representar exatamente a nossa realidade, trouxe um plano completo e muito interessante para corrigirmos os problemas e aproveitarmos as oportunidades.',
+    name: 'DAS Brasil',
+    role: 'Academia de Líderes',
+    logo: 'das-brasil',
+  },
+  {
+    quote:
       'Um dos maiores diferenciais dessa consultoria é a forma como compartilham conhecimento. Hoje posso dizer que desenvolvi uma visão muito mais ampla sobre Gestão de Pessoas graças ao suporte, às orientações e à metodologia aplicada por eles.',
     name: 'Citro',
     role: 'RH Estratégico',

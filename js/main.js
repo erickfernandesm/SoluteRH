@@ -786,6 +786,45 @@
   }
 
   /* ================================================================
+     LOGO-GRID — evita uma logo sozinha na ultima fila
+     A folha de estilo diz quantas colunas caberiam (--cols-base). Aqui
+     ajustamos em ate duas para que a ultima fila fique cheia ou tenha
+     pelo menos tres logos, que e quando o corte parece proposital.
+     ================================================================ */
+  function logoGrid() {
+    const grades = $$('.logo-grid');
+    if (!grades.length) return;
+
+    const ajusta = () => {
+      grades.forEach((g) => {
+        const total = g.children.length;
+        if (!total) return;
+
+        g.style.removeProperty('--cols');
+        const base = parseInt(getComputedStyle(g).getPropertyValue('--cols-base'), 10);
+        if (!base || total <= base) return;
+
+        // tenta a base primeiro e depois os vizinhos, do mais proximo ao mais longe
+        const opcoes = [base, base - 1, base + 1, base - 2, base + 2];
+        const bom = opcoes.find((n) => {
+          if (n < 2) return false;
+          const resto = total % n;
+          return resto === 0 || resto >= 3;
+        });
+        if (bom && bom !== base) g.style.setProperty('--cols', bom);
+      });
+    };
+
+    ajusta();
+
+    let t = null;
+    on(window, 'resize', () => {
+      clearTimeout(t);
+      t = setTimeout(ajusta, 150);
+    });
+  }
+
+  /* ================================================================
      SWAP — rotulo do menu que alterna entre dois nomes
      O item do Solute Cast mostra tambem o Plantao RH, revezando.
      Com movimento reduzido fica parado no primeiro nome.
@@ -908,6 +947,7 @@
     forms();
     announce();
     swapLabels();
+    logoGrid();
     misc();
   }
 
