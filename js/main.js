@@ -786,6 +786,56 @@
   }
 
   /* ================================================================
+     SWAP — rotulo do menu que alterna entre dois nomes
+     O item do Solute Cast mostra tambem o Plantao RH, revezando.
+     Com movimento reduzido fica parado no primeiro nome.
+     ================================================================ */
+  function swapLabels() {
+    if (REDUCED) return;
+
+    $$('[data-swap]').forEach((box) => {
+      const itens = $$('.swap__item', box);
+      if (itens.length < 2) return;
+
+      let atual = 0;
+      let timer = null;
+      let parado = false;
+
+      const troca = () => {
+        if (parado) return;
+        const sai = itens[atual];
+        atual = (atual + 1) % itens.length;
+        const entra = itens[atual];
+
+        sai.classList.remove('is-on');
+        sai.classList.add('is-out');
+        entra.classList.add('is-on');
+
+        // devolve o que saiu para a posicao inicial, ja invisivel
+        setTimeout(() => sai.classList.remove('is-out'), 360);
+      };
+
+      const liga = () => { timer = setInterval(troca, 4000); };
+      const desliga = () => { clearInterval(timer); timer = null; };
+
+      // nao troca com o mouse em cima nem com o teclado no link
+      const link = box.closest('a') || box;
+      on(link, 'mouseenter', () => { parado = true; });
+      on(link, 'mouseleave', () => { parado = false; });
+      on(link, 'focusin', () => { parado = true; });
+      on(link, 'focusout', () => { parado = false; });
+
+      // aba em segundo plano nao precisa animar
+      on(document, 'visibilitychange', () => {
+        if (document.hidden) desliga();
+        else if (!timer) liga();
+      });
+
+      liga();
+    });
+  }
+
+  /* ================================================================
      MISC — ano no rodape, links externos seguros
      ================================================================ */
   function misc() {
@@ -857,6 +907,7 @@
     anchors();
     forms();
     announce();
+    swapLabels();
     misc();
   }
 

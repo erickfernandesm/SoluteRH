@@ -648,6 +648,34 @@ p { text-wrap: pretty; }
   border-radius: 2px;
   background: var(--brand);
 }
+/* Rotulo que alterna entre dois nomes (Solute Cast e Plantao RH).
+   O sizer invisivel segura a largura do maior, para o resto do menu nao
+   se mexer a cada troca. Os dois rotulos ficam sobrepostos. */
+.swap {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  overflow: hidden;
+}
+.swap__sizer { visibility: hidden; }
+.swap__item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(70%);
+  transition: opacity .34s var(--e-out), transform .34s var(--e-out);
+}
+.swap__item.is-on { opacity: 1; transform: none; }
+.swap__item.is-out { opacity: 0; transform: translateY(-70%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .swap__item { transition: none; }
+}
+
 .nav__caret {
   width: 9px; height: 9px;
   flex: none;
@@ -1569,6 +1597,15 @@ p { text-wrap: pretty; }
   background: var(--ink-850);
 }
 .figure img { width: 100%; height: 100%; object-fit: cover; }
+/* As fotos dos servicos sao retrato (4:5) e aqui aparecem deitadas (16:11).
+   Centralizado, o corte comia a cabeca das pessoas: o ponto de foco sobe
+   para a altura dos rostos. */
+.figure__crop {
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  object-position: center 26%;
+}
+
 .figure--portrait { aspect-ratio: 4 / 5; }
 .figure--wide { aspect-ratio: 16 / 10; }
 .figure--square { aspect-ratio: 1; }

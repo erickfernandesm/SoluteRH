@@ -167,6 +167,19 @@ function header(meta) {
       </a>${mega(n.mega)}
     </li>`;
     }
+    // rotulo que alterna entre dois nomes: o mais largo reserva a largura,
+    // para os vizinhos nao dancarem a cada troca
+    if (n.swap) {
+      const largo = n.swap.slice().sort((x, y) => y.length - x.length)[0];
+      const itens = n.swap.map((s, i) =>
+        `<span class="swap__item${i === 0 ? ' is-on' : ''}">${s}</span>`).join('');
+      return `
+    <li class="nav__item">
+      <a class="nav__link" href="${n.href}" data-page="${n.page}"${current} aria-label="${n.swap.join(' e ')}">
+        <span class="swap" data-swap aria-hidden="true"><span class="swap__sizer">${largo}</span>${itens}</span>
+      </a>
+    </li>`;
+    }
     return `
     <li class="nav__item"><a class="nav__link" href="${n.href}" data-page="${n.page}"${current}>${n.label}</a></li>`;
   }).join('');

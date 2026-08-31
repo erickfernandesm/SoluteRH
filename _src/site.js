@@ -395,12 +395,12 @@ const COURSES = [
     meta: ['Modelos prontos', 'Passo a passo'],
   },
   {
-    title: 'Meu Time Forte',
-    icon: 'handshake',
-    short: 'Formar, integrar e manter equipes de alta entrega.',
-    url: 'https://meutimeforte.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
-    text: 'Como formar, integrar e manter equipes de alta entrega, desde a seleção até o ritual de acompanhamento semanal.',
-    meta: ['Times', 'Engajamento'],
+    title: 'Caixa de Ferramentas',
+    icon: 'file',
+    short: 'Modelos prontos para a rotina trabalhista da empresa.',
+    url: 'https://caixadeferramentas-8tx.pages.dev/',
+    text: 'Advertência, admissão, banco de horas, férias e contrato de PJ: os documentos que deveriam existir por trás de cada combinado de boca, prontos para editar, imprimir e assinar.',
+    meta: ['Documentos', 'Rotina trabalhista'],
   },
   {
     title: 'Programa de Remuneração',
@@ -706,7 +706,10 @@ const NAV = [
   { label: 'Treinamentos', href: 'treinamentos.html', page: 'treinamentos', mega: 'trainings', hidden: true },
   { label: 'Clientes', href: 'clientes.html', page: 'clientes' },
   { label: 'Blog', href: 'blog.html', page: 'blog' },
-  { label: 'Solute Cast', href: 'solute-cast.html', page: 'solute-cast' },
+  // O item alterna entre os dois nomes no menu do topo. No celular e no
+  // rodape aparece so o `label`, sem animacao.
+  { label: 'Solute Cast', href: 'solute-cast.html', page: 'solute-cast',
+    swap: ['Solute Cast', 'Plantão RH'] },
   { label: 'Contato', href: 'contato.html', page: 'contato' },
 ];
 

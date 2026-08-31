@@ -146,7 +146,7 @@ function page(svc, idx) {
     <div class="duo">
 
       <div class="figure figure--wide veil" data-reveal="right">
-        <img src="media/${svc.img}.webp" alt="${svc.title}" width="1122" height="1402" loading="lazy" style="aspect-ratio:16/11;object-fit:cover">
+        <img class="figure__crop" src="media/${svc.img}.webp" alt="${svc.title}" width="1122" height="1402" loading="lazy">
       </div>
 
       <div>
