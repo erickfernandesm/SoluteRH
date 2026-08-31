@@ -16,7 +16,7 @@ const meta = {
   page: 'solute-cast',
   title: 'Solute Cast | Podcast e lives sobre gestão de pessoas',
   description:
-    'O podcast da Solute RH sobre gestão de pessoas, com Rosemeire Moreira, e as lives de terça-feira às 09h00 no YouTube, com pergunta aberta da audiência.',
+    'O podcast da Solute RH sobre gestão de pessoas, com Rosemeire Moreira, e o Plantão RH Estratégico, aula ao vivo e gratuita toda terça-feira às 09h00 no YouTube.',
   ogImage: 'og-default.jpg',
   schema: {
     '@context': 'https://schema.org',
@@ -70,14 +70,14 @@ const body = `
     <p class="lead" data-reveal="up" data-reveal-delay="140">
       O canal da Solute RH tem duas frentes: o <strong style="color:var(--fog-50)">podcast</strong>,
       com conversas sobre o que realmente acontece dentro das empresas, e as
-      <strong style="color:var(--fog-50)">lives de terça</strong>, ao vivo e com pergunta aberta.
+      aulas do <strong style="color:var(--fog-50)">Plantão RH Estratégico</strong>, ao vivo e com pergunta aberta.
     </p>
 
     <div class="row" style="margin-top:2.2rem;gap:.8rem" data-reveal="up" data-reveal-delay="200">
       <a class="btn btn--primary btn--lg" href="${SITE.social.youtube}" target="_blank" data-magnetic="0.22">
         ${icon('youtube')} Abrir o canal
       </a>
-      <a class="btn btn--ghost btn--lg" href="#lives">Ver as lives de terça</a>
+      <a class="btn btn--ghost btn--lg" href="#lives">Ver o Plantão RH Estratégico</a>
     </div>
   </div>
 </section>
@@ -93,7 +93,7 @@ const body = `
         <p class="lead" style="margin-top:1.1rem" data-reveal="up" data-reveal-delay="100">
           Episódios com a Rosemeire Moreira sobre liderança, retenção, remuneração,
           conformidade e cultura. Cada conversa parte de um caso real de empresa, não de
-          teoria de livro.
+          teoria de livro. A partir de setembro, os episódios passam a ser quinzenais.
         </p>
 
         <ul class="checks" style="margin-top:2rem" data-stagger="90">
@@ -138,11 +138,11 @@ const body = `
            data-live-on="Ao vivo agora, entre no canal"
            data-live-off="Ao vivo ${SITE.live.day.toLowerCase()} às ${SITE.live.time}"><span class="tag__dot tag__dot--live"></span> <span data-live-label>Ao vivo ${SITE.live.day.toLowerCase()} às ${SITE.live.time}</span></p>
 
-        <h2 id="lives-titulo" style="margin-top:.9rem" data-split="words" data-reveal="fade">As lives de terça</h2>
+        <h2 id="lives-titulo" style="margin-top:.9rem" data-split="words" data-reveal="fade">Plantão RH Estratégico</h2>
         <p class="lead" style="margin-top:1.1rem" data-reveal="up" data-reveal-delay="100">
-          Uma hora por semana, ao vivo, com o chat aberto. Você chega com a dúvida da sua
-          empresa e sai com um encaminhamento. É de graça, não precisa de inscrição e dá
-          para entrar e sair a hora que quiser.
+          Aula ao vivo e gratuita toda semana, com o chat aberto. Você chega com a dúvida
+          da sua empresa e sai com um encaminhamento. Não precisa de inscrição e dá para
+          entrar e sair a hora que quiser.
         </p>
 
         <div class="row" style="margin-top:1.8rem;gap:.6rem" data-reveal="up" data-reveal-delay="150">

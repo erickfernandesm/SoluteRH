@@ -64,7 +64,7 @@ const body = `
         <p class="eyebrow" data-reveal="up">A fundadora</p>
         <h2 id="historia-titulo" data-split="words" data-reveal="fade">Rosemeire Moreira</h2>
         <p class="lead" style="margin-top:.9rem" data-reveal="up" data-reveal-delay="90">
-          Especialista em RH Estratégico, Liderança e Gestão de Pessoas.
+          Especialista em RH Estratégico, Remuneração, Gestão de Pessoas e Liderança.
         </p>
 
         <div class="prose" style="margin-top:1.6rem" data-reveal="up" data-reveal-delay="150">

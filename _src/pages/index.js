@@ -171,7 +171,7 @@ const pilares = `
       <h2 id="divisoes-titulo" class="measure" data-split="words" data-reveal="fade">A Solute RH atua onde a gestão de pessoas acontece</h2>
       <p class="lead measure" data-reveal="up" data-reveal-delay="140">
         Consultoria para estruturar por dentro, cursos para formar quem executa e conteúdo
-        semanal para manter empresário e RH atualizados.
+        gratuito toda semana para manter empresário e RH atualizados.
       </p>
     </div>
 
@@ -180,11 +180,11 @@ const pilares = `
       <article class="pillar" data-reveal="up">
         <img class="pillar__logo" src="media/logo-consultoria-branca.png" alt="Solute Consultoria" width="900" height="248" loading="lazy">
         <h3 class="pillar__title">Consultoria</h3>
-        <p class="pillar__text">Projetos B2B conduzidos dentro da sua empresa, com método validado e acompanhamento direto da nossa equipe até a solução estar rodando.</p>
+        <p class="pillar__text">Projetos conduzidos dentro da sua empresa, com método validado e acompanhamento direto dos nossos especialistas até a solução estar rodando.</p>
         <ul class="pillar__list">
           <li>${icon('check')}<span>Diagnóstico antes de qualquer proposta</span></li>
-          <li>${icon('check')}<span>Escopo montado sob a sua realidade</span></li>
-          <li>${icon('check')}<span>Entrega com indicador, não com relatório</span></li>
+          <li>${icon('check')}<span>Escopo montado de acordo com a realidade da empresa</span></li>
+          <li>${icon('check')}<span>Entrega com indicador e aplicação prática, não apenas relatório</span></li>
         </ul>
         <div class="pillar__foot">
           <a class="link-arrow" href="consultoria.html">Ver os 8 serviços ${icon('arrow')}</a>
@@ -207,15 +207,15 @@ const pilares = `
 
       <article class="pillar" data-reveal="up">
         <img class="pillar__logo" src="media/logo-cast-branca.png" alt="Solute Cast" width="900" height="300" loading="lazy">
-        <h3 class="pillar__title">Cast</h3>
-        <p class="pillar__text">Conversa semanal sobre gestão de pessoas, ao vivo, com a Rosemeire Moreira. De graça, sem enrolação e com pergunta aberta da audiência.</p>
+        <h3 class="pillar__title">Cast e Plantão</h3>
+        <p class="pillar__text">Conteúdo gratuito sobre gestão de pessoas com a Rosemeire Moreira: o Plantão RH Estratégico ao vivo toda semana e o podcast da Solute, sem enrolação.</p>
         <ul class="pillar__list">
-          <li>${icon('check')}<span>${SITE.live.day} às ${SITE.live.time}</span></li>
-          <li>${icon('check')}<span>Ao vivo no YouTube, com chat aberto</span></li>
-          <li>${icon('check')}<span>Casos reais de empresas brasileiras</span></li>
+          <li>${icon('check')}<span>Plantão RH Estratégico: ${SITE.live.day.toLowerCase()} às ${SITE.live.time}</span></li>
+          <li>${icon('check')}<span>Solute Cast: ${SITE.cast.cadence.toLowerCase()} a partir de setembro</span></li>
+          <li>${icon('check')}<span>Ao vivo no YouTube, de graça e com chat aberto</span></li>
         </ul>
         <div class="pillar__foot">
-          <a class="link-arrow" href="solute-cast.html">Assistir às lives ${icon('arrow')}</a>
+          <a class="link-arrow" href="solute-cast.html">Ver o Cast e o Plantão ${icon('arrow')}</a>
         </div>
       </article>
 
@@ -244,7 +244,7 @@ const rose = `
         <p class="eyebrow" data-reveal="up">Quem conduz</p>
         <h2 id="rose-titulo" data-split="words" data-reveal="fade">Rosemeire Moreira</h2>
         <p class="lead" style="margin-top:1rem" data-reveal="up" data-reveal-delay="100">
-          Especialista em RH Estratégico, Liderança e Gestão de Pessoas.
+          Especialista em RH Estratégico, Remuneração, Gestão de Pessoas e Liderança.
         </p>
 
         <div class="stack" style="gap:1.15rem;margin-top:1.6rem;color:var(--fog-300)">
@@ -270,7 +270,7 @@ const rose = `
           <div class="card" data-reveal="up" style="padding:1.15rem 1.3rem">
             <span class="card__ico" style="width:40px;height:40px;margin-bottom:.8rem">${icon('mic')}</span>
             <h3 class="card__title" style="font-size:1rem">Solute Cast</h3>
-            <p class="card__text" style="font-size:.88rem">Apresentadora do programa semanal ao vivo no YouTube.</p>
+            <p class="card__text" style="font-size:.88rem">Apresentadora do Plantão RH Estratégico, ao vivo toda terça no YouTube.</p>
           </div>
         </div>
 

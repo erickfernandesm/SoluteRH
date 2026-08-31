@@ -43,10 +43,13 @@ const SITE = {
   },
 
   live: {
+    name: 'Plantão RH Estratégico',
     day: 'Toda terça-feira',
     time: '09h00',
     radio: 'Rádio Aló FM 96.7',
   },
+  // O podcast passa a ser quinzenal a partir de setembro de 2026.
+  cast: { cadence: 'Episódios quinzenais' },
 };
 
 /* --------------------------------------------------------------------------
