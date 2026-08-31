@@ -1096,7 +1096,9 @@ p { text-wrap: pretty; }
 }
 .hero__place svg { width: 15px; height: 15px; color: var(--brand); flex: none; }
 
-.hero__title { margin-bottom: 1.5rem; }
+/* a chamada da home tem tres linhas longas: escala propria, menor que o h1
+   padrao, para nao estourar a largura em telas grandes */
+.hero__title { margin-bottom: 1.5rem; font-size: clamp(2.1rem, 1.35rem + 3.2vw, 4.3rem); }
 .hero__title .split-line + .split-line { margin-top: -0.04em; }
 
 .hero__lead {

@@ -12,7 +12,7 @@ const meta = {
   page: 'index',
   title: 'Solute RH | Consultoria em RH Estratégico e Gestão de Pessoas',
   description:
-    'Consultoria de RH que organiza a gestão de pessoas com método validado: RH estratégico, cargos e salários, NR-01, liderança e recrutamento. +700 empresas atendidas.',
+    'Consultoria e cursos de RH para estruturar a gestão de pessoas: RH estratégico, cargos e salários, NR-01, desenvolvimento de líderes e recrutamento. +700 empresas atendidas.',
   ogImage: 'og-default.jpg',
   preload: [{ href: 'media/tour-escritorio-poster.webp', as: 'image' }],
   schema: {
@@ -78,18 +78,19 @@ const hero = `
       <p class="eyebrow eyebrow--center" data-reveal="up">Consultoria em RH · Atuação em todo o Brasil</p>
 
       <h1 class="hero__title" data-reveal="fade" data-reveal-delay="120">
-        <span class="split-line"><span class="split-word" style="--word-delay:0ms">Fortalecemos</span></span>
-        <span class="split-line"><span class="split-word" style="--word-delay:110ms">negócios</span> <span class="split-word" style="--word-delay:190ms">através</span></span>
-        <span class="split-line"><span class="split-word" style="--word-delay:270ms">de</span> <span class="split-word" style="--word-delay:340ms"><span class="mark">pessoas</span></span></span>
+        <span class="split-line"><span class="split-word" style="--word-delay:0ms">Consultoria</span> <span class="split-word" style="--word-delay:40ms">e</span> <span class="split-word" style="--word-delay:80ms">Cursos</span> <span class="split-word" style="--word-delay:120ms">de</span> <span class="split-word" style="--word-delay:160ms">RH</span></span>
+        <span class="split-line"><span class="split-word" style="--word-delay:200ms">para</span> <span class="split-word" style="--word-delay:240ms">uma</span> <span class="split-word" style="--word-delay:280ms">Gestão</span> <span class="split-word" style="--word-delay:320ms">de</span> <span class="split-word" style="--word-delay:360ms">Pessoas</span></span>
+        <span class="split-line"><span class="split-word" style="--word-delay:400ms">mais</span> <span class="split-word" style="--word-delay:440ms"><span class="mark">Estratégica</span></span></span>
       </h1>
 
-      <p class="hero__lead" data-reveal="up" data-reveal-delay="520">
-        Organizamos a gestão de pessoas da sua empresa com <strong>soluções personalizadas</strong>,
-        <strong>líderes preparados</strong> e uma cultura alinhada aos objetivos do negócio.
-        Somos o motor que impulsiona performance, engajamento e crescimento sustentável.
+      <p class="hero__lead" data-reveal="up" data-reveal-delay="580">
+        Fortalecemos negócios através de pessoas com <strong>consultoria de RH</strong>, <strong>cursos</strong>
+        e soluções em gestão de pessoas. Ajudamos empresas a estruturar processos de RH,
+        <strong>desenvolver líderes</strong>, fortalecer a cultura organizacional e transformar a gestão de
+        pessoas em resultados para o negócio.
       </p>
 
-      <div class="hero__cta" data-reveal="up" data-reveal-delay="640">
+      <div class="hero__cta" data-reveal="up" data-reveal-delay="700">
         <a class="btn btn--primary btn--lg" href="${wa()}" target="_blank" data-magnetic="0.24">
           Diagnóstico gratuito ${icon('arrow')}
         </a>
@@ -98,13 +99,9 @@ const hero = `
         </a>
       </div>
 
-      <p class="hero__place" data-reveal="up" data-reveal-delay="720">
-        ${icon('pin')} Nosso escritório · Juiz de Fora, MG
-      </p>
-
     </div>
 
-    <div class="hero__stats" data-reveal="up" data-reveal-delay="800">
+    <div class="hero__stats" data-reveal="up" data-reveal-delay="780">
       <div class="hero__stat">
         <b>+<span data-count="700">0</span></b>
         <span>empresas atendidas</span>
@@ -136,23 +133,27 @@ const problema = `
       <p class="eyebrow eyebrow--center" data-reveal="up">O diagnóstico honesto</p>
       <h2 id="problema-titulo" class="measure" data-split="words" data-reveal="fade">Se qualquer uma destas frases parece familiar, o problema não é o time</h2>
       <p class="lead measure" data-reveal="up" data-reveal-delay="120">
-        É estrutura. E estrutura se constrói, normalmente em menos tempo e por menos dinheiro
-        do que custa continuar convivendo com o problema.
+        Quase sempre é o mesmo enredo: a empresa cresceu, o time aumentou, mas a gestão de
+        pessoas não acompanhou esse crescimento. Estrutura se constrói, normalmente em menos
+        tempo e por menos dinheiro do que custa continuar convivendo com o problema.
       </p>
     </div>
 
     <ul class="pain-grid" data-stagger="80">
+      <li class="pain" data-reveal="up">${icon('x')}<span>Você abre vagas, entrevista, mas <strong>não encontra profissionais qualificados</strong>. E quando encontra, demora para contratar.</span></li>
       <li class="pain" data-reveal="up">${icon('x')}<span>Você contrata, treina e, seis meses depois, <strong>a pessoa vai embora</strong>. E o ciclo recomeça.</span></li>
-      <li class="pain" data-reveal="up">${icon('x')}<span>Cada gestor conduz o time do seu jeito. <strong>Não existe um padrão</strong> de liderança na casa.</span></li>
-      <li class="pain" data-reveal="up">${icon('x')}<span>Aumento salarial é decidido caso a caso, <strong>sem critério nenhum</strong>. E todo mundo sabe.</span></li>
       <li class="pain" data-reveal="up">${icon('x')}<span>Você descobre que o clima está ruim <strong>na entrevista de desligamento</strong>.</span></li>
-      <li class="pain" data-reveal="up">${icon('x')}<span>Na hora de promover falta critério. <strong>Quem cresce é quem aparece</strong>, não quem entrega.</span></li>
-      <li class="pain" data-reveal="up">${icon('x')}<span>O RH está ocupado demais apagando incêndio <strong>para pensar em estratégia</strong>.</span></li>
+      <li class="pain" data-reveal="up">${icon('x')}<span><strong>Tudo ainda passa por você.</strong> Se não cobrar, acompanhar e decidir, as coisas não acontecem.</span></li>
+      <li class="pain" data-reveal="up">${icon('x')}<span>Cada gestor conduz o time do seu jeito. <strong>Não existe um padrão</strong> de liderança na casa.</span></li>
+      <li class="pain" data-reveal="up">${icon('x')}<span>Você investe em treinamento, mas <strong>não vê mudança de comportamento</strong> nem resultado na prática.</span></li>
+      <li class="pain" data-reveal="up">${icon('x')}<span>Você não consegue dizer com segurança <strong>quem entrega resultado</strong> e quem precisa se desenvolver.</span></li>
+      <li class="pain" data-reveal="up">${icon('x')}<span>Aumento salarial é decidido caso a caso, <strong>sem critério nenhum</strong>. E todo mundo sabe.</span></li>
+      <li class="pain" data-reveal="up">${icon('x')}<span>Admissão, desligamento, jornada e documento acontecem sem processo claro, <strong>com risco trabalhista</strong>.</span></li>
     </ul>
 
     <div class="row" style="justify-content:center;margin-top:2.8rem" data-reveal="up">
       <a class="btn btn--primary btn--lg" href="${wa('Olá! Vi o site da Solute RH e me identifiquei com os sinais de RH desestruturado. Gostaria de conversar.')}" target="_blank" data-magnetic="0.2">
-        Quero destravar isso ${icon('arrow')}
+        Quero resolver isso ${icon('arrow')}
       </a>
     </div>
 
