@@ -372,7 +372,7 @@ def build_client_jpegs():
         im.save(os.path.join(OUT, name + ".webp"), "WEBP", quality=88, method=6)
         n += 1
     log("%d logos convertidas" % n)
-PEOPLE = ["riane", "marcia"]
+PEOPLE = []  # os depoimentos passaram a usar a logo da empresa
 
 # fotos redondas do time (quem-somos)
 TEAM = [

@@ -625,9 +625,9 @@ const TESTIMONIALS = [
   {
     quote:
       'Trabalhar com a Solute RH foi um divisor de águas. A equipe entende do que está falando e conduz cada etapa com muito profissionalismo.',
-    name: 'Marcia Gargiulo',
-    role: 'Diretora · Datafor',
-    photo: 'marcia',
+    name: 'Datafor',
+    role: 'Consultoria de RH',
+    logo: 'datafor',
   },
 ];
 
