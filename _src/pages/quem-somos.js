@@ -139,7 +139,7 @@ ${B.values({})}
 
       <div>
         <p class="eyebrow" data-reveal="up">O time</p>
-        <h2 id="time-titulo" data-split="words" data-reveal="fade">Uma equipe pequena, próxima e especialista</h2>
+        <h2 id="time-titulo" data-split="words" data-reveal="fade">Uma equipe em crescimento, próxima e especialista</h2>
         <p class="lead" style="margin-top:1.2rem" data-reveal="up" data-reveal-delay="100">
           Na Solute RH você não fala com um comercial e depois é repassado para um estagiário.
           Quem conduz o diagnóstico é quem entrega o projeto.
