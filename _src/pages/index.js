@@ -389,19 +389,22 @@ const escritorio = `
     <p class="eyebrow eyebrow--center" data-reveal="up">Nossa casa</p>
     <h2 id="escritorio-titulo" data-split="words" data-reveal="fade">Um time de gente que gosta de gente</h2>
     <p class="lead" style="margin:1.3rem auto 0;max-width:56ch" data-reveal="up" data-reveal-delay="120">
-      Atendemos empresas em todo o Brasil, com um escritório de portas abertas em Minas.
-      Se estiver por perto, o café está sempre pronto.
+      Somos uma consultoria de RH que atende empresas em todo o Brasil. Por trás de cada
+      projeto existe um time que trabalha junto todos os dias, e a porta fica sempre aberta
+      para quem quiser conhecer a gente de perto.
     </p>
     <div class="row" style="justify-content:center;margin-top:2.2rem" data-reveal="up" data-reveal-delay="200">
-      <a class="btn btn--ghost btn--lg" href="contato.html">Ver onde estamos ${icon('pin')}</a>
+      <a class="btn btn--ghost btn--lg" href="contato.html">Fale com a gente ${icon('arrow')}</a>
     </div>
   </div>
 </section>
 `;
 
-/* ------------------------------------------------------------- SOLUTE CAST */
+/* ------------------------------------- PLANTAO RH ESTRATEGICO E SOLUTE CAST */
+/* Duas coisas diferentes: o Plantao e a aula ao vivo, semanal, as tercas.
+   O Solute Cast e o podcast, com episodios quinzenais a partir de setembro. */
 const cast = `
-<section class="section surface-900" aria-labelledby="cast-titulo">
+<section class="section surface-900" aria-labelledby="plantao-titulo">
   <div class="wrap wrap--wide">
     <div class="section-head section-head--center" style="margin-bottom:clamp(2rem,1.4rem+2vw,3.4rem)">
 
@@ -409,20 +412,20 @@ const cast = `
          data-live-on="Ao vivo agora no YouTube"
          data-live-off="${SITE.live.day} às ${SITE.live.time}"><span class="tag__dot tag__dot--live"></span> <span data-live-label>${SITE.live.day} às ${SITE.live.time}</span></p>
 
-      <h2 id="cast-titulo" data-split="words" data-reveal="fade">Solute Cast</h2>
+      <h2 id="plantao-titulo" data-split="words" data-reveal="fade">Plantão RH Estratégico</h2>
 
       <p class="lead measure" data-reveal="up" data-reveal-delay="100">
-        Toda semana, uma conversa sobre o que realmente acontece dentro das empresas:
-        liderança, conflito, retenção, remuneração, legislação e cultura.
-        <strong style="color:var(--fog-50)">${SITE.live.day} às ${SITE.live.time}</strong>, ao vivo no YouTube,
-        com pergunta aberta da audiência.
+        Aula ao vivo e gratuita <strong style="color:var(--fog-50)">${SITE.live.day.toLowerCase()} às ${SITE.live.time}</strong>,
+        no YouTube. Uma hora sobre o que realmente acontece dentro das empresas: liderança,
+        conflito, retenção, remuneração, legislação e cultura, com pergunta aberta da audiência.
+        Não precisa de inscrição.
       </p>
 
       <div class="row" style="margin-top:2rem;gap:.7rem;justify-content:center" data-reveal="up" data-reveal-delay="180">
         <a class="btn btn--primary" href="${SITE.social.youtube}" target="_blank" data-magnetic="0.2">
           ${icon('youtube')} Assistir no YouTube
         </a>
-        <a class="btn btn--ghost" href="solute-cast.html">Ver todos os episódios</a>
+        <a class="btn btn--ghost" href="solute-cast.html">Ver o Plantão e o Cast</a>
       </div>
     </div>
 
@@ -430,13 +433,13 @@ const cast = `
       <img class="cast-card__logo" src="media/logo-cast-branca.png" alt="Solute Cast"
            width="900" height="300" loading="lazy">
       <a class="play-btn" href="${SITE.social.youtube}" target="_blank"
-         aria-label="Assistir ao Solute Cast no YouTube">${icon('play')}</a>
+         aria-label="Ouvir o Solute Cast no YouTube">${icon('play')}</a>
       <p class="cast-card__meta">
-        ${icon('calendar')} ${SITE.live.day}
+        ${icon('mic')} O podcast da Solute
         <span aria-hidden="true">·</span>
-        ${icon('clock')} ${SITE.live.time}
+        ${icon('calendar')} ${SITE.cast.cadence} a partir de setembro
         <span aria-hidden="true">·</span>
-        ${icon('youtube')} Ao vivo no YouTube
+        ${icon('youtube')} No YouTube
       </p>
     </div>
 

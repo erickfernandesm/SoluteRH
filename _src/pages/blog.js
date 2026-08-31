@@ -85,15 +85,18 @@ const listBody = `
   <div class="wrap wrap--wide">
     <div class="duo">
       <div>
-        <p class="eyebrow" data-reveal="up">Toda semana</p>
+        <p class="eyebrow" data-reveal="up">No nosso canal</p>
         <h2 id="mais-titulo" data-split="words" data-reveal="fade">Prefere ouvir a ler?</h2>
         <p class="lead" style="margin-top:1.1rem" data-reveal="up" data-reveal-delay="100">
-          Os mesmos assuntos do blog viram conversa ao vivo no Solute Cast,
-          ${SITE.live.day.toLowerCase()} às ${SITE.live.time}, com pergunta aberta da audiência.
+          O canal da Solute RH no YouTube tem duas frentes gratuitas: o
+          <strong style="color:var(--fog-50)">Plantão RH Estratégico</strong>, aula ao vivo
+          ${SITE.live.day.toLowerCase()} às ${SITE.live.time}, e o
+          <strong style="color:var(--fog-50)">Solute Cast</strong>, o nosso podcast, com
+          episódios quinzenais a partir de setembro.
         </p>
         <div class="row" style="margin-top:2rem;gap:.8rem" data-reveal="up" data-reveal-delay="160">
           <a class="btn btn--primary" href="solute-cast.html" data-magnetic="0.2">
-            Conhecer o Solute Cast ${icon('arrow')}
+            Ver o Plantão e o Cast ${icon('arrow')}
           </a>
           <a class="btn btn--ghost" href="${SITE.social.youtube}" target="_blank">
             ${icon('youtube')} Ver no YouTube

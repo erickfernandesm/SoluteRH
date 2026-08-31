@@ -65,7 +65,8 @@ Redirect 301 /nr-01/                https://soluterh.com.br/consultoria-nr-01-ri
 Redirect 301 /academia-de-lideres/  https://soluterh.com.br/consultoria-desenvolvimento-de-lideranca.html
 Redirect 301 /avd/                  https://soluterh.com.br/consultoria-avaliacao-de-desempenho.html
 Redirect 301 /pesquisa-de-clima/    https://soluterh.com.br/consultoria-pesquisa-de-clima.html
-Redirect 301 /fit-cultural/         https://soluterh.com.br/consultoria-fit-cultural-e-perfil-comportamental.html
+# o fit cultural virou parte do recrutamento e nao tem mais pagina propria
+Redirect 301 /fit-cultural/         https://soluterh.com.br/consultoria-recrutamento-e-selecao.html
 Redirect 301 /rs/                   https://soluterh.com.br/consultoria-recrutamento-e-selecao.html
 
 # artigos antigos do blog

@@ -12,7 +12,7 @@ const meta = {
   page: 'consultoria',
   title: 'Consultoria em RH | Solute RH',
   description:
-    'Oito frentes de consultoria em recursos humanos: RH estratégico, cargos e salários, NR-01, liderança, avaliação de desempenho, clima, fit cultural e recrutamento.',
+    'Oito frentes de consultoria em recursos humanos: RH estratégico, cargos e salários, NR-01, liderança, avaliação de desempenho, clima, remuneração variável e recrutamento.',
   ogImage: 'og-default.jpg',
   schema: {
     '@context': 'https://schema.org',

@@ -21,11 +21,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://soluterh.com.br/consultoria-fit-cultural-e-perfil-comportamental.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://soluterh.com.br/consultoria-nr-01-riscos-psicossociais.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -42,6 +37,11 @@
   </url>
   <url>
     <loc>https://soluterh.com.br/consultoria-recrutamento-e-selecao.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://soluterh.com.br/consultoria-remuneracao-variavel.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
