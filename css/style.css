@@ -112,6 +112,11 @@
    ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
 
+/* O atributo `hidden` do HTML vale menos que qualquer regra de display
+   escrita aqui. Sem esta linha, um elemento com classe propria (um .btn,
+   por exemplo) continua aparecendo mesmo escondido pelo JavaScript. */
+[hidden] { display: none !important; }
+
 * { margin: 0; padding: 0; }
 
 html {
