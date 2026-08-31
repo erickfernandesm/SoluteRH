@@ -75,7 +75,7 @@ const hero = `
   <div class="wrap wrap--wide hero__inner">
     <div class="hero__content">
 
-      <p class="eyebrow eyebrow--center" data-reveal="up">Consultoria em RH · Juiz de Fora e todo o Brasil</p>
+      <p class="eyebrow eyebrow--center" data-reveal="up">Consultoria em RH · Atuação em todo o Brasil</p>
 
       <h1 class="hero__title" data-reveal="fade" data-reveal-delay="120">
         <span class="split-line"><span class="split-word" style="--word-delay:0ms">Fortalecemos</span></span>
@@ -388,7 +388,7 @@ const escritorio = `
     <p class="eyebrow eyebrow--center" data-reveal="up">Nossa casa</p>
     <h2 id="escritorio-titulo" data-split="words" data-reveal="fade">Um time de gente que gosta de gente</h2>
     <p class="lead" style="margin:1.3rem auto 0;max-width:56ch" data-reveal="up" data-reveal-delay="120">
-      No coração de Juiz de Fora, em Minas Gerais, atendendo empresas do país inteiro.
+      Atendemos empresas em todo o Brasil, com um escritório de portas abertas em Minas.
       Se estiver por perto, o café está sempre pronto.
     </p>
     <div class="row" style="justify-content:center;margin-top:2.2rem" data-reveal="up" data-reveal-delay="200">

@@ -148,7 +148,7 @@ ${B.values({})}
         <ul class="checks" style="margin-top:2rem" data-stagger="90">
           <li data-reveal="up">${icon('checkCircle')}<span><strong>Atendimento direto</strong> com quem executa o projeto, do começo ao fim.</span></li>
           <li data-reveal="up">${icon('checkCircle')}<span><strong>Sigilo absoluto</strong> sobre tudo o que vemos dentro da empresa.</span></li>
-          <li data-reveal="up">${icon('checkCircle')}<span><strong>Presença nacional</strong>, com base em Juiz de Fora e projetos em todo o Brasil.</span></li>
+          <li data-reveal="up">${icon('checkCircle')}<span><strong>Presença nacional</strong>, com projetos em empresas de todo o Brasil.</span></li>
           <li data-reveal="up">${icon('checkCircle')}<span><strong>Formação continuada</strong>: o que ensinamos nos cursos é o que praticamos na consultoria.</span></li>
         </ul>
       </div>

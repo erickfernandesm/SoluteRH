@@ -11,7 +11,7 @@ const meta = {
   page: 'contato',
   title: 'Contato | Solute RH',
   description:
-    'Fale com a Solute RH. WhatsApp (32) 99950-1615, contato@soluterh.com.br. Escritório em Juiz de Fora, MG, com atendimento a empresas de todo o Brasil.',
+    'Fale com a Solute RH. WhatsApp (32) 99950-1615, contato@soluterh.com.br. Consultoria em gestão de pessoas com atuação em todo o Brasil.',
   ogImage: 'og-default.jpg',
   schema: {
     '@context': 'https://schema.org',
@@ -226,7 +226,7 @@ const body = `
         <div class="acc__panel"><div><p>É. São cerca de 30 minutos de conversa, sem custo e sem compromisso de contratação. O objetivo é entender o seu contexto e apontar a prioridade. Se a nossa consultoria não for o caminho, dizemos isso na hora.</p></div></div>
       </div>
       <div class="acc__item">
-        <button class="acc__btn" type="button" aria-expanded="false">Vocês atendem fora de Juiz de Fora?<span class="acc__ico" aria-hidden="true"></span></button>
+        <button class="acc__btn" type="button" aria-expanded="false">Vocês atendem empresas de outros estados?<span class="acc__ico" aria-hidden="true"></span></button>
         <div class="acc__panel"><div><p>Sim, atendemos empresas em todo o Brasil. Boa parte dos projetos acontece em formato remoto, com encontros presenciais quando o escopo pede. Recrutamento e seleção também tem cobertura nacional.</p></div></div>
       </div>
       <div class="acc__item">
