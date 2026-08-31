@@ -2845,19 +2845,29 @@ body.has-announce { --header-offset: 40px; }
 .course__foot { margin-top: auto; padding-top: 1.4rem; }
 
 /* grade de logos de clientes (pagina clientes) */
+/* Grade de logos em flex, e nao em grid, de proposito: quando a quantidade
+   nao fecha a ultima fila, o que sobra fica centralizado em vez de deixar um
+   buraco escuro no canto direito. O numero de colunas vem de --cols. */
 .logo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(130px, 100%), 1fr));
+  --cols: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1px;
-  /* mesma cor das celulas: se a ultima fila ficar incompleta, o espaco vazio
-     nao aparece como um bloco mais claro */
   background: var(--ink-900);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   overflow: hidden;
 }
+
+@media (max-width: 1180px) { .logo-grid { --cols: 8; } }
+@media (max-width: 900px)  { .logo-grid { --cols: 6; } }
+@media (max-width: 640px)  { .logo-grid { --cols: 4; } }
+@media (max-width: 420px)  { .logo-grid { --cols: 3; } }
+
 .logo-grid__cell {
   position: relative;
+  flex: 0 0 calc((100% - (var(--cols) - 1) * 1px) / var(--cols));
   aspect-ratio: 1;
   overflow: hidden;
   background: var(--ink-900);
