@@ -351,12 +351,26 @@ const SERVICES = [
 /* --------------------------------------------------------------------------
    CURSOS (Solute Cursos)
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   RASTREIO DAS VENDAS DE CURSO
+   Os links de curso guardam so o endereco limpo. As UTMs sao acrescentadas
+   pelo gerador (utm() em _src/layout.js), sempre no mesmo padrao, e dizem
+   de que ponto do site veio o clique. As paginas de venda rodam o Utmify,
+   que leva essas UTMs ate o checkout e atribui a venda ao site.
+   Nunca colar aqui link copiado do navegador: ele traz fbclid, xcod e sck
+   de outro clique e baguncaria a atribuicao.
+   -------------------------------------------------------------------------- */
+const UTM = {
+  source: 'site_soluterh',
+  medium: 'referral',
+};
+
 const COURSES = [
   {
     title: 'Método RH Estratégico',
     icon: 'target',
     short: 'A formação completa para estruturar um RH que decide.',
-    url: 'https://metodorhestrategico.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
+    url: 'https://metodorhestrategico.com.br/',
     badge: 'Certificação MEC',
     text: 'A formação completa para estruturar um RH que senta à mesa de decisão. Método validado em centenas de empresas, com ferramentas prontas e mentorias ao vivo.',
     meta: ['+50 horas', 'Certificado MEC', 'Mentorias ao vivo'],
@@ -366,7 +380,7 @@ const COURSES = [
     title: 'Plano de Cargos e Salários',
     icon: 'scale',
     short: 'Do zero à tabela salarial pronta, com planilhas.',
-    url: 'https://curso.soluterh.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
+    url: 'https://curso.soluterh.com.br/',
     badge: 'Mais procurado',
     text: 'Do zero à tabela salarial pronta. Passo a passo com planilhas de descrição, pontuação e faixas, mais suporte direto para tirar dúvidas do seu caso real.',
     meta: ['Planilhas prontas', 'Suporte direto', 'Estudo de caso'],
@@ -376,7 +390,7 @@ const COURSES = [
     title: 'Domine a NR-01',
     icon: 'shield',
     short: 'Riscos psicossociais na ordem certa, com templates.',
-    url: 'https://dominenr1.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
+    url: 'https://dominenr1.com.br/',
     badge: 'Conformidade',
     text: 'Tudo o que a norma exige sobre riscos psicossociais, na ordem certa de execução, com os documentos que a fiscalização pede já modelados.',
     meta: ['20 horas', '9 módulos', '8 templates'],
@@ -386,7 +400,7 @@ const COURSES = [
     title: 'I.A. com RH',
     icon: 'sparkles',
     short: 'Automatize triagem, cargos e clima com prompts prontos.',
-    url: 'https://iacomrh.com.br/ia-com-rh-2/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
+    url: 'https://iacomrh.com.br/ia-com-rh-2/',
     badge: 'Novo',
     text: 'Como automatizar triagem, descrição de cargos, análise de clima e relatórios usando inteligência artificial, com prompts prontos para o dia a dia do RH.',
     meta: ['Prompts prontos', 'Prático', 'Atualizado'],
@@ -395,7 +409,7 @@ const COURSES = [
     title: 'Liderar com Alta Performance',
     icon: 'users',
     short: 'Feedback, delegação e conversas difíceis na prática.',
-    url: 'https://liderarcomaltaperformance.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&fbclid=PAZXh0bgNhZW0CMTEAAaeqYwmeVZcXlEB0ajHU0NTfQJH1G4HnHnIrSHrKp3PEDy7alPVzGS_xGcOXtg_aem_CFpT6V6ub77CvnXdsigXzg',
+    url: 'https://liderarcomaltaperformance.com.br/',
     text: 'Formação para gestores que precisam entregar resultado através do time: feedback, delegação, conversas difíceis e gestão de conflito.',
     meta: ['Para gestores', 'Casos reais'],
   },
@@ -403,7 +417,7 @@ const COURSES = [
     title: 'Avaliação de Desempenho',
     icon: 'chart',
     short: 'Um ciclo de avaliação que gera decisão, não formulário.',
-    url: 'https://avaliacaodedesempenhonapraticasoluterh.pages.dev/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR',
+    url: 'https://avaliacaodedesempenhonapraticasoluterh.pages.dev/',
     text: 'Metodologia prática para empresários e gestores montarem um ciclo de avaliação que gera decisão, e não só formulário preenchido.',
     meta: ['Modelos prontos', 'Passo a passo'],
   },
@@ -419,7 +433,7 @@ const COURSES = [
     title: 'Programa de Remuneração',
     icon: 'layers',
     short: 'Remuneração variável e bônus ligados a metas.',
-    url: 'https://www.mentoria.soluterh.com.br/?utm_source=organic&utm_campaign=&utm_medium=&utm_content=&utm_term=&xcod=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR&sck=organichQwK21wXxRhQwK21wXxRhQwK21wXxRhQwK21wXxR',
+    url: 'https://www.mentoria.soluterh.com.br/',
     text: 'Estrutura de remuneração variável, bonificação e incentivos ligada a metas, sem criar passivo nem distorção interna.',
     meta: ['Remuneração variável', 'Metas'],
   },
@@ -793,4 +807,5 @@ const EVENT = {
   announceText: 'Inscrições abertas para o Encontro Solute RH 2026',
 };
 
-module.exports = { SITE, SERVICES, COURSES, TRAININGS, CLIENTS, TESTIMONIALS, VALUES, TEAM, TEAM_CTA, NAV, EVENT, BLOG };
+module.exports = {
+  UTM, SITE, SERVICES, COURSES, TRAININGS, CLIENTS, TESTIMONIALS, VALUES, TEAM, TEAM_CTA, NAV, EVENT, BLOG };

@@ -2,7 +2,7 @@
    SOLUTE RH - layout compartilhado (head, header, drawer, footer)
    ========================================================================== */
 
-const { SITE, SERVICES, COURSES, TRAININGS, NAV, EVENT } = require('./site');
+const { SITE, SERVICES, COURSES, TRAININGS, NAV, EVENT, UTM } = require('./site');
 const { icon } = require('./icons');
 
 const wa = (text) =>
@@ -97,6 +97,23 @@ function announceBar() {
 /** Painel suspenso de um item do menu.
  *  'services' leva a paginas internas; 'courses' abre o site de cada curso
  *  em outra aba. */
+/* Link de venda de curso com as UTMs do site.
+   campaign = o curso, content = o ponto do site onde a pessoa clicou.
+   Assim, no Utmify, da para ver qual curso vendeu e por qual caminho. */
+function slug(s) {
+  return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+function utm(url, curso, onde) {
+  if (!url) return url;
+  const u = new URL(url);
+  u.searchParams.set('utm_source', UTM.source);
+  u.searchParams.set('utm_medium', UTM.medium);
+  u.searchParams.set('utm_campaign', slug(curso));
+  u.searchParams.set('utm_content', onde);
+  return u.toString();
+}
+
 function mega(tipo) {
   const itens = tipo === 'trainings'
     ? TRAININGS.map((x) => ({
@@ -112,7 +129,7 @@ function mega(tipo) {
     ? COURSES.map((c) => ({
         titulo: c.title,
         texto: c.short || '',
-        href: c.url || 'cursos.html',
+        href: c.url ? utm(c.url, c.title, 'menu') : 'cursos.html',
         icone: c.icon || 'book',
         externo: !!c.url,
       }))
@@ -192,7 +209,7 @@ function header(meta) {
           ).join('\n')
         : n.mega === 'courses'
         ? COURSES.map((c) =>
-            `<a href="${c.url || 'cursos.html'}"${c.url ? ' target="_blank"' : ''}>${c.title}</a>`
+            `<a href="${c.url ? utm(c.url, c.title, 'menu-celular') : 'cursos.html'}"${c.url ? ' target="_blank"' : ''}>${c.title}</a>`
           ).join('\n            ')
         : SERVICES.map((s) =>
             `<a href="consultoria-${s.slug}.html">${s.nav}</a>`
@@ -349,4 +366,5 @@ function footer() {
 `;
 }
 
-module.exports = { head, header, footer, socials, wa };
+module.exports = {
+  utm, head, header, footer, socials, wa };

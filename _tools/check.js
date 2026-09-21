@@ -90,6 +90,38 @@ pages.forEach((file) => {
 });
 
 /* ---- conteudo do blog (vem de JSON, nao passa pelo HTML) ---- */
+/* ---------------------------------------------------- rastreio das vendas */
+// Todo link que sai para a pagina de venda de um curso precisa levar as UTMs
+// do site, senao a venda nao e atribuida a ele. E nenhum link pode carregar
+// identificadores de outro clique, copiados da barra do navegador.
+{
+  const { COURSES, UTM } = require(path.join(ROOT, '_src', 'site.js'));
+  const hosts = COURSES.filter((c) => c.url).map((c) => new URL(c.url).host);
+  const PROIBIDOS = ['fbclid', 'gclid', 'xcod', 'sck', 'wbraid', 'gbraid'];
+
+  COURSES.forEach((c) => {
+    if (c.url && c.url.indexOf('?') > -1) {
+      err('site.js', 'curso "' + c.title + '" com parametros no link: guarde so o endereco limpo');
+    }
+  });
+
+  pages.forEach((f) => {
+    const html = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    const links = html.match(/href="https?:\/\/[^"]+"/g) || [];
+    links.forEach((h) => {
+      const bruto = h.slice(6, -1).replace(/&amp;/g, '&');
+      let u;
+      try { u = new URL(bruto); } catch (e) { return; }
+      PROIBIDOS.forEach((k) => {
+        if (u.searchParams.has(k)) err(f, 'link com ' + k + ' copiado de outro clique: ' + u.host);
+      });
+      if (hosts.indexOf(u.host) > -1 && u.searchParams.get('utm_source') !== UTM.source) {
+        err(f, 'link de venda sem UTM do site: ' + u.host + u.pathname);
+      }
+    });
+  });
+}
+
 const arqPosts = path.join(ROOT, 'data', 'posts.json');
 if (fs.existsSync(arqPosts)) {
   let dados = null;

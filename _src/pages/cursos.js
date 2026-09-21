@@ -4,7 +4,7 @@
 
 const { SITE, COURSES } = require('../site');
 const { icon } = require('../icons');
-const { wa } = require('../layout');
+const { wa, utm } = require('../layout');
 const B = require('../blocks');
 
 const meta = {
@@ -44,7 +44,7 @@ const cards = COURSES.map(
               ${c.meta.map((m) => `<span>${icon('check')} ${m}</span>`).join('\n              ')}
             </div>
             <div class="course__foot">
-              <a class="link-arrow" href="${c.url || wa('Olá! Quero saber mais sobre o curso ' + c.title + '.')}"
+              <a class="link-arrow" href="${c.url ? utm(c.url, c.title, 'pagina-cursos') : wa('Olá! Quero saber mais sobre o curso ' + c.title + '.')}"
                  target="_blank" aria-label="Quero saber mais sobre ${c.title}">
                 Quero saber mais ${icon(c.url ? 'external' : 'arrow')}
               </a>
