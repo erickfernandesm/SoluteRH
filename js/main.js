@@ -61,7 +61,18 @@
       el.classList.toggle('is-stuck', y > 24);
       // so esconde depois de 460px e se o menu mobile estiver fechado
       const drawerOpen = document.body.classList.contains('is-locked');
-      if (!drawerOpen && y > 460 && y > last + 6) el.classList.add('is-hidden');
+      // quem navega pelo teclado dentro do menu nao perde o menu de vista
+      const tecladoNoMenu = !!el.querySelector(':focus-visible');
+      if (!drawerOpen && !tecladoNoMenu && y > 460 && y > last + 6) {
+        el.classList.add('is-hidden');
+        // o painel do menu e mais alto que o cabecalho: se ficasse aberto,
+        // o cabecalho subia e o painel continuava na tela, solto
+        $$('.nav__item--has-mega.is-open', el).forEach((i) => {
+          i.classList.remove('is-open');
+          const t = $('.nav__link', i);
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
       else if (y < last - 6 || y < 200) el.classList.remove('is-hidden');
       last = y;
     });

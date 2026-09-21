@@ -620,6 +620,9 @@ p { text-wrap: pretty; }
 }
 .header.is-stuck::before { opacity: 0; }
 .header.is-hidden { transform: translateY(-102%); transition: transform .45s var(--e-in); }
+/* com o cabecalho escondido, nenhum painel do menu fica visivel nem
+   clicavel, mesmo que a classe de aberto demore um instante a sair */
+.header.is-hidden .mega { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 
 .header__inner {
   width: 100%;
