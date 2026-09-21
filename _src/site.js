@@ -49,7 +49,17 @@ const SITE = {
     radio: 'Rádio Aló FM 96.7',
   },
   // O podcast passa a ser quinzenal a partir de setembro de 2026.
-  cast: { cadence: 'Episódios quinzenais' },
+  cast: {
+    cadence: 'Episódios quinzenais',
+    // Episodio que abre ao clicar no play do card. Para trocar, basta o ID
+    // (o trecho depois de watch?v= no link do YouTube) e o titulo.
+    // O video em loop no fundo do card e um trecho do programa, nao deste
+    // episodio: nao precisa ser refeito quando o destaque mudar.
+    featured: {
+      id: 'qM24skHsPxg',
+      title: 'O fim da escala 6x1: como as empresas devem se preparar?',
+    },
+  },
 };
 
 /* --------------------------------------------------------------------------

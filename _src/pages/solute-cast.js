@@ -112,17 +112,10 @@ const body = `
         </div>
       </div>
 
-      <div class="cast-card" data-reveal="left">
-        <img class="cast-card__logo" src="media/logo-cast-branca.png" alt="Solute Cast"
-             width="900" height="300" loading="lazy">
-        <a class="play-btn" href="${SITE.social.youtube}" target="_blank"
-           aria-label="Ouvir o Solute Cast no YouTube">${icon('play')}</a>
-        <p class="cast-card__meta">
-          ${icon('mic')} Podcast
-          <span aria-hidden="true">·</span>
-          ${icon('youtube')} No canal do YouTube
-        </p>
-      </div>
+${B.castCard({
+  reveal: 'left',
+  meta: [icon('mic') + ' Podcast', icon('calendar') + ' ' + SITE.cast.cadence, icon('youtube') + ' No YouTube'],
+})}
 
     </div>
   </div>

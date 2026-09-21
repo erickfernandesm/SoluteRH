@@ -210,4 +210,35 @@ function servicesGrid(opts) {
 </section>`;
 }
 
-module.exports = { clientMarquee, testimonials, ctaBand, values, stats, servicesGrid };
+/* ------------------------------------------------------------ solute cast */
+/* Card do podcast: trecho do programa rodando mudo no fundo e, ao clicar no
+   play, o episodio em destaque abre ali mesmo. Sem JavaScript, o play leva
+   ao episodio no YouTube. O player do YouTube so e carregado no clique. */
+function castCard(opts) {
+  const o = opts || {};
+  const ep = SITE.cast.featured;
+  const url = 'https://www.youtube.com/watch?v=' + ep.id;
+  const meta = o.meta || [
+    icon('mic') + ' O podcast da Solute',
+    icon('calendar') + ' ' + SITE.cast.cadence + ' a partir de setembro',
+    icon('youtube') + ' No YouTube',
+  ];
+  return `
+      <div class="cast-card cast-card--video" data-cast-card data-reveal="${o.reveal || 'rise'}">
+        <div class="cast-card__bg" aria-hidden="true">
+          <video src="media/solute-cast-teaser.mp4" poster="media/solute-cast-teaser.webp"
+                 muted loop playsinline preload="none" tabindex="-1"></video>
+        </div>
+        <img class="cast-card__logo" src="media/logo-cast-branca.png" alt="Solute Cast"
+             width="900" height="300" loading="lazy">
+        <a class="play-btn" href="${url}" target="_blank" rel="noopener"
+           data-yt="${ep.id}" data-yt-title="${ep.title}"
+           aria-label="Assistir ao episódio: ${ep.title}">${icon('play')}</a>
+        <p class="cast-card__ep"><span>Episódio em destaque</span>${ep.title}</p>
+        <p class="cast-card__meta">
+          ${meta.map((m) => '<span class="cast-card__it">' + m + '</span>').join(' <span aria-hidden="true">·</span> ')}
+        </p>
+      </div>`;
+}
+
+module.exports = { clientMarquee, testimonials, ctaBand, values, stats, servicesGrid, castCard };

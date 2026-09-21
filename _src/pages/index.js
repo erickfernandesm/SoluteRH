@@ -429,19 +429,7 @@ const cast = `
       </div>
     </div>
 
-    <div class="cast-card" data-reveal="rise">
-      <img class="cast-card__logo" src="media/logo-cast-branca.png" alt="Solute Cast"
-           width="900" height="300" loading="lazy">
-      <a class="play-btn" href="${SITE.social.youtube}" target="_blank"
-         aria-label="Ouvir o Solute Cast no YouTube">${icon('play')}</a>
-      <p class="cast-card__meta">
-        ${icon('mic')} O podcast da Solute
-        <span aria-hidden="true">·</span>
-        ${icon('calendar')} ${SITE.cast.cadence} a partir de setembro
-        <span aria-hidden="true">·</span>
-        ${icon('youtube')} No YouTube
-      </p>
-    </div>
+${B.castCard()}
 
   </div>
 </section>

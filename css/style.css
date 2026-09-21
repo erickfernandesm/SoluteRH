@@ -2337,6 +2337,74 @@ p { text-wrap: pretty; }
   overflow: visible;
 }
 .cast-card__logo { width: min(300px, 62%); height: auto; }
+
+/* Card com video. O card continua com overflow visivel, para a onda do play
+   nao ser cortada; quem recorta o video nos cantos e a camada de fundo. */
+.cast-card--video { isolation: isolate; overflow: visible; }
+.cast-card__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  overflow: hidden;
+  background: var(--ink-1000);
+}
+.cast-card__bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* o quadro parado ja aparece antes de tocar, e fica para quem pede
+     menos movimento, que nao ve o video andar */
+  opacity: .6;
+  transform: scale(1.04);
+  transition: opacity 1.1s var(--e-out), transform 6s linear;
+}
+.cast-card__bg.is-playing video { opacity: .92; transform: scale(1); }
+/* escurece o centro para o logo e o play continuarem legiveis sobre o video */
+.cast-card__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(46% 40% at 50% 38%, rgba(10,10,12,.62), rgba(10,10,12,.22) 75%, transparent),
+    linear-gradient(180deg, rgba(10,10,12,.1) 40%, rgba(10,10,12,.82));
+}
+
+.cast-card__ep {
+  display: grid;
+  gap: .25rem;
+  max-width: 44ch;
+  margin-top: -.6rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, .92rem + .35vw, 1.18rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--fog-50);
+  text-wrap: balance;
+}
+.cast-card__ep span {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+/* episodio aberto dentro do card */
+.cast-card__player {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 70px -30px rgba(0,0,0,.9);
+}
+.cast-card__player iframe { width: 100%; height: 100%; border: 0; display: block; }
+.cast-card.is-open { padding: clamp(1rem, .8rem + 1vw, 1.6rem); gap: 1.1rem; }
+.cast-card.is-open .cast-card__logo,
+.cast-card.is-open .play-btn,
+.cast-card.is-open .cast-card__bg { display: none; }
 .cast-card__meta {
   display: flex;
   align-items: center;
@@ -2347,7 +2415,9 @@ p { text-wrap: pretty; }
   color: var(--fog-500);
 }
 .cast-card__meta svg { width: 14px; height: 14px; color: var(--brand); flex: none; }
-.cast-card__meta > span { color: var(--ink-600); }
+.cast-card__meta > [aria-hidden] { color: var(--ink-600); }
+/* icone e texto de cada item quebram juntos */
+.cast-card__it { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; }
 
 /* selo de transmissao centralizado */
 .live-tag--center {
