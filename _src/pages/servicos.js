@@ -25,7 +25,10 @@ function page(svc, idx) {
       description: svc.blurb,
       serviceType: svc.title,
       provider: { '@type': 'Organization', name: SITE.legal, url: SITE.url },
-      areaServed: { '@type': 'Country', name: 'Brasil' },
+      areaServed: [
+      { '@type': 'City', name: 'Juiz de Fora' },
+      { '@type': 'Country', name: 'Brasil' },
+    ],
       url: SITE.url + '/consultoria-' + svc.slug + '.html',
     },
   };

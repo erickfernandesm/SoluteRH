@@ -10,9 +10,12 @@ const B = require('../blocks');
 const meta = {
   file: 'index.html',
   page: 'index',
-  title: 'Solute RH | Consultoria em RH Estratégico e Gestão de Pessoas',
+  // Juiz de Fora fica no titulo e na descricao (o que o Google le e mostra no
+  // resultado), mas nao volta para o texto da pagina, que fala em atuacao
+  // nacional. Sem isso a busca "consultoria de RH Juiz de Fora" perde forca.
+  title: 'Consultoria de RH em Juiz de Fora e em todo o Brasil | Solute RH',
   description:
-    'Consultoria e cursos de RH para estruturar a gestão de pessoas: RH estratégico, cargos e salários, NR-01, desenvolvimento de líderes e recrutamento. +700 empresas atendidas.',
+    'Consultoria e cursos de RH em Juiz de Fora e em todo o Brasil: RH estratégico, cargos e salários, NR-01, desenvolvimento de líderes e recrutamento. +700 empresas atendidas.',
   ogImage: 'og-default.jpg',
   preload: [{ href: 'media/tour-escritorio-poster.webp', as: 'image' }],
   schema: {
@@ -36,7 +39,10 @@ const meta = {
       postalCode: SITE.address.zip,
       addressCountry: 'BR',
     },
-    areaServed: { '@type': 'Country', name: 'Brasil' },
+    areaServed: [
+      { '@type': 'City', name: 'Juiz de Fora' },
+      { '@type': 'Country', name: 'Brasil' },
+    ],
     sameAs: [SITE.social.instagram, SITE.social.linkedin, SITE.social.youtube],
     aggregateRating: {
       '@type': 'AggregateRating',
