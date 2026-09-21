@@ -209,7 +209,7 @@ ${B.castCard({
     </div>
 
     <div class="row" style="justify-content:center;margin-top:2.8rem" data-reveal="up">
-      <a class="btn btn--ghost btn--lg" href="${wa('Olá! Tenho uma pergunta para o Solute Cast: ')}" target="_blank">
+      <a class="btn btn--ghost btn--lg" href="${wa('Olá! Tenho uma pergunta para o Solute Cast: ')}" target="_blank" data-ask-open="pergunta-cast">
         ${icon('megaphone')} Mandar uma pergunta
       </a>
     </div>
@@ -222,6 +222,8 @@ ${B.ctaBand({
   text: 'O programa é o conteúdo aberto. Quando o assunto é resolver a sua gestão de pessoas na prática, a conversa é outra, e ela também começa de graça.',
   cta: 'Agendar diagnóstico gratuito',
 })}
+
+${B.askDialog()}
 
 </main>
 `;

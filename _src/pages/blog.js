@@ -81,41 +81,13 @@ const listBody = `
 </section>
 
 <!-- ================================================= NEWSLETTER / CAST -->
-<section class="section surface-900" aria-labelledby="mais-titulo">
-  <div class="wrap wrap--wide">
-    <div class="duo">
-      <div>
-        <p class="eyebrow" data-reveal="up">No nosso canal</p>
-        <h2 id="mais-titulo" data-split="words" data-reveal="fade">Prefere ouvir a ler?</h2>
-        <p class="lead" style="margin-top:1.1rem" data-reveal="up" data-reveal-delay="100">
-          O canal da Solute RH no YouTube tem duas frentes gratuitas: o
-          <strong style="color:var(--fog-50)">Plantão RH Estratégico</strong>, aula ao vivo
-          ${SITE.live.day.toLowerCase()} às ${SITE.live.time}, e o
-          <strong style="color:var(--fog-50)">Solute Cast</strong>, o nosso podcast, com
-          episódios quinzenais a partir de setembro.
-        </p>
-        <div class="row" style="margin-top:2rem;gap:.8rem" data-reveal="up" data-reveal-delay="160">
-          <a class="btn btn--primary" href="solute-cast.html" data-magnetic="0.2">
-            Ver o Plantão e o Cast ${icon('arrow')}
-          </a>
-          <a class="btn btn--ghost" href="${SITE.social.youtube}" target="_blank">
-            ${icon('youtube')} Ver no YouTube
-          </a>
-        </div>
-      </div>
-
-      <div class="figure figure--wide veil" style="display:grid;place-items:center;background:linear-gradient(150deg,var(--ink-850),var(--ink-1000))" data-reveal="left">
-        <div style="text-align:center;padding:2rem">
-          <img src="media/logo-cast-branca.png" alt="Solute Cast" width="900" height="300"
-               style="width:min(300px,68%);margin:0 auto 1.8rem" loading="lazy">
-          <a class="play-btn" href="${SITE.social.youtube}" target="_blank" aria-label="Assistir ao Solute Cast" style="margin:0 auto">
-            ${icon('play')}
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+${B.channels({
+  id: 'mais',
+  surface: 'surface-900',
+  eyebrow: 'No nosso canal',
+  title: 'Prefere ouvir a ler?',
+  lead: 'Além do blog, a Solute RH tem duas frentes gratuitas no YouTube: o Plantão RH Estratégico, aula ao vivo toda semana, e o Solute Cast, o nosso podcast.',
+})}
 
 ${B.ctaBand({
   eyebrow: 'Do conteúdo à prática',

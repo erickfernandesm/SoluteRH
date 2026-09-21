@@ -403,37 +403,7 @@ const escritorio = `
 /* ------------------------------------- PLANTAO RH ESTRATEGICO E SOLUTE CAST */
 /* Duas coisas diferentes: o Plantao e a aula ao vivo, semanal, as tercas.
    O Solute Cast e o podcast, com episodios quinzenais a partir de setembro. */
-const cast = `
-<section class="section surface-900" aria-labelledby="plantao-titulo">
-  <div class="wrap wrap--wide">
-    <div class="section-head section-head--center" style="margin-bottom:clamp(2rem,1.4rem+2vw,3.4rem)">
-
-      <p class="live-tag live-tag--center" data-reveal="up" data-live
-         data-live-on="Ao vivo agora no YouTube"
-         data-live-off="${SITE.live.day} às ${SITE.live.time}"><span class="tag__dot tag__dot--live"></span> <span data-live-label>${SITE.live.day} às ${SITE.live.time}</span></p>
-
-      <h2 id="plantao-titulo" data-split="words" data-reveal="fade">Plantão RH Estratégico</h2>
-
-      <p class="lead measure" data-reveal="up" data-reveal-delay="100">
-        Aula ao vivo e gratuita <strong style="color:var(--fog-50)">${SITE.live.day.toLowerCase()} às ${SITE.live.time}</strong>,
-        no YouTube. Uma hora sobre o que realmente acontece dentro das empresas: liderança,
-        conflito, retenção, remuneração, legislação e cultura, com pergunta aberta da audiência.
-        Não precisa de inscrição.
-      </p>
-
-      <div class="row" style="margin-top:2rem;gap:.7rem;justify-content:center" data-reveal="up" data-reveal-delay="180">
-        <a class="btn btn--primary" href="${SITE.social.youtube}" target="_blank" data-magnetic="0.2">
-          ${icon('youtube')} Assistir no YouTube
-        </a>
-        <a class="btn btn--ghost" href="solute-cast.html">Ver o Plantão e o Cast</a>
-      </div>
-    </div>
-
-${B.castCard()}
-
-  </div>
-</section>
-`;
+const cast = B.channels({ surface: 'surface-900' });
 
 /* -------------------------------------------------------- FAIXA TIPOGRAFICA */
 const faixa = `

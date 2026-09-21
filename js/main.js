@@ -786,6 +786,142 @@
   }
 
   /* ================================================================
+     ASK — pop-up de pergunta para o Solute Cast
+     Envia para "Perguntas SoluteCast" no sistema de gestao. As regras de
+     validacao sao as mesmas do sistema, para o erro aparecer aqui e nao
+     depois do envio. Se o sistema nao responder, oferece mandar a mesma
+     pergunta pelo WhatsApp, ja escrita: nada do que a pessoa digitou se perde.
+     ================================================================ */
+  function askDialog() {
+    const dlg = $('[data-ask]');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+
+    const form = $('[data-ask-form]', dlg);
+    const done = $('[data-ask-done]', dlg);
+    const msg = $('[data-ask-msg]', dlg);
+    const send = $('[data-ask-send]', dlg);
+    const count = $('[data-ask-count]', dlg);
+    const campo = (n) => form.elements[n];
+    let origem = null;
+
+    const abre = (e) => {
+      if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+      e.preventDefault();
+      origem = e.currentTarget;
+      form.hidden = false;
+      done.hidden = true;
+      msg.hidden = true;
+      dlg.showModal();
+      document.documentElement.style.overflow = 'hidden';
+      // no celular o teclado abre sozinho so se o foco for no toque do usuario
+      if (window.matchMedia('(hover: hover)').matches) campo('nome').focus();
+    };
+    const fecha = () => { if (dlg.open) dlg.close(); };
+
+    $$('[data-ask-open]').forEach((b) => on(b, 'click', abre));
+    $$('[data-ask-close]', dlg).forEach((b) => on(b, 'click', fecha));
+    on(dlg, 'close', () => {
+      document.documentElement.style.overflow = '';
+      if (origem) origem.focus();
+    });
+    // clique no fundo escurecido fecha
+    on(dlg, 'click', (e) => { if (e.target === dlg) fecha(); });
+
+    // WhatsApp no formato (32) 99999-9999 enquanto digita
+    on(campo('whatsapp'), 'input', (e) => {
+      const d = e.target.value.replace(/\D/g, '').slice(0, 11);
+      let v = d;
+      if (d.length > 2) v = '(' + d.slice(0, 2) + ') ' + d.slice(2);
+      if (d.length > 7) v = '(' + d.slice(0, 2) + ') ' + d.slice(2, d.length - 4) + '-' + d.slice(-4);
+      e.target.value = v;
+    });
+
+    on(campo('pergunta'), 'input', (e) => {
+      const n = e.target.value.length;
+      count.textContent = n + ' / 1500';
+      count.classList.toggle('is-near', n > 1350);
+    });
+
+    const aviso = (html) => { msg.innerHTML = html; msg.hidden = false; };
+    const marca = (el, ruim) => el.setAttribute('aria-invalid', ruim ? 'true' : 'false');
+
+    const linkWhats = (dados) => {
+      const texto = 'Olá! Tenho uma pergunta para o Solute Cast.\n\nNome: ' + dados.nome +
+                    '\n\nPergunta: ' + dados.pergunta;
+      return 'https://wa.me/' + dlg.dataset.wa + '?text=' + encodeURIComponent(texto);
+    };
+
+    on(form, 'submit', (e) => {
+      e.preventDefault();
+      msg.hidden = true;
+
+      const dados = {
+        nome: campo('nome').value.trim().replace(/\s+/g, ' '),
+        whatsapp: campo('whatsapp').value.replace(/\D/g, ''),
+        pergunta: campo('pergunta').value.trim(),
+        website: campo('website').value,
+      };
+
+      const erros = [];
+      const nomeOk = dados.nome.length >= 2 && dados.nome.length <= 80;
+      const zapOk = dados.whatsapp.length >= 10 && dados.whatsapp.length <= 13;
+      const pergOk = dados.pergunta.length >= 5 && dados.pergunta.length <= 1500;
+      marca(campo('nome'), !nomeOk);
+      marca(campo('whatsapp'), !zapOk);
+      marca(campo('pergunta'), !pergOk);
+      if (!nomeOk) erros.push('informe o seu nome');
+      if (!zapOk) erros.push('confira o WhatsApp com DDD');
+      if (!pergOk) erros.push('escreva a sua pergunta');
+      if (erros.length) {
+        aviso('Quase lá: ' + erros.join(', ') + '.');
+        const primeiro = !nomeOk ? 'nome' : !zapOk ? 'whatsapp' : 'pergunta';
+        campo(primeiro).focus();
+        return;
+      }
+
+      send.disabled = true;
+      const rotulo = send.innerHTML;
+      send.textContent = 'Enviando…';
+
+      const ctl = 'AbortController' in window ? new AbortController() : null;
+      const limite = setTimeout(() => ctl && ctl.abort(), 15000);
+
+      fetch(dlg.dataset.api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados),
+        signal: ctl ? ctl.signal : undefined,
+      })
+        .then((r) => r.json().catch(() => ({})).then((j) => ({ r, j })))
+        .then(({ r, j }) => {
+          if (r.ok && j.ok !== false) {
+            form.reset();
+            count.textContent = '0 / 1500';
+            form.hidden = true;
+            done.hidden = false;
+            $('[data-ask-close]', done).focus();
+            return;
+          }
+          // o sistema recusou com um motivo que da para mostrar
+          if (r.status === 400 || r.status === 429) {
+            aviso(j.erro || 'Não foi possível enviar. Confira os dados e tente de novo.');
+            return;
+          }
+          throw new Error('indisponivel');
+        })
+        .catch(() => {
+          aviso('Não conseguimos enviar agora. Mande a mesma pergunta pelo WhatsApp, ela já vai escrita:' +
+                '<br><a class="btn btn--primary" href="' + linkWhats(dados) + '" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>');
+        })
+        .then(() => {
+          clearTimeout(limite);
+          send.disabled = false;
+          send.innerHTML = rotulo;
+        });
+    });
+  }
+
+  /* ================================================================
      CAST — trecho do programa no fundo do card e episodio no play
      O video de fundo so carrega quando o card aparece e pausa quando
      sai da tela. Quem pede menos movimento fica so com o quadro parado.
@@ -831,9 +967,17 @@
         box.appendChild(f);
 
         if (video) video.pause();
-        card.classList.add('is-open');
-        // o player entra onde estava o logo, acima do titulo do episodio
-        card.insertBefore(box, $('.cast-card__logo', card));
+        const midia = $('[data-cast-media]', card);
+        if (midia) {
+          // card compacto: o episodio ocupa o espaco do video de fundo
+          midia.innerHTML = '';
+          midia.appendChild(box);
+          midia.classList.add('is-open');
+        } else {
+          card.classList.add('is-open');
+          // o player entra onde estava o logo, acima do titulo do episodio
+          card.insertBefore(box, $('.cast-card__logo', card));
+        }
         f.focus();
       });
     });
@@ -1003,6 +1147,7 @@
     swapLabels();
     logoGrid();
     castCards();
+    askDialog();
     misc();
   }
 

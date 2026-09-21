@@ -241,4 +241,130 @@ function castCard(opts) {
       </div>`;
 }
 
-module.exports = { clientMarquee, testimonials, ctaBand, values, stats, servicesGrid, castCard };
+/* ------------------------------------------------- pergunta para o podcast */
+/* Pop-up com nome, WhatsApp e pergunta. Envia para o sistema de gestao
+   (Perguntas SoluteCast). O botao que abre e um link de WhatsApp: sem
+   JavaScript, a pergunta segue por la. */
+function askDialog() {
+  return `
+<dialog class="ask" id="pergunta-cast" aria-labelledby="ask-titulo" data-ask data-api="${SITE.cast.perguntasApi}" data-wa="${SITE.phoneRaw}">
+  <div class="ask__box">
+    <button class="ask__close" type="button" data-ask-close aria-label="Fechar">${icon('close')}</button>
+
+    <form class="ask__form" data-ask-form novalidate>
+      <p class="eyebrow">Solute Cast</p>
+      <h2 class="ask__title" id="ask-titulo">Mande a sua pergunta</h2>
+      <p class="ask__lead">As perguntas escolhidas viram pauta no programa. Se precisarmos de algum detalhe, falamos com você pelo WhatsApp.</p>
+
+      <div class="field">
+        <label class="label" for="ask-nome">Seu nome <span class="req">*</span></label>
+        <input class="input" type="text" id="ask-nome" name="nome" required minlength="2" maxlength="80" autocomplete="name" placeholder="Como podemos te chamar?">
+      </div>
+      <div class="field">
+        <label class="label" for="ask-whats">WhatsApp <span class="req">*</span></label>
+        <input class="input" type="tel" id="ask-whats" name="whatsapp" required inputmode="tel" autocomplete="tel" maxlength="16" placeholder="(32) 99999-9999">
+      </div>
+      <div class="field">
+        <label class="label" for="ask-pergunta">Sua pergunta <span class="req">*</span></label>
+        <textarea class="textarea" id="ask-pergunta" name="pergunta" required minlength="5" maxlength="1500" rows="4" placeholder="O que você gostaria de ver discutido no programa?"></textarea>
+        <span class="ask__count" data-ask-count aria-hidden="true">0 / 1500</span>
+      </div>
+
+      <!-- campo invisivel: se vier preenchido, e robo -->
+      <div class="ask__hp" aria-hidden="true">
+        <label for="ask-site">Deixe em branco</label>
+        <input type="text" id="ask-site" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="form-msg ask__msg" data-ask-msg role="alert" hidden></p>
+
+      <button class="btn btn--primary btn--lg ask__send" type="submit" data-ask-send>
+        Enviar pergunta ${icon('arrow')}
+      </button>
+    </form>
+
+    <div class="ask__done" data-ask-done hidden>
+      <span class="ask__done-ico">${icon('checkCircle')}</span>
+      <h2 class="ask__title">Pergunta recebida</h2>
+      <p class="ask__lead">Obrigado! Ela já está com a nossa equipe. Se for escolhida para o programa, avisamos você pelo WhatsApp.</p>
+      <button class="btn btn--ghost" type="button" data-ask-close>Fechar</button>
+    </div>
+  </div>
+</dialog>`;
+}
+
+/* ---------------------------------------------- plantao e solute cast lado a lado */
+/* Os dois sao gratuitos e ficam no YouTube, mas sao coisas diferentes: o
+   Plantao e aula ao vivo com hora marcada, o Solute Cast e podcast gravado.
+   Por isso cada um tem o seu card, com visual proprio: o Plantao mostra a
+   agenda, o Cast mostra o programa. */
+function channels(opts) {
+  const o = opts || {};
+  const id = o.id || 'canais';
+  const ep = SITE.cast.featured;
+  const url = 'https://www.youtube.com/watch?v=' + ep.id;
+  return `
+<section class="section${o.surface ? ' ' + o.surface : ''}" aria-labelledby="${id}-titulo">
+  <div class="wrap wrap--wide">
+    <div class="section-head section-head--center">
+      <p class="eyebrow eyebrow--center" data-reveal="up">${o.eyebrow || 'Conteúdo gratuito'}</p>
+      <h2 id="${id}-titulo" class="measure" data-split="words" data-reveal="fade">${o.title || 'Duas formas de acompanhar a Solute'}</h2>
+      <p class="lead measure" data-reveal="up" data-reveal-delay="100">${o.lead || 'O Plantão RH Estratégico é aula ao vivo, toda semana. O Solute Cast é o nosso podcast, com episódios quinzenais. Os dois são gratuitos e ficam no YouTube.'}</p>
+    </div>
+
+    <div class="channels" data-stagger="120">
+
+      <article class="channel channel--live" data-reveal="up">
+        <div class="channel__media">
+          <p class="live-tag channel__badge" data-live
+             data-live-on="Ao vivo agora"
+             data-live-off="Aula ao vivo"><span class="tag__dot tag__dot--live"></span> <span data-live-label>Aula ao vivo</span></p>
+          <div class="channel__clock" aria-hidden="true">
+            <span>${SITE.live.day}</span>
+            <b>${SITE.live.time}</b>
+            <span>ao vivo no YouTube</span>
+          </div>
+        </div>
+        <div class="channel__body">
+          <p class="channel__kicker">Aula ao vivo · toda semana</p>
+          <h3 class="channel__title">Plantão RH Estratégico</h3>
+          <p class="channel__text">Uma hora de aula sobre o que acontece dentro das empresas: liderança, conflito, retenção, remuneração e legislação. O chat fica aberto para perguntas.</p>
+          <ul class="channel__facts">
+            <li>${icon('calendar')} ${SITE.live.day}</li>
+            <li>${icon('clock')} ${SITE.live.time}</li>
+            <li>${icon('ticket')} Gratuito, sem inscrição</li>
+          </ul>
+          <div class="channel__cta">
+            <a class="btn btn--primary" href="${SITE.social.youtube}" target="_blank" rel="noopener">${icon('youtube')} Assistir ao Plantão</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="channel channel--cast" data-cast-card data-reveal="up">
+        <div class="channel__media" data-cast-media>
+          <div class="cast-card__bg" aria-hidden="true">
+            <video src="media/solute-cast-teaser.mp4" poster="media/solute-cast-teaser.webp"
+                   muted loop playsinline preload="none" tabindex="-1"></video>
+          </div>
+          <img class="channel__logo" src="media/logo-cast-branca.png" alt="Solute Cast" width="900" height="300" loading="lazy">
+          <a class="play-btn play-btn--sm" href="${url}" target="_blank" rel="noopener"
+             data-yt="${ep.id}" data-yt-title="${ep.title}"
+             aria-label="Assistir ao episódio: ${ep.title}">${icon('play')}</a>
+        </div>
+        <div class="channel__body">
+          <p class="channel__kicker">Podcast · a cada 15 dias</p>
+          <h3 class="channel__title">Solute Cast</h3>
+          <p class="channel__text">O podcast da Solute: conversas com convidados sobre casos reais de gestão de pessoas. Episódios quinzenais a partir de setembro.</p>
+          <p class="channel__ep"><span>Episódio em destaque</span>${ep.title}</p>
+          <div class="channel__cta">
+            <a class="btn btn--ghost" href="solute-cast.html">Ver o Solute Cast ${icon('arrow')}</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>`;
+}
+
+module.exports = { clientMarquee, testimonials, ctaBand, values, stats, servicesGrid, castCard, askDialog, channels };

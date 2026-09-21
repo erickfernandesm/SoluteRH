@@ -55,6 +55,9 @@ const SITE = {
     // (o trecho depois de watch?v= no link do YouTube) e o titulo.
     // O video em loop no fundo do card e um trecho do programa, nao deste
     // episodio: nao precisa ser refeito quando o destaque mudar.
+    // Perguntas do formulario vao para "Perguntas SoluteCast" no sistema.
+    // Se o sistema nao responder, a pessoa pode reenviar pelo WhatsApp.
+    perguntasApi: 'https://sistema.soluterh.com.br/api/publico/perguntas',
     featured: {
       id: 'qM24skHsPxg',
       title: 'O fim da escala 6x1: como as empresas devem se preparar?',
