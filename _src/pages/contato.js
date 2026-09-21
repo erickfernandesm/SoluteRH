@@ -38,6 +38,12 @@ const meta = {
 const svcOptions = SERVICES.map((s) => `<option value="${s.title}">${s.title}</option>`).join('\n              ');
 
 const mapQuery = encodeURIComponent(SITE.address.full);
+// Para o mapa embutido: sem numero de sala e sem a barra antes da UF, que
+// atrapalham o Google a localizar o ponto. O formato /maps/embed e o atual:
+// o antigo (maps?q=...&output=embed) redireciona com um bloqueio de exibicao
+// dentro de outro site, e o quadro ficava em branco.
+const mapEmbed = 'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s' +
+  encodeURIComponent('R. Batista de Oliveira, 1164, Centro, Juiz de Fora - MG').replace(/%20/g, '+');
 
 const body = `
 <main id="conteudo">
@@ -188,7 +194,7 @@ const body = `
         <div class="map-frame">
           <iframe
             title="Localização do escritório da Solute RH em Juiz de Fora"
-            src="https://www.google.com/maps?q=${mapQuery}&amp;output=embed"
+            src="${mapEmbed}"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
