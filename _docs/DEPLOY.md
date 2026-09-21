@@ -1,213 +1,180 @@
 # Publicar o site novo em soluterh.com.br
 
-Objetivo: colocar o site novo no domínio principal e mover o site atual
-(WordPress) para um endereço reservado, onde ele continue acessível.
+Objetivo: o site novo passa a ser `soluterh.com.br`, e o WordPress atual continua
+inteiro, acessível em `antigo.soluterh.com.br`. **Nada é excluído**: tudo o que
+sai da raiz vai para a pasta do antigo.
 
-## O cenário hoje
+Hospedagem: TurboCloud, conta `soluterh` no cPanel (IP 170.81.43.111).
 
-| | |
+---
+
+## O que mora hoje em `public_html` e não pode ser mexido
+
+| Item | O que é |
 |---|---|
-| Domínio | `soluterh.com.br` |
-| Hospedagem | TurboCloud, painel cPanel, servidor LiteSpeed |
-| Site atual | WordPress 7.0.2 + Elementor, PHP 8.4 |
-| Sistema | `sistema.soluterh.com.br` (Next.js, não é afetado por nada aqui) |
+| `certificacao-remuneracao/` | WordPress próprio da Certificação em Remuneração, **no ar** |
+| `curso/`, `megacomborh/` | WordPress próprios |
+| `ponto.soluterh.com.br/`, `sistema.soluterh.com.br/` | atalhos para as pastas dos sistemas |
+| `.well-known/` | renovação automática do certificado de segurança |
+| `cgi-bin/` | pasta do servidor |
+| `google*.html` (7 arquivos) | verificação do Google Search Console |
+| `.user.ini`, `php.ini` | configurações do PHP (as instalações acima usam) |
 
-O site novo é estático: só arquivos. Não usa PHP, banco de dados nem WordPress.
-
----
-
-## Antes de qualquer coisa: backup
-
-Faça **os dois**, e confirme que baixou:
-
-1. **cPanel → Backup → Baixar backup completo.** Guarde o arquivo fora do servidor.
-2. **cPanel → phpMyAdmin →** selecione o banco do WordPress **→ Exportar → Rápido → SQL.**
-
-Sem isso, um passo errado significa reconstruir o site antigo do zero.
+O `.htaccess` do site novo foi escrito para não encostar em nenhum deles.
 
 ---
 
-## Passo 1: criar o endereço do site antigo
+## Etapa 1: preparar, sem tirar nada do ar (15 min)
 
-cPanel → **Domínios → Criar um subdomínio**
+### 1.1 Backup do banco do WordPress
 
-- Subdomínio: `desativado`
-- Domínio: `soluterh.com.br`
-- Raiz do documento: **aponte para a pasta onde o WordPress está hoje**
-  (normalmente `public_html`)
+1. Gerenciador de Arquivos → `public_html` → botão direito em `wp-config.php` → **Exibir**.
+2. Anote o valor de `DB_NAME` e o de `$table_prefix` (ex.: `wp_`).
+3. Aproveite e veja se existe `define('WP_HOME'` ou `define('WP_SITEURL'`. Se existir, anote: vai precisar mudar na etapa 3.
+4. **phpMyAdmin** → clique no banco anotado → **Exportar** → Rápido → SQL → **Executar**. Guarde o arquivo.
 
-O endereço fica: **`https://desativado.soluterh.com.br`**
+Só esse banco. Os outros bancos da conta não mudam.
 
-> Se você preferir o endereço `desativadosoluterh.com.br`, ele é um domínio
-> diferente e precisa ser registrado e pago à parte. O subdomínio acima não
-> tem custo e cumpre a mesma função.
+### 1.2 Criar o endereço do antigo
 
-Depois de criar, vá em **SSL/TLS Status**, marque o subdomínio e rode
-**Run AutoSSL**, senão ele abre com aviso de segurança.
+1. cPanel → **Domínios** → **Criar um novo domínio**.
+2. Domínio: `antigo.soluterh.com.br`.
+3. **Desmarque** "compartilhar a raiz do documento com soluterh.com.br".
+4. Raiz do documento: `antigo.soluterh.com.br` (fica em `/home/soluterh/antigo.soluterh.com.br`, **fora** do `public_html`, igual aos outros subdomínios da conta).
+5. **Enviar**.
+
+### 1.3 Certificado de segurança do antigo
+
+cPanel → **SSL/TLS Status** → marque `antigo.soluterh.com.br` → **Run AutoSSL**.
+
+Espere até abrir `https://antigo.soluterh.com.br` sem aviso de segurança (a página vai estar vazia, é normal). Pode levar alguns minutos.
+
+### 1.4 Deixar o site novo esperando
+
+1. Gerenciador de Arquivos → **Configurações** (canto superior direito) → marque **Mostrar arquivos ocultos**. Sem isso o `.htaccess` fica invisível.
+2. Vá para `/home/soluterh` (a pasta acima de `public_html`) → **+ Pasta** → `site-novo`.
+3. Entre em `site-novo` → **Carregar** → envie `C:\SiteSoluteRH\publicar\soluterh-site.zip`.
+4. Botão direito no zip → **Extrair** → extrair ali mesmo. Depois apague o zip.
+5. Confira que o `.htaccess` apareceu dentro de `site-novo`.
+
+Até aqui, ninguém percebeu nada: o site antigo segue no ar.
 
 ---
 
-## Passo 2: avisar o WordPress do novo endereço
+## Etapa 2: a troca (10 min, faça sem pausa)
 
-Este passo é obrigatório. O WordPress guarda o próprio endereço no banco de
-dados. Sem trocar, ele vai redirecionar `desativado.soluterh.com.br` de volta
-para `soluterh.com.br` e você não consegue mais acessá-lo.
+### 2.1 O WordPress sai da raiz
 
-phpMyAdmin → banco do WordPress → tabela `wp_options` → edite duas linhas:
+Em `public_html`, selecione **só estes itens** e use **Mover** para `/antigo.soluterh.com.br`:
 
-| option_name | valor novo |
+**Pastas:** `wp-admin` · `wp-content` · `wp-includes` · `.wp-cli` · `css` · `js` · `fonts` · `img` · `font-awesome` · `COPYRIGHT`
+
+**Arquivos:** todos os que começam com `wp-` · `index.php` · `xmlrpc.php` · `.htaccess` · `.htaccess.bk` · `.htaccess-bk2` · `index.html_` · `readme.html` · `license.txt` · `LICENSE.txt` · `sitemap.xml` · `error_log`
+
+`css`, `js` e `fonts` são de um modelo antigo e precisam sair: o site novo tem pastas com esses nomes.
+
+### 2.2 Copiar (não mover) a configuração do PHP
+
+Selecione `.user.ini` e `php.ini` → **Copiar** para `/antigo.soluterh.com.br`. Os originais ficam em `public_html`, porque a Certificação usa.
+
+### 2.3 Conferir o que sobrou em `public_html`
+
+Deve restar **só** a lista da tabela do começo deste documento. Se sobrou algo que não está nela, pare e confira antes de seguir.
+
+### 2.4 O site novo entra
+
+Vá para `/home/soluterh/site-novo` → **Selecionar tudo** → **Mover** para `/public_html`.
+
+Confira que o `.htaccess` do site novo está em `public_html`.
+
+### 2.5 Limpar o cache
+
+cPanel → **LiteSpeed Web Cache Manager** → **Flush All**.
+
+Abra `https://soluterh.com.br`: tem que aparecer o site novo.
+
+---
+
+## Etapa 3: o antigo volta a funcionar no endereço novo (10 min)
+
+### 3.1 Avisar o WordPress do endereço novo
+
+phpMyAdmin → banco anotado → tabela `<prefixo>options` (ex.: `wp_options`) → edite as linhas:
+
+| option_name | novo valor |
 |---|---|
-| `siteurl` | `https://desativado.soluterh.com.br` |
-| `home` | `https://desativado.soluterh.com.br` |
+| `siteurl` | `https://antigo.soluterh.com.br` |
+| `home` | `https://antigo.soluterh.com.br` |
 
-Ou, pelo Terminal do cPanel, dentro da pasta do WordPress:
+Se o `wp-config.php` tinha `WP_HOME` ou `WP_SITEURL` (item 1.1), troque lá também, no arquivo que agora está em `/antigo.soluterh.com.br`.
 
-```bash
-wp option update siteurl "https://desativado.soluterh.com.br"
-wp option update home    "https://desativado.soluterh.com.br"
-```
+**Teste:** `https://antigo.soluterh.com.br` deve abrir o site antigo, e `https://antigo.soluterh.com.br/wp-admin` o painel.
 
-**Confira agora:** abra `https://desativado.soluterh.com.br`. O site antigo
-tem que aparecer. Só siga adiante se ele abrir.
+### 3.2 Trocar os links internos do antigo
 
----
+O conteúdo do WordPress tem links gravados como `soluterh.com.br/...`. As imagens já funcionam (o site novo encaminha `/wp-content/` para o antigo), mas os menus e botões do antigo levariam para o site novo.
 
-## Passo 3: impedir que o site antigo apareça no Google
+No painel do antigo:
 
-Se os dois ficarem indexados, eles competem entre si pelas mesmas buscas e o
-Google pode preferir o antigo. É o erro mais comum nesse tipo de troca.
+1. **Elementor → Ferramentas → Substituir URL**: de `https://soluterh.com.br` para `https://antigo.soluterh.com.br` → **Substituir URL**.
+2. **Elementor → Ferramentas → Regenerar CSS e dados**.
+3. Opcional, para o que não é Elementor: instalar o plugin **Better Search Replace** e fazer a mesma troca em todas as tabelas, **marcando "Executar como teste" primeiro**. Tirar a opção "Substituir GUIDs".
 
-WordPress → **Configurações → Leitura → marque "Sugerir aos mecanismos de busca
-que não indexem este site" → Salvar.**
+### 3.3 Tirar o antigo do Google
 
-E crie um `robots.txt` na raiz do subdomínio:
+Painel do antigo → **Configurações → Leitura** → marque **"Evitar que mecanismos de busca indexem este site"** → Salvar.
 
-```
-User-agent: *
-Disallow: /
-```
+Sem isso, o antigo e o novo disputam as mesmas buscas.
+
+### 3.4 Limpar o cache do antigo
+
+Painel do antigo → **LiteSpeed Cache → Limpar tudo**.
 
 ---
 
-## Passo 4: separar as pastas
+## Etapa 4: conferir
 
-O site novo precisa da raiz do domínio, e o WordPress precisa continuar onde
-está para o subdomínio funcionar.
-
-1. cPanel → **Gerenciador de Arquivos**
-2. Crie a pasta `site-antigo` fora de `public_html`
-3. Mova **todo** o conteúdo de `public_html` para `site-antigo`
-4. Volte no subdomínio criado no passo 1 e aponte a raiz dele para `site-antigo`
-5. Confira de novo se `desativado.soluterh.com.br` continua abrindo
-
-Agora `public_html` está vazia e pronta para receber o site novo.
-
----
-
-## Passo 5: subir o site novo
-
-Envie para `public_html` **o conteúdo da pasta do projeto**, não a pasta em si.
-
-Precisa subir:
-
-```
-.htaccess          <- importante, começa com ponto e costuma ficar oculto
-favicon.ico
-robots.txt
-sitemap.xml
-site.webmanifest
-todos os arquivos .html
-css/
-js/
-fonts/
-media/
-data/
-```
-
-**Não precisa subir:** `_src/`, `_tools/`, `_docs/`, `assets/`, `.git/`,
-`.gitignore`, `.gitattributes`.
-
-> Atenção ao `.htaccess`: no Gerenciador de Arquivos do cPanel, ative
-> **Configurações → Mostrar arquivos ocultos**, senão ele não aparece e você
-> pode achar que não subiu.
-
----
-
-## Passo 6: conferir
-
-Abra e confirme cada um:
-
-- [ ] `https://soluterh.com.br` abre o site novo
-- [ ] `https://soluterh.com.br/quem-somos.html` abre
-- [ ] `https://soluterh.com.br/quem-somos/` **redireciona** para a versão nova
-- [ ] `https://soluterh.com.br/pcs/` cai em Plano de Cargos e Salários
-- [ ] `https://soluterh.com.br/pagina-que-nao-existe` mostra o 404 do site novo
-- [ ] `https://desativado.soluterh.com.br` abre o site antigo
-- [ ] `https://sistema.soluterh.com.br` continua funcionando
-- [ ] O blog carrega as publicações (ele busca do sistema)
-
-Se algo ficar com a cara antiga, limpe o cache: cPanel → **LiteSpeed Web Cache
-Manager → Flush All**.
-
----
-
-## Passo 7: avisar o Google
-
-1. **Search Console → Sitemaps →** envie `https://soluterh.com.br/sitemap.xml`
-2. **Inspeção de URL →** teste a home e peça indexação
-3. Nas semanas seguintes, acompanhe **Páginas → Não indexadas**. É normal ver
-   as URLs antigas como "Página com redirecionamento": significa que o 301
-   está funcionando.
-
----
-
-## Sobre os redirecionamentos
-
-O arquivo `.htaccess` já leva cada URL antiga para a correspondente nova:
-
-| Endereço antigo | Vai para |
+| Abrir | Esperado |
 |---|---|
-| `/quem-somos/` | `/quem-somos.html` |
-| `/contato/` | `/contato.html` |
-| `/blog/` e `/noticias/` | `/blog.html` |
-| `/rh-estrategico/` | `/consultoria-rh-estrategico.html` |
-| `/pcs/` | `/consultoria-plano-de-cargos-e-salarios.html` |
-| `/nr-01/` | `/consultoria-nr-01-riscos-psicossociais.html` |
-| `/academia-de-lideres/` | `/consultoria-desenvolvimento-de-lideranca.html` |
-| `/avd/` | `/consultoria-avaliacao-de-desempenho.html` |
-| `/pesquisa-de-clima/` | `/consultoria-pesquisa-de-clima.html` |
-| `/fit-cultural/` | `/consultoria-fit-cultural-e-perfil-comportamental.html` |
-| `/rs/` | `/consultoria-recrutamento-e-selecao.html` |
-| `/politica-de-privacidade` | `/politica-de-privacidade.html` |
-| `/2025/...` e `/2026/...` | os artigos correspondentes |
+| `soluterh.com.br` | site novo |
+| `www.soluterh.com.br` | vai para `soluterh.com.br` |
+| `soluterh.com.br/quem-somos/` | vai para a página nova de Quem somos |
+| `soluterh.com.br/pcs/` | vai para Plano de Cargos e Salários |
+| `soluterh.com.br/pagina-que-nao-existe` | página de erro do site novo |
+| `soluterh.com.br/wp-admin` | vai para o painel do antigo |
+| **`soluterh.com.br/certificacao-remuneracao/`** | **continua no ar, igual** |
+| `ponto.soluterh.com.br` | normal |
+| `curso.soluterh.com.br` | normal |
+| `antigo.soluterh.com.br` | site antigo, com imagens |
+| Blog do site novo | carrega as publicações do sistema |
 
-**Por que isso importa:** essas URLs já aparecem no Google e estão em links de
-outros sites, no Instagram e em materiais enviados a clientes. Sem o 301, todas
-viram erro 404 e o ranqueamento conquistado se perde. Com o 301, o Google
-transfere esse histórico para o endereço novo.
+Depois: **Search Console → Sitemaps** → enviar `https://soluterh.com.br/sitemap.xml`.
 
-Não apague essas linhas do `.htaccess` com o tempo. Elas custam nada e
-continuam salvando quem clica em link antigo.
+Nos dias seguintes é normal o Search Console mostrar as URLs antigas como "Página com redirecionamento": é o sinal de que está funcionando.
 
 ---
 
 ## Se algo der errado
 
-Para voltar tudo como estava:
+Tudo o que saiu da raiz está em `/antigo.soluterh.com.br`, intacto. Para voltar:
 
-1. Gerenciador de Arquivos → esvazie `public_html`
-2. Mova de volta o conteúdo de `site-antigo` para `public_html`
-3. phpMyAdmin → devolva `siteurl` e `home` para `https://soluterh.com.br`
-4. WordPress → Configurações → Leitura → desmarque o bloqueio de indexação
-5. LiteSpeed Cache Manager → Flush All
+1. Mova o conteúdo de `public_html` que veio do site novo para `/site-novo`.
+2. Mova o conteúdo de `/antigo.soluterh.com.br` de volta para `public_html` (os `.user.ini` e `php.ini` copiados podem ficar).
+3. phpMyAdmin → `siteurl` e `home` de volta para `https://soluterh.com.br`.
+4. LiteSpeed → Flush All.
 
-O site antigo volta ao ar em poucos minutos. Por isso o backup do passo zero
-não é formalidade.
+Em poucos minutos o site antigo volta como estava.
 
 ---
 
-## Recomendação de horário
+## Atualizar o site depois
 
-Faça a troca **em um dia útil, pela manhã**, nunca numa sexta à noite. Se
-aparecer algum problema, você tem o dia inteiro e o suporte da hospedagem
-disponível para resolver.
+1. No computador: gerar o site (`node _tools/build-site.js`) e o pacote (`node _tools/empacotar.js`).
+2. Enviar `publicar/soluterh-site.zip` para `public_html` e **Extrair** por cima.
+3. Apagar o zip e dar **Flush All** no LiteSpeed.
+
+O pacote só tem arquivos do site novo, então extrair por cima não mexe em mais nada.
+
+## Não cancelar a TurboCloud
+
+O Sistema de Gestão foi para um VPS, mas **o site, o Ponto, a Certificação e as páginas de venda do Método RH Estratégico, do Domine a NR-01 e do I.A. com RH continuam nesta hospedagem.** Cancelar derruba tudo isso.
