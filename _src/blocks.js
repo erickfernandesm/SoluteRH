@@ -316,14 +316,11 @@ function channels(opts) {
 
       <article class="channel channel--live" data-reveal="up">
         <div class="channel__media">
+          <img class="channel__photo" src="media/rose-principal.webp"
+               alt="Rosemeire Moreira, que apresenta o Plantão RH Estratégico" width="660" height="950" loading="lazy">
           <p class="live-tag channel__badge" data-live
              data-live-on="Ao vivo agora"
-             data-live-off="Aula ao vivo"><span class="tag__dot tag__dot--live"></span> <span data-live-label>Aula ao vivo</span></p>
-          <div class="channel__clock" aria-hidden="true">
-            <span>${SITE.live.day}</span>
-            <b>${SITE.live.time}</b>
-            <span>ao vivo no YouTube</span>
-          </div>
+             data-live-off="Ao vivo · terça, ${SITE.live.time}"><span class="tag__dot tag__dot--live"></span> <span data-live-label>Ao vivo · terça, ${SITE.live.time}</span></p>
         </div>
         <div class="channel__body">
           <p class="channel__kicker">Aula ao vivo · toda semana</p>

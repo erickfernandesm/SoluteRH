@@ -2440,31 +2440,24 @@ p { text-wrap: pretty; }
   z-index: 2;
 }
 
-/* Plantao: a agenda e o visual */
-.channel--live .channel__media {
-  background:
-    radial-gradient(60% 70% at 50% 45%, rgba(243,140,35,.22), transparent 70%),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 64px),
-    var(--ink-1000);
+/* Plantao: foto da Rose, que apresenta a aula. Sem brilho nem letreiro:
+   o visual segue o do card do Cast, que tambem e imagem real */
+.channel--live .channel__media { background: var(--ink-1000); }
+.channel__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
 }
-.channel__clock { display: grid; justify-items: center; gap: .2rem; text-align: center; }
-.channel__clock span {
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--fog-400);
-}
-.channel__clock b {
-  font-family: var(--font-display);
-  font-size: clamp(3.2rem, 2.2rem + 4vw, 5.4rem);
-  line-height: 1;
-  letter-spacing: -.04em;
-  background: linear-gradient(180deg, var(--fog-50), var(--brand-lt));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.channel--live .channel__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(10,10,12,.35), transparent 35%, transparent 70%, rgba(10,10,12,.55));
 }
 
 /* Cast: o programa e o visual */
@@ -3201,6 +3194,9 @@ body.has-announce { --header-offset: 40px; }
 /* icone e texto andam juntos: sem isso o horario desgruda do relogio */
 .ep__meta > span { display: inline-flex; align-items: center; gap: .32rem; white-space: nowrap; }
 .ep__meta svg { width: 13px; height: 13px; flex: none; }
+/* texto unico e longo e frase, nao rotulo: quebra linha normalmente */
+.ep__meta > span:only-child { white-space: normal; }
+.ep > div { min-width: 0; }
 
 /* --- cartao da proxima live (folhinha de calendario) -------------------- */
 .next-live {
@@ -4008,6 +4004,20 @@ body.has-announce { --header-offset: 40px; }
   /* moldura decorativa deslocada: na tela estreita ela sobrava para fora da
      foto e parecia desalinhada */
   .figure-frame::before { display: none; }
+
+  /* selo "15+ anos": no celular ele deixa de flutuar sobre a foto e vira
+     uma faixa. O texto estava preso a 13 caracteres e ficava espremido
+     num canto da faixa */
+  .badge-float { justify-content: center; text-align: left; }
+  .badge-float span { max-width: 24ch; }
+
+  /* ponto do "ao vivo" alinhado ao texto, e nao acima dele */
+  .duo .live-tag { align-items: center; gap: .5rem; }
+
+  /* botoes da faixa final: largura cheia, para o texto caber numa linha so
+     em vez de quebrar espremido ao lado da seta */
+  .cta-band .row { flex-direction: column; align-items: stretch; width: 100%; max-width: 360px; margin-inline: auto; }
+  .cta-band .row .btn { width: 100%; justify-content: center; }
 
   /* foto de fundo dos heros internos: rostos saiam atras do titulo. A foto
      sobe, e a cortina escurece mais atras do texto */
