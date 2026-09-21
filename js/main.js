@@ -950,11 +950,10 @@
   }
 
   /* ================================================================
-     CAST — trecho do programa no fundo do card e episodio no play
+     CAST — trecho do programa no fundo do card
      O video de fundo so carrega quando o card aparece e pausa quando
      sai da tela. Quem pede menos movimento fica so com o quadro parado.
-     O player do YouTube nao e carregado antes do clique: ele pesa mais
-     que a pagina inteira e a maioria das visitas nao chega a dar play.
+     O play e um link comum: leva ao episodio no canal do YouTube.
      ================================================================ */
   function castCards() {
     $$('[data-cast-card]').forEach((card) => {
@@ -976,38 +975,6 @@
         }, { threshold: 0.25 }).observe(card);
       }
 
-      const play = $('[data-yt]', card);
-      if (!play) return;
-      on(play, 'click', (e) => {
-        // com Ctrl ou Cmd a pessoa quer abrir no YouTube: deixa seguir
-        if (e.ctrlKey || e.metaKey || e.shiftKey) return;
-        e.preventDefault();
-
-        const box = document.createElement('div');
-        box.className = 'cast-card__player';
-        const f = document.createElement('iframe');
-        f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(play.dataset.yt) +
-                '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-        f.title = play.dataset.ytTitle || 'Solute Cast';
-        f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        f.allowFullscreen = true;
-        f.referrerPolicy = 'strict-origin-when-cross-origin';
-        box.appendChild(f);
-
-        if (video) video.pause();
-        const midia = $('[data-cast-media]', card);
-        if (midia) {
-          // card compacto: o episodio ocupa o espaco do video de fundo
-          midia.innerHTML = '';
-          midia.appendChild(box);
-          midia.classList.add('is-open');
-        } else {
-          card.classList.add('is-open');
-          // o player entra onde estava o logo, acima do titulo do episodio
-          card.insertBefore(box, $('.cast-card__logo', card));
-        }
-        f.focus();
-      });
     });
   }
 

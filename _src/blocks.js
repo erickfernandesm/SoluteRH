@@ -211,9 +211,8 @@ function servicesGrid(opts) {
 }
 
 /* ------------------------------------------------------------ solute cast */
-/* Card do podcast: trecho do programa rodando mudo no fundo e, ao clicar no
-   play, o episodio em destaque abre ali mesmo. Sem JavaScript, o play leva
-   ao episodio no YouTube. O player do YouTube so e carregado no clique. */
+/* Card do podcast: trecho do programa rodando mudo no fundo. O play leva ao
+   episodio em destaque no canal do YouTube, em outra aba. */
 function castCard(opts) {
   const o = opts || {};
   const ep = SITE.cast.featured;
@@ -232,7 +231,6 @@ function castCard(opts) {
         <img class="cast-card__logo" src="media/logo-cast-branca.png" alt="Solute Cast"
              width="900" height="300" loading="lazy">
         <a class="play-btn" href="${url}" target="_blank" rel="noopener"
-           data-yt="${ep.id}" data-yt-title="${ep.title}"
            aria-label="Assistir ao episódio: ${ep.title}">${icon('play')}</a>
         <p class="cast-card__ep"><span>Episódio em destaque</span>${ep.title}</p>
         <p class="cast-card__meta">
@@ -345,7 +343,6 @@ function channels(opts) {
           </div>
           <img class="channel__logo" src="media/logo-cast-branca.png" alt="Solute Cast" width="900" height="300" loading="lazy">
           <a class="play-btn play-btn--sm" href="${url}" target="_blank" rel="noopener"
-             data-yt="${ep.id}" data-yt-title="${ep.title}"
              aria-label="Assistir ao episódio: ${ep.title}">${icon('play')}</a>
         </div>
         <div class="channel__body">
