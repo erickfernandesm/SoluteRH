@@ -448,8 +448,12 @@ p { text-wrap: pretty; }
   opacity: 1;
   transform: none;
   filter: none;
-  clip-path: inset(0 0 0 0);
 }
+/* O recorte vale so para a revelacao do tipo "clip". Aplicado a todas, ele
+   deixava cada bloco revelado recortando o proprio conteudo no retangulo da
+   caixa: a sombra dos botoes e o deslocamento do efeito magnetico no hover
+   eram cortados, e o botao arredondado aparecia dentro de um retangulo. */
+[data-reveal="clip"].is-revealed { clip-path: inset(0 0 0 0); }
 
 /* revelacao por linha de texto / palavra
    OBS: sem overflow:hidden — um titulo pode quebrar em varias linhas visuais
