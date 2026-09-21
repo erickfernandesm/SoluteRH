@@ -548,8 +548,14 @@ p { text-wrap: pretty; }
   position: fixed;
   inset: 0;
   z-index: 500;
-  display: grid;
-  place-items: center;
+  /* logo e barra formam um bloco so, centralizado na tela inteira. Antes a
+     barra ficava presa ao fundo da tela e, num celular alto, se afastava
+     do logo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.4rem, 1rem + 1.5vw, 2rem);
   background: var(--ink-1000);
   transition: opacity .7s var(--e-out), visibility .7s;
 }
@@ -563,9 +569,7 @@ p { text-wrap: pretty; }
   50%      { transform: scale(1);   opacity: 1; }
 }
 .preloader__bar {
-  position: absolute;
-  bottom: 22%;
-  width: min(180px, 40vw);
+  width: min(160px, 42vw);
   height: 2px;
   background: var(--ink-700);
   border-radius: 99px;
@@ -1236,7 +1240,7 @@ p { text-wrap: pretty; }
   z-index: -2;
   overflow: hidden;
 }
-.hero-sub__bg img { width: 100%; height: 100%; object-fit: cover; opacity: .3; }
+.hero-sub__bg img, .hero-sub__bg video { width: 100%; height: 100%; object-fit: cover; opacity: .3; }
 .hero-sub__bg::after {
   content: '';
   position: absolute;
@@ -1251,7 +1255,7 @@ p { text-wrap: pretty; }
   text-align: center;
   /* mais perto da navbar */
   padding-top: calc(var(--header-h) + clamp(1.8rem, 3.4vw, 3.2rem));
-  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 .hero-sub--center .crumbs { justify-content: center; }
 .hero-sub--center .hero-sub__title { max-width: 20ch; margin-inline: auto; }
@@ -1259,7 +1263,8 @@ p { text-wrap: pretty; }
 .hero-sub--center .row { justify-content: center; }
 
 /* foto de fundo com mais presença: sobe a opacidade e alivia a cortina */
-.hero-sub--center .hero-sub__bg img {
+.hero-sub--center .hero-sub__bg img,
+.hero-sub--center .hero-sub__bg video {
   opacity: .62;
   /* a propria foto se dissolve na base, para nao existir corte reto
      entre esta secao e a seguinte */
@@ -3904,7 +3909,19 @@ body.has-announce { --header-offset: 40px; }
   .footer__brand img { margin-inline: auto; }
   .footer__brand p { margin-inline: auto; }
   .socials { justify-content: center; }
-  .footer__contact a, .footer__contact p { justify-content: center; text-align: left; }
+  /* em uma coluna, icone ao lado do texto deixava cada linha comecando num
+     ponto diferente. Empilhados e centralizados, tudo fica no mesmo eixo */
+  .footer__contact { gap: 1.25rem; justify-items: center; }
+  .footer__contact a, .footer__contact p {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: .35rem;
+  }
+  .footer__contact svg { margin-top: 0; }
+  .footer__links { justify-items: center; }
+  /* o fim do rodape fica acima do botao flutuante e da barra do iPhone */
+  .footer { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
   .footer__links a:hover { transform: none; }
   .footer__bar { justify-content: center; text-align: center; }
   /* uma coluna: centraliza a bolinha e o texto de cada passo */
@@ -3954,4 +3971,46 @@ body.has-announce { --header-offset: 40px; }
   .marquee__track { animation: none !important; }
   .mark::after { transform: scaleX(1) !important; }
   /* o video fica visivel e pausado no poster; quem pausa e o js/main.js */
+}
+
+
+/* ==========================================================================
+   CELULAR: CONTEUDO CENTRALIZADO
+   Os blocos de duas colunas (texto ao lado de imagem) viram uma coluna so no
+   celular. Ali o texto alinhado a esquerda parecia torto, entao tudo passa a
+   ser centralizado: etiqueta, titulo, texto, selos, listas e botoes.
+   Cartoes e formularios dentro desses blocos continuam alinhados a esquerda.
+   ========================================================================== */
+@media (max-width: 720px) {
+  .duo { text-align: center; }
+  .duo .eyebrow { display: flex; justify-content: center; }
+  .duo .eyebrow:not(.eyebrow--plain)::after {
+    content: '';
+    width: 26px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--brand), transparent);
+    border-radius: 2px;
+    flex: none;
+  }
+  .duo .lead, .duo .measure { margin-inline: auto; }
+  .duo .row, .duo .chips { justify-content: center; }
+  .duo .live-tag { display: flex; justify-content: center; }
+  .duo .emblem { margin-inline: auto !important; }
+
+  /* lista de checagem: icone sobre o texto, tudo no mesmo eixo */
+  .duo .checks { justify-items: center; }
+  .duo .checks li { flex-direction: column; align-items: center; text-align: center; gap: .4rem; }
+  .duo .checks svg { margin-top: 0; }
+
+  /* o que e cartao ou formulario volta a ler da esquerda */
+  .duo .ep, .duo .form, .duo .next-live, .duo .card, .duo .acc, .duo .course { text-align: left; }
+
+  /* moldura decorativa deslocada: na tela estreita ela sobrava para fora da
+     foto e parecia desalinhada */
+  .figure-frame::before { display: none; }
+
+  /* foto de fundo dos heros internos: rostos saiam atras do titulo. A foto
+     sobe, e a cortina escurece mais atras do texto */
+  .hero-sub--center .hero-sub__bg img { object-position: center top; opacity: .42; }
+  .hero-sub--center .hero-sub__bg video { opacity: .5; }
 }

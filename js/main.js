@@ -786,6 +786,23 @@
   }
 
   /* ================================================================
+     BG-VIDEO — video de fundo de hero interno
+     Pausa quando sai da tela; com movimento reduzido fica o quadro parado.
+     ================================================================ */
+  function bgVideos() {
+    $$('video[data-bg-video]').forEach((v) => {
+      if (REDUCED) { v.removeAttribute('autoplay'); v.pause(); return; }
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver((es) => {
+          es.forEach((e) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); });
+        }, { threshold: 0.02 }).observe(v);
+      }
+    });
+  }
+
+  /* ================================================================
      ASK — pop-up de pergunta para o Solute Cast
      Envia para "Perguntas SoluteCast" no sistema de gestao. As regras de
      validacao sao as mesmas do sistema, para o erro aparecer aqui e nao
@@ -1148,6 +1165,7 @@
     logoGrid();
     castCards();
     askDialog();
+    bgVideos();
     misc();
   }
 
