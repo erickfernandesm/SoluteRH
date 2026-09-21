@@ -198,8 +198,8 @@ ${TEAM.map(
         <p class="person__role">${TEAM_CTA.role}</p>
         <p class="person__text">${TEAM_CTA.text}</p>
         <a class="btn btn--primary btn--sm person__cta"
-           href="${wa('Olá! Gostaria de enviar meu currículo para a Solute RH.')}" target="_blank">
-          ${icon('whatsapp')} Enviar currículo
+           href="${SITE.careers}" target="_blank" rel="noopener">
+          ${TEAM_CTA.cta} ${icon('arrow')}
         </a>
       </li>
     </ul>

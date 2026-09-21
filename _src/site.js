@@ -10,6 +10,8 @@ const SITE = {
   cnpj: '42.692.955/0001-05',
   tagline: 'Fortalecemos negócios através de pessoas',
   url: 'https://soluterh.com.br',
+  // Trabalhe conosco: cadastro de curriculo no banco de talentos do Solute Recruta
+  careers: 'https://recruta.soluterh.com.br/t/B5M3RAmJLHJElQ8_uNBjysi9',
 
   phone: '(32) 99950-1615',
   phoneRaw: '5532999501615',
@@ -745,7 +747,7 @@ const TEAM_CTA = {
   name: 'E você?',
   role: 'Junte-se à Solute',
   text: 'Estamos sempre atentos a talentos alinhados à nossa cultura.',
-  cta: 'Enviar currículo',
+  cta: 'Cadastrar currículo',
 };
 
 /* --------------------------------------------------------------------------

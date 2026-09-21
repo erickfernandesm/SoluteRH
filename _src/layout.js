@@ -322,7 +322,8 @@ function footer() {
           <a href="cursos.html">Solute Cursos</a>
           <a href="clientes.html">Clientes</a>
           <a href="solute-cast.html">Solute Cast</a>
-          <a href="contato.html">Contato</a>${EVENT.enabled ? `\n          <a href="${EVENT.page}">${EVENT.name}</a>` : ''}
+          <a href="contato.html">Contato</a>
+          <a href="${SITE.careers}" target="_blank" rel="noopener">Trabalhe conosco</a>${EVENT.enabled ? `\n          <a href="${EVENT.page}">${EVENT.name}</a>` : ''}
           <a href="politica-de-privacidade.html">Política de Privacidade</a>
         </nav>
       </div>
