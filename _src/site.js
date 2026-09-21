@@ -367,7 +367,7 @@ const UTM = {
   medium: 'referral',
 };
 
-const COURSES = [
+const ALL_COURSES = [
   {
     title: 'Método RH Estratégico',
     icon: 'target',
@@ -408,6 +408,9 @@ const COURSES = [
     meta: ['Prompts prontos', 'Prático', 'Atualizado'],
   },
   {
+    // Escondido: o dominio liderarcomaltaperformance.com.br esta fora do ar.
+    // Para voltar, apagar a linha hidden.
+    hidden: true,
     title: 'Liderar com Alta Performance',
     icon: 'users',
     short: 'Feedback, delegação e conversas difíceis na prática.',
@@ -440,6 +443,9 @@ const COURSES = [
     meta: ['Remuneração variável', 'Metas'],
   },
 ];
+
+// Cursos escondidos (hidden: true) ficam fora do menu, da pagina e do rastreio.
+const COURSES = ALL_COURSES.filter((c) => !c.hidden);
 
 /* --------------------------------------------------------------------------
    TREINAMENTOS
