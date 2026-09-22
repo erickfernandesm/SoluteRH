@@ -1084,17 +1084,30 @@
       });
     }
 
-    // selo "ao vivo" do Solute Cast: acende na terca, das 09h as 12h
+    // selo "ao vivo" do Plantao RH Estrategico: acende na terca, das 09h00
+    // as 10h20, no horario de Brasilia (quem acessa de outro fuso ve igual).
+    // Reconfere a cada 30s, para acender e apagar sem recarregar a pagina.
     const live = $$('[data-live]');
     if (live.length) {
-      const now = new Date();
-      const isLive = now.getDay() === 2 && now.getHours() >= 9 && now.getHours() < 12;
-      live.forEach((el) => {
-        el.classList.toggle('is-live', isLive);
-        const label = $('[data-live-label]', el) || el;
-        if (isLive) label.textContent = el.dataset.liveOn || 'Ao vivo agora';
-        else if (el.dataset.liveOff) label.textContent = el.dataset.liveOff;
-      });
+      const agoraEmBrasilia = () => {
+        const p = {};
+        new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Sao_Paulo', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false,
+        }).formatToParts(new Date()).forEach((x) => { p[x.type] = x.value; });
+        return { dia: p.weekday, min: (parseInt(p.hour, 10) % 24) * 60 + parseInt(p.minute, 10) };
+      };
+      const confere = () => {
+        const a = agoraEmBrasilia();
+        const isLive = a.dia === 'Tue' && a.min >= 9 * 60 && a.min < 10 * 60 + 20;
+        live.forEach((el) => {
+          el.classList.toggle('is-live', isLive);
+          const label = $('[data-live-label]', el) || el;
+          if (isLive) label.textContent = el.dataset.liveOn || 'Ao vivo agora';
+          else if (el.dataset.liveOff) label.textContent = el.dataset.liveOff;
+        });
+      };
+      confere();
+      setInterval(confere, 30000);
     }
 
     $$('a[target="_blank"]').forEach((a) => {

@@ -1030,6 +1030,11 @@ p { text-wrap: pretty; }
   color: var(--brand-lt);
 }
 .tag__dot {
+  /* inline-block: como span vazio de texto, a bolinha perdia o tamanho e o
+     brilho pulsante era desenhado em volta de uma faixa da altura da linha,
+     aparecendo como um retangulo que piscava */
+  display: inline-block;
+  vertical-align: middle;
   width: 6px; height: 6px;
   border-radius: 50%;
   background: currentColor;
@@ -1039,7 +1044,7 @@ p { text-wrap: pretty; }
   background: var(--fog-600);
   box-shadow: none;
 }
-/* acende de verdade so durante a transmissao (terca, 09h as 12h) */
+/* acende de verdade so durante a transmissao (terca, 09h00 as 10h20) */
 .is-live .tag__dot--live,
 .live-tag.is-live .tag__dot--live {
   background: #34d399;
@@ -1048,6 +1053,9 @@ p { text-wrap: pretty; }
 }
 /* selo de transmissao: so o texto e a bolinha, sem pilula */
 .live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
   border: 0;
   background: none;
   padding-inline: 0;
