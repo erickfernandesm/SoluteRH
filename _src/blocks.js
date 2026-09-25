@@ -74,7 +74,7 @@ function testimonials(opts) {
 
   <div class="wrap wrap--wide">
     <div class="row" style="justify-content:center;margin-top:2.8rem;gap:.8rem" data-reveal="up">
-      <span class="tag tag--brand"><img src="media/google-colorido.png" alt="" width="15" height="15"> Nota 5,0 no Google</span>
+      <a class="tag tag--brand" href="${SITE.googleProfile}" target="_blank" rel="noopener"><img src="media/google-colorido.png" alt="" width="15" height="15"> Nota 5,0 no Google</a>
       <span class="tag">${icon('building')} +${SITE.stats.empresas} empresas atendidas</span>
     </div>
   </div>

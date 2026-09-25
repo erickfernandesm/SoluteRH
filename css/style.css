@@ -2751,6 +2751,10 @@ p { text-wrap: pretty; }
 /* --------------------------------------------------------------------------
    Feedback do cliente (pagina de link privado)
    -------------------------------------------------------------------------- */
+/* selo que e link (a nota do Google leva ao perfil) */
+a.tag { transition: border-color var(--t-fast), color var(--t-fast); }
+a.tag:hover { border-color: var(--brand); color: var(--brand-soft); }
+
 .fb-card {
   display: grid;
   gap: 1.3rem;

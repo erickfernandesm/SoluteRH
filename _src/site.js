@@ -15,9 +15,12 @@ const SITE = {
   // Feedback de cliente: o link chega por WhatsApp, com um codigo por cliente
   // (feedback.html?c=<codigo>). O sistema valida o codigo e guarda o feedback.
   feedbackApi: 'https://sistema.soluterh.com.br/api/publico/feedback',
-  // Link direto para escrever avaliacao no Google. Pegar em
-  // Perfil da Empresa > Peca avaliacoes. Vazio: cai na busca do perfil.
-  googleReview: '',
+  // Link que abre a janela de escrever avaliacao no perfil da Solute.
+  // O identificador do perfil e 0x989fe6d9f29859:0xb592b05526a0ced4 (CID
+  // 13083713747231493844); o ,3 no fim e o que abre a caixa de avaliacao.
+  googleReview: 'https://www.google.com/search?q=Solute+RH#lrd=0x989fe6d9f29859:0xb592b05526a0ced4,3,,,,',
+  // Perfil da Solute no Google, sem a caixa de avaliacao
+  googleProfile: 'https://www.google.com/maps?cid=13083713747231493844',
 
   phone: '(32) 99950-1615',
   phoneRaw: '5532999501615',
