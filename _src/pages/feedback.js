@@ -99,36 +99,47 @@ const body = `
       </button>
     </form>
 
-    <!-- 2. enviado: o convite ao Google -->
+    <!-- 2. enviado: confirmacao curta na pagina -->
     <div class="fb-card fb-done" data-feedback-done hidden>
       <span class="ask__done-ico">${icon('checkCircle')}</span>
       <h2 class="ask__title">Obrigado! Recebemos o seu feedback</h2>
-
-      <div class="fb-google">
-        <p class="fb-google__eyebrow">${icon('star')} Falta um passo, e ele ajuda muito</p>
-        <h3 class="fb-google__title">Publique o que você escreveu no Google</h3>
-        <p class="fb-google__text">
-          A avaliação no Google é o que faz outras empresas encontrarem a Solute RH.
-          Copiamos o seu texto: no Google, é só colar e escolher as estrelas.
-        </p>
-
-        <blockquote class="fb-google__quote" data-feedback-eco></blockquote>
-
-        <div class="fb-google__acoes">
-          <button class="btn btn--ghost" type="button" data-feedback-copy>
-            ${icon('file')} <span data-feedback-copy-label>Copiar o meu texto</span>
-          </button>
-          <a class="btn btn--primary btn--lg" data-feedback-google target="_blank" rel="noopener">
-            <img src="media/google-colorido.png" alt="" width="18" height="18"> Avaliar no Google
-          </a>
-        </div>
-      </div>
-
-      <p class="fb-done__nota">Se preferir deixar para depois, sem problema. O seu feedback já está com a nossa equipe.</p>
+      <p class="fb-done__nota">Se a janela do Google não abrir, use o botão abaixo.</p>
+      <button class="btn btn--primary btn--lg" type="button" data-feedback-reabrir>
+        <img src="media/google-colorido.png" alt="" width="18" height="18"> Avaliar no Google
+      </button>
     </div>
 
   </div>
 </section>
+
+<!-- 3. o pop-up do Google, que abre assim que o feedback e enviado -->
+<dialog class="ask fb-pop" data-feedback-pop aria-labelledby="pop-titulo">
+  <div class="ask__box">
+    <button class="ask__close" type="button" data-feedback-pop-close aria-label="Fechar">${icon('close')}</button>
+
+    <div class="fb-google">
+      <p class="fb-google__eyebrow">${icon('star')} Falta um passo, e ele ajuda muito</p>
+      <h2 class="fb-google__title" id="pop-titulo">Publique o que você escreveu no Google</h2>
+      <p class="fb-google__text">
+        A avaliação no Google é o que faz outras empresas encontrarem a Solute RH.
+        O seu texto está aqui: copie, abra o Google e cole.
+      </p>
+
+      <blockquote class="fb-google__quote" data-feedback-eco></blockquote>
+
+      <div class="fb-google__acoes">
+        <button class="btn btn--ghost" type="button" data-feedback-copy>
+          ${icon('file')} <span data-feedback-copy-label>Copiar o meu texto</span>
+        </button>
+        <a class="btn btn--primary btn--lg" data-feedback-google target="_blank" rel="noopener">
+          <img src="media/google-colorido.png" alt="" width="18" height="18"> Avaliar no Google
+        </a>
+      </div>
+
+      <button class="fb-pop__depois" type="button" data-feedback-pop-close>Deixar para depois</button>
+    </div>
+  </div>
+</dialog>
 
 </main>
 `;

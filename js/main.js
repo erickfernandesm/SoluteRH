@@ -858,15 +858,25 @@
 
     const aviso = (html) => { msg.innerHTML = html; msg.hidden = false; };
 
+    const pop = $('[data-feedback-pop]');
+
     const mostraObrigado = (texto) => {
       form.hidden = true;
       done.hidden = false;
-      $('[data-feedback-eco]', done).textContent = texto;
+      $('[data-feedback-eco]', pop).textContent = texto;
+      $('[data-feedback-google]', pop).href = box.dataset.google;
 
-      const link = $('[data-feedback-google]', done);
-      link.href = box.dataset.google;
+      const abre = () => {
+        if (pop.showModal) { pop.open || pop.showModal(); document.documentElement.style.overflow = 'hidden'; }
+        else window.open(box.dataset.google, '_blank');
+      };
+      abre();
+      $$('[data-feedback-pop-close]', pop).forEach((b) => on(b, 'click', () => pop.close()));
+      on(pop, 'click', (e) => { if (e.target === pop) pop.close(); });
+      on(pop, 'close', () => { document.documentElement.style.overflow = ''; });
+      on($('[data-feedback-reabrir]', done), 'click', abre);
 
-      const copiar = $('[data-feedback-copy]', done);
+      const copiar = $('[data-feedback-copy]', pop);
       const rotulo = $('[data-feedback-copy-label]', copiar);
       on(copiar, 'click', () => {
         const pronto = () => {
@@ -877,7 +887,7 @@
           navigator.clipboard.writeText(texto).then(pronto).catch(() => {});
         } else {
           // navegador antigo: seleciona o texto para a pessoa copiar na mao
-          const alvo = $('[data-feedback-eco]', done);
+          const alvo = $('[data-feedback-eco]', pop);
           const r = document.createRange();
           r.selectNodeContents(alvo);
           const s = window.getSelection();
@@ -887,7 +897,6 @@
         }
       });
 
-      done.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
     };
 
     on(form, 'submit', (e) => {

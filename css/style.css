@@ -2789,6 +2789,21 @@ a.tag:hover { border-color: var(--brand); color: var(--brand-soft); }
 .stars__star:hover { transform: scale(1.08); }
 .stars__input:focus-visible + .stars__star { outline: 2px solid var(--brand-lt); outline-offset: 3px; border-radius: 4px; }
 
+.fb-pop { width: min(620px, calc(100% - 32px)); }
+.fb-pop .fb-google { border: 0; background: none; padding: 0; }
+.fb-pop__depois {
+  justify-self: center;
+  margin-top: .2rem;
+  padding: .3rem .6rem;
+  background: none;
+  border: 0;
+  color: var(--fog-500);
+  font-size: .85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.fb-pop__depois:hover { color: var(--fog-300); }
+
 .fb-done { text-align: center; justify-items: center; }
 .fb-done__nota { font-size: .85rem; color: var(--fog-500); }
 
