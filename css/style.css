@@ -2748,6 +2748,87 @@ p { text-wrap: pretty; }
 }
 @media (prefers-reduced-motion: reduce) { .ask[open] { animation: none; } }
 
+/* --------------------------------------------------------------------------
+   Feedback do cliente (pagina de link privado)
+   -------------------------------------------------------------------------- */
+.fb-card {
+  display: grid;
+  gap: 1.3rem;
+  padding: clamp(1.5rem, 1.1rem + 2vw, 2.6rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: linear-gradient(160deg, var(--ink-850), var(--ink-1000));
+}
+.fb-hello {
+  padding: .8rem 1.1rem;
+  border-radius: var(--r-md);
+  background: rgba(243, 140, 35, .1);
+  border: 1px solid var(--line-brand);
+  color: var(--brand-soft);
+  font-size: .92rem;
+}
+
+/* estrelas: radios de verdade por baixo, para funcionar no teclado */
+.stars { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: .3rem; }
+.stars__input { position: absolute; opacity: 0; width: 0; height: 0; }
+.stars__star {
+  cursor: pointer;
+  color: var(--ink-600);
+  transition: color var(--t-fast), transform var(--t-fast) var(--e-out);
+}
+.stars__star svg { width: 34px; height: 34px; display: block; }
+/* acende a estrela apontada e todas a esquerda dela (a ordem esta invertida) */
+.stars__star:hover,
+.stars__star:hover ~ .stars__star,
+.stars__input:checked ~ .stars__star,
+.stars__input:checked + .stars__star { color: var(--brand); }
+.stars__star:hover { transform: scale(1.08); }
+.stars__input:focus-visible + .stars__star { outline: 2px solid var(--brand-lt); outline-offset: 3px; border-radius: 4px; }
+
+.fb-done { text-align: center; justify-items: center; }
+.fb-done__nota { font-size: .85rem; color: var(--fog-500); }
+
+/* o convite ao Google: o ponto alto da pagina */
+.fb-google {
+  display: grid;
+  gap: .9rem;
+  width: 100%;
+  padding: clamp(1.3rem, 1rem + 1.4vw, 2rem);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-brand);
+  background: radial-gradient(420px circle at 50% 0%, rgba(243,140,35,.14), transparent 70%), var(--ink-900);
+}
+.fb-google__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  justify-self: center;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+.fb-google__eyebrow svg { width: 15px; height: 15px; }
+.fb-google__title { font-size: clamp(1.3rem, 1.1rem + .9vw, 1.7rem); line-height: 1.15; }
+.fb-google__text { color: var(--fog-400); font-size: .95rem; line-height: 1.6; }
+.fb-google__quote {
+  margin: 0;
+  padding: .9rem 1.1rem;
+  border-left: 3px solid var(--brand);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  background: rgba(255,255,255,.04);
+  color: var(--fog-200);
+  font-size: .95rem;
+  line-height: 1.6;
+  text-align: left;
+  max-height: 9.5rem;
+  overflow: auto;
+}
+.fb-google__acoes { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: .3rem; }
+.fb-google__acoes .btn img { border-radius: 3px; }
+@media (max-width: 560px) { .fb-google__acoes .btn { width: 100%; justify-content: center; } }
+
 /* ==========================================================================
    17. ACORDEAO / FAQ
    ========================================================================== */

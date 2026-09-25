@@ -12,6 +12,12 @@ const SITE = {
   url: 'https://soluterh.com.br',
   // Trabalhe conosco: cadastro de curriculo no banco de talentos do Solute Recruta
   careers: 'https://recruta.soluterh.com.br/t/B5M3RAmJLHJElQ8_uNBjysi9',
+  // Feedback de cliente: o link chega por WhatsApp, com um codigo por cliente
+  // (feedback.html?c=<codigo>). O sistema valida o codigo e guarda o feedback.
+  feedbackApi: 'https://sistema.soluterh.com.br/api/publico/feedback',
+  // Link direto para escrever avaliacao no Google. Pegar em
+  // Perfil da Empresa > Peca avaliacoes. Vazio: cai na busca do perfil.
+  googleReview: '',
 
   phone: '(32) 99950-1615',
   phoneRaw: '5532999501615',

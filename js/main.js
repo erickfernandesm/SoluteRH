@@ -814,6 +814,150 @@
   }
 
   /* ================================================================
+     FEEDBACK — pagina de feedback do cliente (link privado)
+     O codigo do cliente vem na propria URL (?c=). Se o sistema reconhecer
+     o codigo, a pessoa nem precisa digitar nome e empresa.
+     Ao enviar, o texto escrito vira o rascunho da avaliacao no Google:
+     um toque copia, o botao ao lado abre o Google para colar.
+     ================================================================ */
+  function feedback() {
+    const box = $('[data-feedback]');
+    if (!box) return;
+
+    const form = $('[data-feedback-form]', box);
+    const done = $('[data-feedback-done]', box);
+    const msg = $('[data-feedback-msg]', box);
+    const send = $('[data-feedback-send]', box);
+    const count = $('[data-feedback-count]', box);
+    const hello = $('[data-feedback-hello]', box);
+    const quem = $('[data-feedback-quem]', box);
+    const campo = (n) => form.elements[n];
+
+    const codigo = new URLSearchParams(location.search).get('c') || '';
+
+    // com codigo valido, o sistema devolve de quem e o link
+    if (codigo) {
+      fetch(box.dataset.api + '/' + encodeURIComponent(codigo), { headers: { Accept: 'application/json' } })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => {
+          if (!j || j.ok === false || !j.nome) return;
+          campo('nome').value = j.nome;
+          campo('empresa').value = j.empresa || '';
+          hello.textContent = 'Olá, ' + j.nome.split(' ')[0] + '! Este link é só seu.';
+          hello.hidden = false;
+          quem.hidden = true;
+        })
+        .catch(() => {});
+    }
+
+    on(campo('texto'), 'input', (e) => {
+      const n = e.target.value.length;
+      count.textContent = n + ' / 1500';
+      count.classList.toggle('is-near', n > 1350);
+    });
+
+    const aviso = (html) => { msg.innerHTML = html; msg.hidden = false; };
+
+    const mostraObrigado = (texto) => {
+      form.hidden = true;
+      done.hidden = false;
+      $('[data-feedback-eco]', done).textContent = texto;
+
+      const link = $('[data-feedback-google]', done);
+      link.href = box.dataset.google;
+
+      const copiar = $('[data-feedback-copy]', done);
+      const rotulo = $('[data-feedback-copy-label]', copiar);
+      on(copiar, 'click', () => {
+        const pronto = () => {
+          rotulo.textContent = 'Copiado! Agora é só colar no Google';
+          setTimeout(() => { rotulo.textContent = 'Copiar o meu texto'; }, 4000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(texto).then(pronto).catch(() => {});
+        } else {
+          // navegador antigo: seleciona o texto para a pessoa copiar na mao
+          const alvo = $('[data-feedback-eco]', done);
+          const r = document.createRange();
+          r.selectNodeContents(alvo);
+          const s = window.getSelection();
+          s.removeAllRanges();
+          s.addRange(r);
+          rotulo.textContent = 'Texto selecionado: use Ctrl+C';
+        }
+      });
+
+      done.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+    };
+
+    on(form, 'submit', (e) => {
+      e.preventDefault();
+      msg.hidden = true;
+
+      const nota = form.querySelector('input[name="nota"]:checked');
+      const dados = {
+        codigo,
+        nota: nota ? Number(nota.value) : 0,
+        texto: campo('texto').value.trim(),
+        nome: campo('nome').value.trim().replace(/\s+/g, ' '),
+        empresa: campo('empresa').value.trim().replace(/\s+/g, ' '),
+        autoriza: campo('autoriza').checked,
+        website: campo('website').value,
+      };
+
+      const erros = [];
+      if (!dados.nota) erros.push('escolha de 1 a 5 estrelas');
+      if (dados.texto.length < 15) erros.push('escreva um pouco mais no seu comentário');
+      if (!quem.hidden && dados.nome.length < 2) erros.push('informe o seu nome');
+      if (!quem.hidden && dados.empresa.length < 2) erros.push('informe a empresa');
+      if (erros.length) { aviso('Quase lá: ' + erros.join(', ') + '.'); return; }
+
+      send.disabled = true;
+      const rotulo = send.innerHTML;
+      send.textContent = 'Enviando…';
+
+      const ctl = 'AbortController' in window ? new AbortController() : null;
+      const limite = setTimeout(() => ctl && ctl.abort(), 15000);
+
+      fetch(box.dataset.api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados),
+        signal: ctl ? ctl.signal : undefined,
+      })
+        .then((r) => r.json().catch(() => ({})).then((j) => ({ r, j })))
+        .then(({ r, j }) => {
+          if (r.ok && j.ok !== false) return mostraObrigado(dados.texto);
+          if (r.status === 400 || r.status === 429) {
+            aviso(j.erro || 'Não foi possível enviar. Confira os dados e tente de novo.');
+            return;
+          }
+          throw new Error('indisponivel');
+        })
+        .catch(() => {
+          // o feedback nao pode se perder: segue pelo WhatsApp, ja escrito,
+          // e a pessoa continua vendo o convite ao Google
+          const texto = 'Feedback para a Solute RH\n\nNota: ' + dados.nota + ' de 5\nNome: ' +
+            (dados.nome || '') + '\nEmpresa: ' + (dados.empresa || '') +
+            (dados.autoriza ? '\nAutorizo publicar no site.' : '') +
+            '\n\n' + dados.texto;
+          aviso('Não conseguimos registrar agora. Envie pelo WhatsApp, já escrito:' +
+            '<br><a class="btn btn--primary" href="https://wa.me/' + box.dataset.wa +
+            '?text=' + encodeURIComponent(texto) + '" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>');
+          mostraObrigado(dados.texto);
+          msg.hidden = false;
+          form.hidden = false;
+          form.querySelectorAll('.field, .stars, .check, .ask__send').forEach((el) => { el.style.display = 'none'; });
+        })
+        .then(() => {
+          clearTimeout(limite);
+          send.disabled = false;
+          send.innerHTML = rotulo;
+        });
+    });
+  }
+
+  /* ================================================================
      ASK — pop-up de pergunta para o Solute Cast
      Envia para "Perguntas SoluteCast" no sistema de gestao. As regras de
      validacao sao as mesmas do sistema, para o erro aparecer aqui e nao
@@ -1156,6 +1300,7 @@
     logoGrid();
     castCards();
     askDialog();
+    feedback();
     bgVideos();
     misc();
   }
