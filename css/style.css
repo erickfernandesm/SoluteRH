@@ -2789,20 +2789,22 @@ a.tag:hover { border-color: var(--brand); color: var(--brand-soft); }
 .stars__star:hover { transform: scale(1.08); }
 .stars__input:focus-visible + .stars__star { outline: 2px solid var(--brand-lt); outline-offset: 3px; border-radius: 4px; }
 
-.fb-pop { width: min(620px, calc(100% - 32px)); }
-.fb-pop .fb-google { border: 0; background: none; padding: 0; }
-.fb-pop__depois {
+/* aviso de que o Google esta abrindo sozinho, logo apos o envio */
+.fb-abrindo {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
   justify-self: center;
-  margin-top: .2rem;
-  padding: .3rem .6rem;
-  background: none;
-  border: 0;
-  color: var(--fog-500);
-  font-size: .85rem;
-  text-decoration: underline;
-  cursor: pointer;
+  font-size: .88rem;
+  color: var(--brand-soft);
 }
-.fb-pop__depois:hover { color: var(--fog-300); }
+.fb-abrindo__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+  animation: live-ping 1.4s var(--e-out) infinite;
+}
+@media (prefers-reduced-motion: reduce) { .fb-abrindo__dot { animation: none; } }
 
 .fb-done { text-align: center; justify-items: center; }
 .fb-done__nota { font-size: .85rem; color: var(--fog-500); }

@@ -99,47 +99,28 @@ const body = `
       </button>
     </form>
 
-    <!-- 2. enviado: confirmacao curta na pagina -->
+    <!-- 2. enviado: copia o texto e segue direto para o Google -->
     <div class="fb-card fb-done" data-feedback-done hidden>
       <span class="ask__done-ico">${icon('checkCircle')}</span>
       <h2 class="ask__title">Obrigado! Recebemos o seu feedback</h2>
-      <p class="fb-done__nota">Se a janela do Google não abrir, use o botão abaixo.</p>
-      <button class="btn btn--primary btn--lg" type="button" data-feedback-reabrir>
+
+      <p class="fb-google__text">
+        Copiamos o seu texto. Estamos abrindo o Google para você colar e publicar.
+      </p>
+      <blockquote class="fb-google__quote" data-feedback-eco></blockquote>
+
+      <p class="fb-abrindo" data-feedback-abrindo>
+        <span class="fb-abrindo__dot" aria-hidden="true"></span> Abrindo o Google...
+      </p>
+
+      <a class="btn btn--primary btn--lg" data-feedback-google target="_blank" rel="noopener">
         <img src="media/google-colorido.png" alt="" width="18" height="18"> Avaliar no Google
-      </button>
+      </a>
+      <p class="fb-done__nota">Se o Google não abrir sozinho, use o botão acima.</p>
     </div>
 
   </div>
 </section>
-
-<!-- 3. o pop-up do Google, que abre assim que o feedback e enviado -->
-<dialog class="ask fb-pop" data-feedback-pop aria-labelledby="pop-titulo">
-  <div class="ask__box">
-    <button class="ask__close" type="button" data-feedback-pop-close aria-label="Fechar">${icon('close')}</button>
-
-    <div class="fb-google">
-      <p class="fb-google__eyebrow">${icon('star')} Falta um passo, e ele ajuda muito</p>
-      <h2 class="fb-google__title" id="pop-titulo">Publique o que você escreveu no Google</h2>
-      <p class="fb-google__text">
-        A avaliação no Google é o que faz outras empresas encontrarem a Solute RH.
-        O seu texto está aqui: copie, abra o Google e cole.
-      </p>
-
-      <blockquote class="fb-google__quote" data-feedback-eco></blockquote>
-
-      <div class="fb-google__acoes">
-        <button class="btn btn--ghost" type="button" data-feedback-copy>
-          ${icon('file')} <span data-feedback-copy-label>Copiar o meu texto</span>
-        </button>
-        <a class="btn btn--primary btn--lg" data-feedback-google target="_blank" rel="noopener">
-          <img src="media/google-colorido.png" alt="" width="18" height="18"> Avaliar no Google
-        </a>
-      </div>
-
-      <button class="fb-pop__depois" type="button" data-feedback-pop-close>Deixar para depois</button>
-    </div>
-  </div>
-</dialog>
 
 </main>
 `;

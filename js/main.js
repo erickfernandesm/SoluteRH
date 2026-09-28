@@ -858,45 +858,43 @@
 
     const aviso = (html) => { msg.innerHTML = html; msg.hidden = false; };
 
-    const pop = $('[data-feedback-pop]');
+    // copia sem depender de permissao: a area de transferencia so aceita a
+    // chamada durante o clique, entao isto roda no envio, antes do fetch
+    const copiaTexto = (texto) => {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(texto).catch(() => {});
+          return;
+        }
+        const t = document.createElement('textarea');
+        t.value = texto;
+        t.setAttribute('readonly', '');
+        t.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+      } catch (e) { /* sem area de transferencia: o texto fica na tela para copiar */ }
+    };
 
-    const mostraObrigado = (texto) => {
+    // Sem escolha no fim: o feedback foi enviado, o texto ja esta copiado e a
+    // pessoa segue direto para a avaliacao no Google. O botao que fica na tela
+    // e so rede de seguranca, para o caso de o navegador barrar a ida sozinha.
+    const mostraObrigado = (texto, sozinho) => {
       form.hidden = true;
       done.hidden = false;
-      $('[data-feedback-eco]', pop).textContent = texto;
-      $('[data-feedback-google]', pop).href = box.dataset.google;
+      $('[data-feedback-eco]', done).textContent = texto;
+      $('[data-feedback-google]', done).href = box.dataset.google;
+      done.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
 
-      const abre = () => {
-        if (pop.showModal) { pop.open || pop.showModal(); document.documentElement.style.overflow = 'hidden'; }
-        else window.open(box.dataset.google, '_blank');
-      };
-      abre();
-      $$('[data-feedback-pop-close]', pop).forEach((b) => on(b, 'click', () => pop.close()));
-      on(pop, 'click', (e) => { if (e.target === pop) pop.close(); });
-      on(pop, 'close', () => { document.documentElement.style.overflow = ''; });
-      on($('[data-feedback-reabrir]', done), 'click', abre);
-
-      const copiar = $('[data-feedback-copy]', pop);
-      const rotulo = $('[data-feedback-copy-label]', copiar);
-      on(copiar, 'click', () => {
-        const pronto = () => {
-          rotulo.textContent = 'Copiado! Agora é só colar no Google';
-          setTimeout(() => { rotulo.textContent = 'Copiar o meu texto'; }, 4000);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(texto).then(pronto).catch(() => {});
-        } else {
-          // navegador antigo: seleciona o texto para a pessoa copiar na mao
-          const alvo = $('[data-feedback-eco]', pop);
-          const r = document.createRange();
-          r.selectNodeContents(alvo);
-          const s = window.getSelection();
-          s.removeAllRanges();
-          s.addRange(r);
-          rotulo.textContent = 'Texto selecionado: use Ctrl+C';
-        }
-      });
-
+      if (!sozinho) {
+        // deu problema no envio: a pessoa precisa ler o aviso antes, entao
+        // aqui ela decide quando ir para o Google
+        $('[data-feedback-abrindo]', done).hidden = true;
+        return;
+      }
+      // um respiro para a pessoa ler o "obrigado" antes de trocar de pagina
+      setTimeout(() => { window.location.href = box.dataset.google; }, 1800);
     };
 
     on(form, 'submit', (e) => {
@@ -921,6 +919,10 @@
       if (!quem.hidden && dados.empresa.length < 2) erros.push('informe a empresa');
       if (erros.length) { aviso('Quase lá: ' + erros.join(', ') + '.'); return; }
 
+      // ainda dentro do clique: e o unico momento em que o navegador deixa
+      // escrever na area de transferencia
+      copiaTexto(dados.texto);
+
       send.disabled = true;
       const rotulo = send.innerHTML;
       send.textContent = 'Enviando…';
@@ -936,7 +938,7 @@
       })
         .then((r) => r.json().catch(() => ({})).then((j) => ({ r, j })))
         .then(({ r, j }) => {
-          if (r.ok && j.ok !== false) return mostraObrigado(dados.texto);
+          if (r.ok && j.ok !== false) return mostraObrigado(dados.texto, true);
           if (r.status === 400 || r.status === 429) {
             aviso(j.erro || 'Não foi possível enviar. Confira os dados e tente de novo.');
             return;
@@ -953,7 +955,7 @@
           aviso('Não conseguimos registrar agora. Envie pelo WhatsApp, já escrito:' +
             '<br><a class="btn btn--primary" href="https://wa.me/' + box.dataset.wa +
             '?text=' + encodeURIComponent(texto) + '" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>');
-          mostraObrigado(dados.texto);
+          mostraObrigado(dados.texto, false);
           msg.hidden = false;
           form.hidden = false;
           form.querySelectorAll('.field, .stars, .check, .ask__send').forEach((el) => { el.style.display = 'none'; });
