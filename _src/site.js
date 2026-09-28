@@ -15,6 +15,9 @@ const SITE = {
   // Feedback de cliente: o link chega por WhatsApp, com um codigo por cliente
   // (feedback.html?c=<codigo>). O sistema valida o codigo e guarda o feedback.
   feedbackApi: 'https://sistema.soluterh.com.br/api/publico/feedback',
+  // Depoimentos aprovados no sistema, que entram na pagina de Depoimentos e
+  // na faixa das demais paginas junto dos que ja estao no cadastro daqui.
+  depoimentosApi: 'https://sistema.soluterh.com.br/api/publico/depoimentos',
   // Link que abre a janela de escrever avaliacao no perfil da Solute.
   // O identificador do perfil e 0x989fe6d9f29859:0xb592b05526a0ced4 (CID
   // 13083713747231493844); o ,3 no fim e o que abre a caixa de avaliacao.
@@ -780,7 +783,7 @@ const NAV = [
   // Fora do menu enquanto os textos estao em lorem ipsum. Para publicar,
   // apague a linha `hidden` abaixo e rode `node _tools/build-site.js`.
   { label: 'Treinamentos', href: 'treinamentos.html', page: 'treinamentos', mega: 'trainings', hidden: true },
-  { label: 'Clientes', href: 'clientes.html', page: 'clientes' },
+  { label: 'Clientes', href: 'clientes.html', page: 'clientes', mega: 'clients' },
   { label: 'Blog', href: 'blog.html', page: 'blog' },
   // O item alterna entre os dois nomes no menu do topo. No celular e no
   // rodape aparece so o `label`, sem animacao.

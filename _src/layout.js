@@ -125,6 +125,23 @@ function mega(tipo) {
         icone: x.icon,
         externo: false,
       }))
+    : tipo === 'clients'
+    ? [
+        {
+          titulo: 'Quem confia na Solute',
+          texto: 'As empresas que já passaram por aqui, de indústria a serviço.',
+          href: 'clientes.html',
+          icone: 'building',
+          externo: false,
+        },
+        {
+          titulo: 'Depoimentos',
+          texto: 'O que os clientes escrevem sobre o trabalho, em primeira pessoa.',
+          href: 'depoimentos.html',
+          icone: 'quote',
+          externo: false,
+        },
+      ]
     : tipo === 'courses'
     ? COURSES.map((c) => ({
         titulo: c.title,
@@ -152,7 +169,10 @@ function mega(tipo) {
         </a>`
   ).join('');
 
-  const rodape = tipo === 'trainings'
+  const rodape = tipo === 'clients'
+    ? { nota: 'Nota 5,0 no Google, com depoimento de quem contratou.',
+        label: 'Ver os depoimentos', href: 'depoimentos.html' }
+    : tipo === 'trainings'
     ? { nota: 'Todos os formatos são fechados e montados sob a realidade da sua empresa.',
         label: 'Ver todos os treinamentos', href: 'treinamentos.html' }
     : tipo === 'courses'
@@ -203,7 +223,9 @@ function header(meta) {
 
   const drawerItems = NAV.filter((n) => !n.hidden).map((n) => {
     if (n.mega) {
-      const subs = n.mega === 'trainings'
+      const subs = n.mega === 'clients'
+        ? '<a href="clientes.html">Quem confia na Solute</a>\n            <a href="depoimentos.html">Depoimentos</a>'
+        : n.mega === 'trainings'
         ? TRAININGS.map((x) =>
             `<a href="treinamentos.html#${x.slug}">${x.title}</a>`
           ).join('\n')
@@ -214,7 +236,9 @@ function header(meta) {
         : SERVICES.map((s) =>
             `<a href="consultoria-${s.slug}.html">${s.nav}</a>`
           ).join('\n            ');
-      const verTudo = n.mega === 'trainings'
+      const verTudo = n.mega === 'clients'
+        ? '<a href="depoimentos.html"><strong>Ver os depoimentos</strong></a>'
+        : n.mega === 'trainings'
         ? '<a href="treinamentos.html"><strong>Ver todos os treinamentos</strong></a>'
         : n.mega === 'courses'
         ? '<a href="cursos.html"><strong>Ver todos os cursos</strong></a>'

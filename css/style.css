@@ -2175,6 +2175,21 @@ p { text-wrap: pretty; }
   transition: border-color var(--t-mid), transform var(--t-mid) var(--e-out);
 }
 .tstm:hover { border-color: var(--line-brand); }
+
+/* pagina de depoimentos: os mesmos cartoes, em grade em vez de faixa */
+.tstm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(330px, 100%), 1fr));
+  gap: clamp(1rem, .7rem + 1vw, 1.6rem);
+  align-items: start;
+}
+.tstm-grid .tstm { flex: none; }
+.tstm-nota {
+  margin-top: clamp(1.6rem, 1.2rem + 1vw, 2.4rem);
+  text-align: center;
+  font-size: .85rem;
+  color: var(--fog-500);
+}
 .tstm__stars { display: flex; gap: .18rem; margin-bottom: 1.15rem; color: var(--brand); }
 .tstm__stars svg { width: 16px; height: 16px; }
 .tstm__quote {

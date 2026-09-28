@@ -77,6 +77,9 @@ function testimonials(opts) {
       <a class="tag tag--brand" href="${SITE.googleProfile}" target="_blank" rel="noopener"><img src="media/google-colorido.png" alt="" width="15" height="15"> Nota 5,0 no Google</a>
       <span class="tag">${icon('building')} +${SITE.stats.empresas} empresas atendidas</span>
     </div>
+    ${o.semLink ? '' : `<div class="row" style="justify-content:center;margin-top:1.4rem" data-reveal="up">
+      <a class="link-arrow" href="depoimentos.html">Ver todos os depoimentos ${icon('arrow')}</a>
+    </div>`}
   </div>
 </section>`;
 }

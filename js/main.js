@@ -797,6 +797,56 @@
   }
 
   /* ================================================================
+     DEPOIMENTOS — os aprovados no sistema entram na pagina
+     A Solute le o feedback no sistema e clica em "Publicar como
+     depoimento". Dali ele aparece aqui, junto dos que ja estao no
+     cadastro do site. Se o sistema estiver fora do ar, a pagina fica
+     so com os fixos, sem erro nenhum na tela.
+     ================================================================ */
+  function depoimentos() {
+    const lista = $('[data-tstm-lista]');
+    if (!lista || !lista.dataset.api) return;
+
+    const esc = (s) => String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+
+    // iniciais da empresa, para o circulo do avatar
+    const iniciais = (nome) => String(nome || '?')
+      .replace(/[^A-Za-zÀ-ÿ ]/g, '').trim().split(/\s+/)
+      .slice(0, 2).map((p) => p[0]).join('').toUpperCase() || '?';
+
+    const estrela = lista.querySelector('.tstm__stars')
+      ? lista.querySelector('.tstm__stars').innerHTML
+      : '';
+
+    fetch(lista.dataset.api, { headers: { Accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        const itens = (j && j.depoimentos) || [];
+        if (!itens.length) return;
+
+        const html = itens.map((d) => {
+          const quem = esc(d.empresa || d.nome);
+          const papel = d.empresa && d.nome ? esc(d.nome) : 'Cliente Solute RH';
+          return '<figure class="tstm" data-reveal="up">' +
+            '<div class="tstm__stars" aria-label="' + (d.nota || 5) + ' de 5 estrelas">' + estrela + '</div>' +
+            '<blockquote class="tstm__quote">' + esc(d.texto) + '</blockquote>' +
+            '<figcaption class="tstm__who">' +
+              '<span class="tstm__ava tstm__ava--ph" aria-hidden="true">' + esc(iniciais(quem)) + '</span>' +
+              '<span><span class="tstm__name">' + quem + '</span>' +
+              '<span class="tstm__role">' + papel + '</span></span>' +
+            '</figcaption></figure>';
+        }).join('');
+
+        // os novos entram na frente: depoimento recente vale mais
+        lista.insertAdjacentHTML('afterbegin', html);
+        if (window.SoluteReveal) window.SoluteReveal();
+      })
+      .catch(() => { /* sistema fora do ar: fica so com os depoimentos fixos */ });
+  }
+
+  /* ================================================================
      BG-VIDEO — video de fundo de hero interno
      Pausa quando sai da tela; com movimento reduzido fica o quadro parado.
      ================================================================ */
@@ -1313,6 +1363,7 @@
     askDialog();
     feedback();
     bgVideos();
+    depoimentos();
     misc();
   }
 
