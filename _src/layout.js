@@ -28,6 +28,7 @@ function head(meta) {
 <meta name="author" content="${SITE.legal}">
 ${meta.noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="robots" content="index, follow, max-image-preview:large">'}
 <link rel="canonical" href="${canonical}">
+${meta.head || ''}
 
 <!-- Open Graph -->
 <meta property="og:type" content="${meta.ogType || 'website'}">

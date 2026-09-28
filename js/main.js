@@ -864,11 +864,11 @@
   }
 
   /* ================================================================
-     FEEDBACK — pagina de feedback do cliente (link privado)
-     O codigo do cliente vem na propria URL (?c=). Se o sistema reconhecer
-     o codigo, a pessoa nem precisa digitar nome e empresa.
-     Ao enviar, o texto escrito vira o rascunho da avaliacao no Google:
-     um toque copia, o botao ao lado abre o Google para colar.
+     FEEDBACK — formulario na pagina de Depoimentos
+     Qualquer cliente entra pelo site e escreve. Ao enviar, o texto vira o
+     rascunho da avaliacao no Google: e copiado e o Google abre em seguida.
+     O feedback vai para o sistema, onde a Solute aprova ou reprova; so o
+     aprovado volta para esta pagina.
      ================================================================ */
   function feedback() {
     const box = $('[data-feedback]');
@@ -879,26 +879,8 @@
     const msg = $('[data-feedback-msg]', box);
     const send = $('[data-feedback-send]', box);
     const count = $('[data-feedback-count]', box);
-    const hello = $('[data-feedback-hello]', box);
     const quem = $('[data-feedback-quem]', box);
     const campo = (n) => form.elements[n];
-
-    const codigo = new URLSearchParams(location.search).get('c') || '';
-
-    // com codigo valido, o sistema devolve de quem e o link
-    if (codigo) {
-      fetch(box.dataset.api + '/' + encodeURIComponent(codigo), { headers: { Accept: 'application/json' } })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((j) => {
-          if (!j || j.ok === false || !j.nome) return;
-          campo('nome').value = j.nome;
-          campo('empresa').value = j.empresa || '';
-          hello.textContent = 'Olá, ' + j.nome.split(' ')[0] + '! Este link é só seu.';
-          hello.hidden = false;
-          quem.hidden = true;
-        })
-        .catch(() => {});
-    }
 
     on(campo('texto'), 'input', (e) => {
       const n = e.target.value.length;
@@ -953,7 +935,6 @@
 
       const nota = form.querySelector('input[name="nota"]:checked');
       const dados = {
-        codigo,
         nota: nota ? Number(nota.value) : 0,
         texto: campo('texto').value.trim(),
         nome: campo('nome').value.trim().replace(/\s+/g, ' '),
@@ -965,8 +946,8 @@
       const erros = [];
       if (!dados.nota) erros.push('escolha de 1 a 5 estrelas');
       if (dados.texto.length < 15) erros.push('escreva um pouco mais no seu comentário');
-      if (!quem.hidden && dados.nome.length < 2) erros.push('informe o seu nome');
-      if (!quem.hidden && dados.empresa.length < 2) erros.push('informe a empresa');
+      if (dados.nome.length < 2) erros.push('informe o seu nome');
+      if (dados.empresa.length < 2) erros.push('informe a empresa');
       if (erros.length) { aviso('Quase lá: ' + erros.join(', ') + '.'); return; }
 
       // ainda dentro do clique: e o unico momento em que o navegador deixa
